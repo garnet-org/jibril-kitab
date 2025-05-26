@@ -1,6 +1,0 @@
----
-icon: a
----
-
-# All Techniques
-
