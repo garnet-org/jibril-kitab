@@ -12,7 +12,10 @@ The `code_on_the_fly` recipe identifies attempts to execute code dynamically usi
 
 ### Information
 
-**Description**: Code on the fly **Category**: Execution **Method**: Command and Scripting Interpreter **Importance**: Critical
+**Description**: Code on the fly  
+**Tactic**: [Collection](../../mitre/tactics/TA0009.md)  
+**Technique**: [Data From Local System](../../mitre/techniques/T1005.md)  
+**Importance**: Critical
 
 ### Analysis of the Event
 

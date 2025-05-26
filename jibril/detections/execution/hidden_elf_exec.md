@@ -12,7 +12,11 @@ The `hidden_elf_exec` recipe identifies the execution of hidden ELF (Executable 
 
 ### Information
 
-**Description**: Hidden ELF execution **Category**: Defense Evasion **Method**: Hide Artifacts (Rootkit) **Importance**: Critical
+**Description**: Hidden ELF execution  
+**Tactic**: [Defense Evasion](../../mitre/tactics/TA0005.md)  
+**Technique**: [Hide Artifacts](../../mitre/techniques/T1564.md)  
+**Sub-Technique**: [Hidden Files And Directories](../../mitre/techniques/T1564.001.md)  
+**Importance**: Critical
 
 ### Analysis of the Event
 

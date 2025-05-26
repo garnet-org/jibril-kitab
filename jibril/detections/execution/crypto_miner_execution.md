@@ -12,7 +12,11 @@ This Jibril detection recipe targets suspicious files and commands related to cr
 
 ### Information
 
-**Description**: Crypto miner execution **Category**: Resource Development **Method**: Establish Account **Importance**: High
+**Description**: Crypto miner execution  
+**Tactic**: [Impact](../../mitre/tactics/TA0040.md)  
+**Technique**: [Resource Hijacking](../../mitre/techniques/T1496.md)  
+**Sub-Technique**: [Compute Hijacking](../../mitre/techniques/T1496.001.md)  
+**Importance**: High
 
 ### Analysis of the Event
 

@@ -12,7 +12,11 @@ The `ssl_certificate_access` event identifies unauthorized modifications or acce
 
 ### Information
 
-**Description**: SSL certificate files modification **Category**: Credential Access **Method**: Unsecured Credentials **Importance**: Critical
+**Description**: ssl certificate access  
+**Tactic**: [Credential Access](../../mitre/tactics/TA0006.md)  
+**Technique**: [Unsecured Credentials](../../mitre/techniques/T1552.md)  
+**Sub-Technique**: [Credentials In Files](../../mitre/techniques/T1552.001.md)  
+**Importance**: Critical
 
 ### Analysis of the Event
 

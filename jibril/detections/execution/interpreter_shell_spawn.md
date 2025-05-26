@@ -12,7 +12,11 @@ The `interpreter_shell_spawn` detection recipe identifies instances where a shel
 
 ### Information
 
-**Description**: Shell spawned by a language interpreter **Category**: Execution **Method**: Command and Scripting Interpreter **Importance**: Critical
+**Description**: Shell spawned by a language interpreter  
+**Tactic**: [Execution](../../mitre/tactics/TA0002.md)  
+**Technique**: [Command And Scripting Interpreter](../../mitre/techniques/T1059.md)  
+**Sub-Technique**: [Unix Shell](../../mitre/techniques/T1059.004.md)  
+**Importance**: Critical
 
 ### Analysis of the Event
 

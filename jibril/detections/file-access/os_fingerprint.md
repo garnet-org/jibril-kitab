@@ -12,7 +12,10 @@ The `os_fingerprint` detection recipe identifies access to files containing info
 
 ### Information
 
-**Description**: OS fingerprint **Category**: Discovery **Method**: System Information Discovery **Importance**: Medium
+**Description**: OS fingerprint  
+**Tactic**: [Discovery](../../mitre/tactics/TA0007.md)  
+**Technique**: [System Information Discovery](../../mitre/techniques/T1082.md)  
+**Importance**: Medium
 
 ### Analysis of the Event
 

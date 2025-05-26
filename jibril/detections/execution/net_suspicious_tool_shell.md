@@ -12,7 +12,11 @@ The `net_suspicious_tool_shell` recipe identifies potential reverse shell execut
 
 ### Information
 
-**Description**: Network suspicious tool shell extension **Category**: Command and Control **Method**: Non-standard Port **Importance**: Critical, Medium
+**Description**: Network suspicious tool shell extension  
+**Tactic**: [Execution](../../mitre/tactics/TA0002.md)  
+**Technique**: [Command And Scripting Interpreter](../../mitre/techniques/T1059.md)  
+**Sub-Technique**: [Unix Shell](../../mitre/techniques/T1059.004.md)  
+**Importance**: Critical, Medium
 
 ### Analysis of the Event
 

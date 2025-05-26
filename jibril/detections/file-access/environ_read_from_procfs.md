@@ -12,7 +12,10 @@ The `environ_read_from_procfs` recipe detects when a process accesses the enviro
 
 ### Information
 
-**Description**: Environment variables read from procfs **Category**: Discovery **Method**: System Information Discovery **Importance**: High
+**Description**: environ read from procfs  
+**Tactic**: [Discovery](../../mitre/tactics/TA0007.md)  
+**Technique**: [System Information Discovery](../../mitre/techniques/T1082.md)  
+**Importance**: High
 
 ### Analysis of the Event
 

@@ -12,7 +12,10 @@ The `example` recipe detects access to random files, serving as an example of ho
 
 ### Information
 
-**Description**: Detect access to some specific files **Category**: Example **Method**: Example **Importance**: None
+**Description**: Detect access to some specific files  
+**Tactic**: [Example](../../mitre/tactics/TA0000.md) (TA0000)  
+**Technique**: [Example](../../mitre/techniques/T1000.md) (T1000)  
+**Importance**: None
 
 ### Analysis of the Event
 

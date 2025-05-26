@@ -12,7 +12,11 @@ The `sudoers_modification` recipe identifies access and modifications to the sud
 
 ### Information
 
-**Description**: Sudoers file access or modification **Category**: Defense Evasion **Method**: Modify Authentication Process **Importance**: Critical
+**Description**: sudoers modification  
+**Tactic**: [Privilege Escalation](../../mitre/tactics/TA0004.md)  
+**Technique**: [Abuse Elevation Control Mechanism](../../mitre/techniques/T1548.md)  
+**Sub-Technique**: [Sudo And Sudo Caching](../../mitre/techniques/T1548.003.md)  
+**Importance**: Critical
 
 ### Analysis of the Event
 

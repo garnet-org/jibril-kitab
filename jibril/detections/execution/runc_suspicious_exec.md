@@ -12,7 +12,10 @@ The `runc_suspicious_exec` detection recipe identifies instances where the `runc
 
 ### Information
 
-**Description**: `runc` binary executed by a suspicious process **Category**: Defense Evasion **Method**: Masquerading **Importance**: Critical
+**Description**: `runc` binary executed by a suspicious process  
+**Tactic**: [Execution](../../mitre/tactics/TA0002.md)  
+**Technique**: [Container Administration Command](../../mitre/techniques/T1609.md)  
+**Importance**: Critical
 
 ### Analysis of the Event
 

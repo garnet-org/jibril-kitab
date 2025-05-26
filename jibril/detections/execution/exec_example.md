@@ -12,7 +12,10 @@ The `exec_example` recipe identifies the execution of random tools, serving as a
 
 ### Information
 
-**Description**: Tool execution example **Category**: Resource Development **Method**: Command and Scripting Interpreter **Importance**: Low
+**Description**: Tool execution example  
+**Tactic**: [Example](../../mitre/tactics/TA0000.md)  
+**Technique**: [Example](../../mitre/techniques/T1000.md)  
+**Importance**: Low
 
 ### Analysis of the Event
 

@@ -12,7 +12,10 @@ The `passwd_usage` recipe identifies the use of password management commands wit
 
 ### Information
 
-**Description**: Passwd related command usage **Category**: Credential Access **Method**: OS Credential Dumping **Importance**: Medium
+**Description**: Password related command usage  
+**Tactic**: [Credential Access](../../mitre/tactics/TA0006.md)  
+**Technique**: [OS Credential Dumping](../../mitre/techniques/T1003.md)  
+**Importance**: Medium
 
 ### Analysis of the Event
 

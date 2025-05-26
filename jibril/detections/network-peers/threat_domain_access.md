@@ -12,7 +12,11 @@ The `threat_domain_access` recipe detects connections to domains associated with
 
 ### Information
 
-**Description**: Access to malicious domains **Category**: Command and Control **Method**: Application Layer Protocol (DNS) **Importance**: Critical
+**Description**: Access to malicious domains  
+**Tactic**: [Command And Control](../../mitre/tactics/TA0011.md)  
+**Technique**: [Application Layer Protocol](../../mitre/techniques/T1071.md)  
+**Sub-Technique**: [DNS](../../mitre/techniques/T1071.004.md)  
+**Importance**: Critical
 
 ### Analysis of the Event
 

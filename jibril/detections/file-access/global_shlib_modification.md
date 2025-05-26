@@ -12,7 +12,11 @@ The `global_shlib_modification` recipe detects modifications to the `/etc/ld.so.
 
 ### Information
 
-**Description**: Global shared library injection **Category**: Persistence **Method**: Boot or Logon Autostart Execution **Importance**: Critical
+**Description**: Global shared library injection  
+**Tactic**: [Persistence](../../mitre/tactics/TA0003.md)  
+**Technique**: [Boot Or Logon Autostart Execution](../../mitre/techniques/T1547.md)  
+**Sub-Technique**: [Kernel Modules And Extensions](../../mitre/techniques/T1547.006.md)  
+**Importance**: Critical
 
 ### Analysis of the Event
 

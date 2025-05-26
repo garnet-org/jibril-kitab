@@ -14,7 +14,11 @@ The `java_instrument_lib_load` recipe monitors the loading of the `libinstrument
 
 #### Information
 
-**Description**: Java instrument library load **Category**: Defense Evasion **Method**: Modify System Image **Importance**: Critical
+**Description**: Java instrument library load  
+**Tactic**: [Defense Evasion](../../mitre/tactics/TA0005.md)  
+**Technique**: [Modify System Image](../../mitre/techniques/T1601.md)  
+**Sub-Technique**: [Patch System Image](../../mitre/techniques/T1601.001.md)  
+**Importance**: Critical
 
 ### Analysis of the Event
 

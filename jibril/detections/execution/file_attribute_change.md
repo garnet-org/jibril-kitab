@@ -14,7 +14,11 @@ The `file_attribute_change` recipe identifies modifications to file attributes, 
 
 ### Information
 
-**Description**: File attributes change **Category**: Defense Evasion **Method**: Hide Artifacts **Importance**: High
+**Description**: File attributes change  
+**Tactic**: [Defense Evasion](../../mitre/tactics/TA0005.md)  
+**Technique**: [File And Directory Permissions Modification](../../mitre/techniques/T1222.md)  
+**Sub-Technique**: [Linux And Mac File And Directory Permissions Modification](../../mitre/techniques/T1222.002.md)  
+**Importance**: High
 
 ### Analysis of the Event
 

@@ -12,7 +12,11 @@ The `shell_config_modification` recipe identifies changes to critical shell conf
 
 ### Information
 
-**Description**: Shell configuration file modification **Category**: Defense Evasion **Method**: Modify Authentication Process **Importance**: Medium to High
+**Description**: Shell configuration file modification  
+**Tactic**: [Defense Evasion](../../mitre/tactics/TA0005.md)  
+**Technique**: [Modify Authentication Process](../../mitre/techniques/T1556.md)  
+**Sub-Technique**: [Pluggable Authentication Modules](../../mitre/techniques/T1556.003.md)  
+**Importance**: Medium to High
 
 ### Analysis of the Event
 
