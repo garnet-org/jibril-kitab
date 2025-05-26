@@ -6,23 +6,23 @@ icon: reply
 
 ## Introduction
 
-Runtime detection systems for cyberattacks, particularly time-progressive attacks such as micro-architectural exploits, rowhammer, ransomware, and cryptominers, face a persistent challenge due to false positives.
+Runtime detection systems for cyberattacks, particularly time-progressive attacks such as micro-architectural exploits, rowhammer, ransomware, and cryptominers, face a persistent challenge due to false positives.&#x20;
 
-These attacks, characterized by their incremental progression over time, leverage system resources to achieve malicious objectives, making them amenable to real-time monitoring. However, false positives in these systems—where benign processes are misclassified as malicious—can disrupt legitimate operations, leading to reduced system productivity.
+These attacks, characterized by their incremental progression over time, leverage system resources to achieve malicious objectives, making them amenable to real-time monitoring. However, false positives in these systems—where benign processes are misclassified as malicious—can disrupt legitimate operations, leading to reduced system productivity.&#x20;
 
-Traditional countermeasures employ advanced machine learning (ML) and artificial intelligence (AI) techniques, such as deep learning models or multi-level expert systems, to enhance detection accuracy.
+Traditional countermeasures employ advanced machine learning (ML) and artificial intelligence (AI) techniques, such as deep learning models or multi-level expert systems, to enhance detection accuracy.&#x20;
 
-Despite these efforts, false positives persist, with reported rates ranging from 3% to 7% in state-of-the-art detectors. The paper "Valkyrie: A Response Framework to Augment Runtime Detection of Time-Progressive Attacks" proposes a novel strategy that shifts focus from eliminating false positives to mitigating their impact.
+Despite these efforts, false positives persist, with reported rates ranging from 3% to 7% in state-of-the-art detectors. The paper "Valkyrie: A Response Framework to Augment Runtime Detection of Time-Progressive Attacks" proposes a novel strategy that shifts focus from eliminating false positives to mitigating their impact.&#x20;
 
 It introduces Valkyrie, a post-detection response framework designed to augment existing runtime detectors by throttling resource allocation to suspected processes, thereby balancing security and operational continuity.
 
 ## Study Summary
 
-Valkyrie operates as an enhancement to any runtime detector, targeting time-progressive attacks by integrating a configurable response mechanism that leverages two key observations: detection efficacy improves with additional runtime measurements, and attack progress is resource-dependent.
+Valkyrie operates as an enhancement to any runtime detector, targeting time-progressive attacks by integrating a configurable response mechanism that leverages two key observations: detection efficacy improves with additional runtime measurements, and attack progress is resource-dependent.&#x20;
 
-The framework allows users to define a desired detection efficacy (e.g., F1-score or false positive rate), which dictates the number of measurement epochs required before decisive action.
+The framework allows users to define a desired detection efficacy (e.g., F1-score or false positive rate), which dictates the number of measurement epochs required before decisive action.&#x20;
 
-During these epochs, Valkyrie computes a _threat index_ for each process, ranging from 0 (benign) to 100 (highly malicious), based on the detector’s periodic inferences. This index is derived from penalty and compensation metrics, adjusted via configurable functions, such as incremental or exponential growth models.
+During these epochs, Valkyrie computes a _threat index_ for each process, ranging from 0 (benign) to 100 (highly malicious), based on the detector’s periodic inferences. This index is derived from penalty and compensation metrics, adjusted via configurable functions, such as incremental or exponential growth models.&#x20;
 
 System resources—CPU time, memory, network bandwidth, and filesystem access—are throttled proportionally to the threat index using an actuator function, implemented via Linux kernel features like Cgroups or the Completely Fair Scheduler (CFS).
 
@@ -37,11 +37,11 @@ Case studies on micro-architectural attacks (e.g., Prime+Probe, CJAG), rowhammer
 
 Valkyrie’s evaluation across diverse platforms (Intel i7-7700, i9-11900, i7-3770) and attack types reveals its robustness in throttling time-progressive attacks while minimizing disruptions from false positives.
 
-Unlike traditional methods that risk premature termination (e.g., a 3% false positive rate implies 3/100 processes halted), Valkyrie’s resource-throttling approach `ensures benign processes recover with minimal overhead`—average slowdowns of less than 1% for single-threaded and 6.7% for multi-threaded SPEC benchmarks, compared to 1.5X–4X overheads from migration-based responses.
+&#x20;Unlike traditional methods that risk premature termination (e.g., a 3% false positive rate implies 3/100 processes halted), Valkyrie’s resource-throttling approach `ensures benign processes recover with minimal overhead`—average slowdowns of less than 1% for single-threaded and 6.7% for multi-threaded SPEC benchmarks, compared to 1.5X–4X overheads from migration-based responses.&#x20;
 
-Its configurability, allowing trade-offs between security (attack throttling) and performance (slowdown tolerance), enhances applicability across domains, from critical systems needing rapid termination to general-purpose systems prioritizing usability.
+Its configurability, allowing trade-offs between security (attack throttling) and performance (slowdown tolerance), enhances applicability across domains, from critical systems needing rapid termination to general-purpose systems prioritizing usability.&#x20;
 
-By decoupling response from detection accuracy, Valkyrie enables lightweight detectors, suitable for resource-constrained environments, and outperforms conventional strategies that rely solely on complex ML models.
+By decoupling response from detection accuracy, Valkyrie enables lightweight detectors, suitable for resource-constrained environments, and outperforms conventional strategies that rely solely on complex ML models.&#x20;
 
 This paradigm shift toward post-detection response mechanisms opens new research avenues for practical cybersecurity, addressing the inherent limitations of detection efficacy and offering a scalable, generalizable solution to the false positive dilemma in runtime attack mitigation.
 
