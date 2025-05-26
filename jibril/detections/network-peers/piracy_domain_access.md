@@ -12,10 +12,11 @@ The `piracy_domain_access` recipe detects connections to domains associated with
 
 ### Information
 
-1. **Description**: Access to illegal distribution of copyrighted content
-2. **Category**: Command and Control
-3. **Method**: Application Layer Protocol (DNS)
-4. **Importance**: Critical
+**Description**: Access to illegal distribution of copyrighted content  
+**Tactic**: [Command And Control](../../mitre/tactics/TA0011.md)  
+**Technique**: [Application Layer Protocol](../../mitre/techniques/T1071.md)  
+**Sub-Technique**: [DNS](../../mitre/techniques/T1071.004.md)  
+**Importance**: Critical
 
 ### Analysis of the Event
 

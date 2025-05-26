@@ -12,7 +12,11 @@ The `capabilities_modification` recipe detects changes to the capabilities confi
 
 ### Information
 
-**Description**: Capabilities file modification **Category**: Defense Evasion **Method**: Modify System Image **Importance**: Critical
+**Description**: Capabilities file modification  
+**Tactic**: [Defense Evasion](../../mitre/tactics/TA0005.md)  
+**Technique**: [Modify System Image](../../mitre/techniques/T1601.md)  
+**Sub-Technique**: [Patch System Image](../../mitre/techniques/T1601.001.md)  
+**Importance**: Critical
 
 ### Analysis of the Event
 

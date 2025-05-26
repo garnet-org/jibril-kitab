@@ -12,7 +12,11 @@ The `webserver_exec` recipe identifies the execution of various web server binar
 
 ### Information
 
-**Description**: Webserver execution **Category**: Command and Control **Method**: Multi-Stage Channels **Importance**: High
+**Description**: webserver exec  
+**Tactic**: [Command And Control](../../mitre/tactics/TA0011.md)  
+**Technique**: [Application Layer Protocol](../../mitre/techniques/T1071.md)  
+**Sub-Technique**: [Web Protocols](../../mitre/techniques/T1071.001.md)  
+**Importance**: High
 
 ### Analysis of the Event
 

@@ -12,7 +12,10 @@ The `net_suspicious_tool_exec` recipe identifies the execution of network tools 
 
 ### Information
 
-**Description**: Network suspicious tool **Category**: Command and Control **Method**: Web Protocols **Importance**: Critical
+**Description**: Network suspicious tool execution  
+**Tactic**: [Discovery](../../mitre/tactics/TA0007.md)  
+**Technique**: [Network Service Discovery](../../mitre/techniques/T1046.md)  
+**Importance**: Critical
 
 ### Analysis of the Event
 

@@ -12,7 +12,11 @@ The `core_pattern_access` recipe detects unauthorized modifications to the syste
 
 ### Information
 
-**Description**: Core pattern config file access **Category**: Defense Evasion **Method**: Impair Defenses **Importance**: Critical
+**Description**: Core pattern config file access  
+**Tactic**: [Defense Evasion](../../mitre/tactics/TA0005.md)  
+**Technique**: [Impair Defenses](../../mitre/techniques/T1562.md)  
+**Sub-Technique**: [Disable Or Modify System Firewall](../../mitre/techniques/T1562.004.md)  
+**Importance**: Critical
 
 ### Analysis of the Event
 

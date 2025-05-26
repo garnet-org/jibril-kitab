@@ -12,7 +12,11 @@ The `data_encoder_exec` recipe monitors the execution of various data encoding t
 
 ### Information
 
-**Description**: Data encoder execution **Category**: Execution **Method**: Command and Scripting Interpreter **Importance**: High
+**Description**: Data encoder execution  
+**Tactic**: [Defense Evasion](../../mitre/tactics/TA0005.md)  
+**Technique**: [Obfuscated Files Or Information](../../mitre/techniques/T1027.md)  
+**Sub-Technique**: [Software Packing](../../mitre/techniques/T1027.002.md)  
+**Importance**: High
 
 ### Analysis of the Event
 

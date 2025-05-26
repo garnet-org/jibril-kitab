@@ -12,7 +12,10 @@ The `filesystem_fingerprint` recipe detects access to files that contain detaile
 
 ### Information
 
-**Description**: Filesystem fingerprint **Category**: Discovery **Method**: System Information Discovery **Importance**: Low
+**Description**: Filesystem fingerprint  
+**Tactic**: [Discovery](../../mitre/tactics/TA0007.md)  
+**Technique**: [System Information Discovery](../../mitre/techniques/T1082.md)  
+**Importance**: Low
 
 ### Analysis of the Event
 

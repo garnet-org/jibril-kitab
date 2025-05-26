@@ -12,7 +12,11 @@ The `tracking_domain_access` detection monitors connections to domains associate
 
 ### Information
 
-**Description**: Access to tracking domains **Category**: Command and Control **Method**: Application Layer Protocol (DNS) **Importance**: High
+**Description**: Access to tracking domains  
+**Tactic**: [Command And Control](../../mitre/tactics/TA0011.md)  
+**Technique**: [Application Layer Protocol](../../mitre/techniques/T1071.md)  
+**Sub-Technique**: [DNS](../../mitre/techniques/T1071.004.md)  
+**Importance**: High
 
 ### Analysis of the Event
 

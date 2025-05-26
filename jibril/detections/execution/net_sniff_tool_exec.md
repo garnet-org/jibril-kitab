@@ -12,7 +12,10 @@ The `net_sniff_tool_exec` recipe identifies the execution of network sniffing to
 
 ### Information
 
-**Description**: Network sniffing tool **Category**: Discovery **Method**: Network Sniffing **Importance**: Critical
+**Description**: Network sniffing tool execution  
+**Tactic**: [Discovery](../../mitre/tactics/TA0007.md)  
+**Technique**: [Network Sniffing](../../mitre/techniques/T1040.md)  
+**Importance**: Critical
 
 ### Analysis of the Event
 

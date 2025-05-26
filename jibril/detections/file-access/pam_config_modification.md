@@ -12,7 +12,11 @@ The `pam_config_modification` recipe identifies unauthorized changes to critical
 
 ### Information
 
-**Description**: PAM configuration modification **Category**: Credential Access **Method**: Modify Authentication Process **Importance**: Critical
+**Description**: PAM configuration modification  
+**Tactic**: [Credential Access](../../mitre/tactics/TA0006.md)  
+**Technique**: [Modify Authentication Process](../../mitre/techniques/T1556.md)  
+**Sub-Technique**: [Pluggable Authentication Modules](../../mitre/techniques/T1556.003.md)  
+**Importance**: Critical
 
 ### Analysis of the Event
 

@@ -12,7 +12,10 @@ The `os_status_fingerprint` recipe identifies attempts to gather detailed inform
 
 ### Information
 
-**Description**: OS status fingerprint **Category**: Discovery **Method**: System Information Discovery **Importance**: Critical, High, Medium, Low
+**Description**: OS status fingerprint  
+**Tactic**: [Discovery](../../mitre/tactics/TA0007.md)  
+**Technique**: [System Information Discovery](../../mitre/techniques/T1082.md)  
+**Importance**: Critical, High, Medium, Low
 
 ### Analysis of the Event
 

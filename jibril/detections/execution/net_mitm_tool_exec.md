@@ -10,7 +10,12 @@ The `net_mitmit_tool_exec` detection identifies the execution of network man-in-
 
 ## More Information
 
-**Description**: Network man-in-the-middle tool **Category**: Discovery **Method**: Network Sniffing **Importance**: Critical
+### Information
+
+**Description**: Network man-in-the-middle tool execution  
+**Tactic**: [Credential Access](../../mitre/tactics/TA0006.md)  
+**Technique**: [Adversary In The Middle](../../mitre/techniques/T1557.md)  
+**Importance**: Critical
 
 ### Analysis of the Event
 

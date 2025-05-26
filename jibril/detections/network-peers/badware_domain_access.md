@@ -12,7 +12,11 @@ The `badware_domain_access` recipe detects connections to domains associated wit
 
 ### Information
 
-**Description**: Access to malware, spyware or adware **Category**: Command and Control **Method**: Application Layer Protocol (DNS) **Importance**: High
+**Description**: Access to malware, spyware or adware  
+**Tactic**: [Command And Control](../../mitre/tactics/TA0011.md)  
+**Technique**: [Application Layer Protocol](../../mitre/techniques/T1071.md)  
+**Sub-Technique**: [DNS](../../mitre/techniques/T1071.004.md)  
+**Importance**: High
 
 ### Analysis of the Event
 

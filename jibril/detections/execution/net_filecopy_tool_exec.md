@@ -12,7 +12,10 @@ The `net_filecopy_tool_exec` recipe identifies the execution of network file cop
 
 ### Information
 
-**Description**: Network file copy tool **Category**: Exfiltration **Method**: Exfiltration Over Other Network Medium **Importance**: Critical, High, Medium
+**Description**: Network file copy tool execution  
+**Tactic**: [Exfiltration](../../mitre/tactics/TA0010.md)  
+**Technique**: [Exfiltration Over Other Network Medium](../../mitre/techniques/T1011.md)  
+**Importance**: Critical
 
 ### Analysis of the Event
 

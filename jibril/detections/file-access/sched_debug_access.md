@@ -12,7 +12,11 @@ The `sched_debug_access` recipe identifies unauthorized access to the `/proc/sch
 
 ### Information
 
-**Description**: Scheduler debug file access **Category**: Defense Evasion **Method**: Impair Defenses **Importance**: High
+**Description**: Scheduler debug file access  
+**Tactic**: [Defense Evasion](../../mitre/tactics/TA0005.md)  
+**Technique**: [Impair Defenses](../../mitre/techniques/T1562.md)  
+**Sub-Technique**: [Disable Or Modify System Firewall](../../mitre/techniques/T1562.004.md)  
+**Importance**: High
 
 ### Analysis of the Event
 

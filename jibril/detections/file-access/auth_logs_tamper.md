@@ -12,7 +12,11 @@ The `auth_logs_tamper` detection recipe identifies suspicious file operations su
 
 ### Information
 
-**Description**: Authentication logs tampering **Category**: Defense Evasion **Method**: Indicator Removal on Host **Importance**: High
+**Description**: Authentication logs tampering  
+**Tactic**: [Defense Evasion](../../mitre/tactics/TA0005.md)  
+**Technique**: [Indicator Removal](../../mitre/techniques/T1070.md)  
+**Sub-Technique**: [File Deletion](../../mitre/techniques/T1070.004.md)  
+**Importance**: High
 
 ### Analysis of the Event
 

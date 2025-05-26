@@ -12,7 +12,11 @@ The `credentials_files_access` recipe detects access to files that may contain s
 
 ### Information
 
-**Description**: Credentials File Access **Category**: Credential Access **Method**: Credentials from Password Stores **Importance**: Critical
+**Description**: credentials files access  
+**Tactic**: [Credential Access](../../mitre/tactics/TA0006.md)  
+**Technique**: [Credentials From Password Stores](../../mitre/techniques/T1555.md)  
+**Sub-Technique**: [Credentials From Web Browsers](../../mitre/techniques/T1555.003.md)  
+**Importance**: Critical
 
 ### Analysis of the Event
 

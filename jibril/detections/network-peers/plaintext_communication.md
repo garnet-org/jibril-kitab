@@ -12,7 +12,11 @@ The `plaintext_communication` event detects communication with specific domains 
 
 ### Information
 
-**Description**: Access to pastebin services **Category**: Command and Control **Method**: Application Layer Protocol (DNS) **Importance**: Critical
+**Description**: Access to pastebin services  
+**Tactic**: [Command And Control](../../mitre/tactics/TA0011.md)  
+**Technique**: [Application Layer Protocol](../../mitre/techniques/T1071.md)  
+**Sub-Technique**: [Web Protocols](../../mitre/techniques/T1071.001.md)  
+**Importance**: Critical
 
 ### Analysis of the Event
 

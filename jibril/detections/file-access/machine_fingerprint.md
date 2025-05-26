@@ -12,7 +12,10 @@ The `machine_fingerprint` recipe identifies access to system directories and fil
 
 ### Information
 
-**Description**: Machine fingerprint **Category**: Discovery **Method**: System Information Discovery **Importance**: Medium
+**Description**: Machine fingerprint  
+**Tactic**: [Discovery](../../mitre/tactics/TA0007.md)  
+**Technique**: [System Information Discovery](../../mitre/techniques/T1082.md)  
+**Importance**: Medium
 
 ### Analysis of the Event
 

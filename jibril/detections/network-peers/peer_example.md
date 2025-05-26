@@ -12,7 +12,10 @@ The `example` recipe detects communication with specific network peers, serving 
 
 ### Information
 
-**Description**: Detect communication with example network peers **Category**: Example **Method**: Example **Importance**: None
+**Description**: Detect communication with example network peers  
+**Tactic**: [Example](../../mitre/tactics/TA0000.md)  
+**Technique**: [Example](../../mitre/techniques/T1000.md)  
+**Importance**: None
 
 ### Analysis of the Event
 

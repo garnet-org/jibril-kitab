@@ -12,7 +12,11 @@ The `package_repo_config_modification` recipe identifies changes to package mana
 
 ### Information
 
-**Description**: Package repository file modification **Category**: Defense Evasion **Method**: Modify System Image **Importance**: Medium
+**Description**: Package repository file modification  
+**Tactic**: [Defense Evasion](../../mitre/tactics/TA0005.md)  
+**Technique**: [Modify System Image](../../mitre/techniques/T1601.md)  
+**Sub-Technique**: [Patch System Image](../../mitre/techniques/T1601.001.md)  
+**Importance**: Medium
 
 ### Analysis of the Event
 

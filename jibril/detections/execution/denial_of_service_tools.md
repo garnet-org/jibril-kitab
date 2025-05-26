@@ -12,7 +12,11 @@ The `denial_of_service_tools` recipe identifies the execution of Denial-of-Servi
 
 ### Information
 
-**Description**: Denial-of-Service (DoS) tools **Category**: Impact **Method**: Network Denial of Service **Importance**: Critical
+**Description**: Denial-of-Service (DoS) tools execution  
+**Tactic**: [Impact](../../mitre/tactics/TA0040.md)  
+**Technique**: [Network Denial Of Service](../../mitre/techniques/T1498.md)  
+**Sub-Technique**: [Direct Network Flood](../../mitre/techniques/T1498.001.md)  
+**Importance**: Critical
 
 ### Analysis of the Event
 

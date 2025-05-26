@@ -12,7 +12,10 @@ The `binary_executed_by_loader` detection recipe identifies when a binary is exe
 
 ### Information
 
-**Description**: Binary executed through loader **Category**: Execution **Method**: System Services **Importance**: Critical
+**Description**: Binary executed through loader  
+**Tactic**: [Defense Evasion](../../mitre/tactics/TA0005.md)  
+**Technique**: [Hijack Execution Flow](../../mitre/techniques/T1574.md)  
+**Importance**: Critical
 
 ### Analysis of the Event
 

@@ -8,9 +8,14 @@ icon: circle-question
 
 The `exec_from_unusual_dir` event identifies the execution of files from non-standard directories like `/tmp`, `/dev`, `/sys`, `/proc`, and others. This behavior is typically indicative of malicious activities, such as running unauthorized code or exploiting system vulnerabilities. Detection of this activity can signal potential threats to both build and production environments, compromising their integrity.
 
-## Information
+## More Information
 
-**Description**: Execution from unusual directory **Category**: Execution **Method**: User Execution **Importance**: High, Critical
+### Information
+
+**Description**: Execution from unusual directory  
+**Tactic**: [Defense Evasion](../../mitre/tactics/TA0005.md)  
+**Technique**: [Hide Artifacts](../../mitre/techniques/T1564.md)  
+**Importance**: High, Critical
 
 ### Analysis of the Event
 

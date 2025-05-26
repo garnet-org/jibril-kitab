@@ -12,7 +12,11 @@ The `fake_domain_access` detection identifies attempts to connect to domains inv
 
 ### Information
 
-**Description**: Access to scams, traps and fakes **Category**: Command and Control **Method**: Application Layer Protocol (DNS) **Importance**: Critical
+**Description**: Access to scams, traps and fakes  
+**Tactic**: [Command And Control](../../mitre/tactics/TA0011.md)  
+**Technique**: [Application Layer Protocol](../../mitre/techniques/T1071.md)  
+**Sub-Technique**: [DNS](../../mitre/techniques/T1071.004.md)  
+**Importance**: Critical
 
 ### Analysis of the Event
 

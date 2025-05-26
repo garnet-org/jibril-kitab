@@ -12,7 +12,11 @@ The `binary_self_deletion` detection recipe identifies instances where a binary 
 
 ### Information
 
-**Description**: Binary executed and self-deleted **Category**: Defense Evasion **Method**: Indicator Removal on Host **Importance**: Critical
+**Description**: Binary executed and self-deleted  
+**Tactic**: [Defense Evasion](../../mitre/tactics/TA0005.md)  
+**Technique**: [Indicator Removal](../../mitre/techniques/T1070.md)  
+**Sub-Technique**: [File Deletion](../../mitre/techniques/T1070.004.md)  
+**Importance**: Critical
 
 ### Analysis of the Event
 

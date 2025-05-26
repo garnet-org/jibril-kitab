@@ -12,7 +12,11 @@ The `code_modification_through_procfs` event is a critical security issue that d
 
 ### Information
 
-**Description**: Code modification through procfs **Category**: Defense Evasion **Method**: Impair Defenses **Importance**: High
+**Description**: Code modification through procfs  
+**Tactic**: [Defense Evasion](../../mitre/tactics/TA0005.md)  
+**Technique**: [Process Injection](../../mitre/techniques/T1055.md)  
+**Sub-Technique**: [Proc Memory](../../mitre/techniques/T1055.009.md)  
+**Importance**: High
 
 ### Analysis of the Event
 
