@@ -13,9 +13,9 @@ The `plaintext_communication` event detects communication with specific domains 
 ### Information
 
 **Description**: Access to pastebin services  
-**Tactic**: [Command And Control](../../mitre/tactics/TA0011.md)  
-**Technique**: [Application Layer Protocol](../../mitre/techniques/T1071.md)  
-**Sub-Technique**: [Web Protocols](../../mitre/techniques/T1071.001.md)  
+**Tactic**: [Command And Control](https://jibril.garnet.ai/mitre/mitre/ta0011)  
+**Technique**: [Application Layer Protocol](https://jibril.garnet.ai/mitre/mitre/ta0011/t1071)  
+**Sub-Technique**: [Web Protocols](https://jibril.garnet.ai/mitre/mitre/ta0011/t1071/t1071.001)  
 **Importance**: Critical
 
 ### Analysis of the Event

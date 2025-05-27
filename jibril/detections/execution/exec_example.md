@@ -13,8 +13,8 @@ The `exec_example` recipe identifies the execution of random tools, serving as a
 ### Information
 
 **Description**: Tool execution example  
-**Tactic**: [Example](../../mitre/tactics/TA0000.md)  
-**Technique**: [Example](../../mitre/techniques/T1000.md)  
+**Tactic**: [Example](https://jibril.garnet.ai/mitre/mitre/ta0000)  
+**Technique**: [Example](https://jibril.garnet.ai/mitre/mitre/ta0000/t1000)  
 **Importance**: Low
 
 ### Analysis of the Event

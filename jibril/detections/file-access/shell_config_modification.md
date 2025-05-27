@@ -13,9 +13,9 @@ The `shell_config_modification` recipe identifies changes to critical shell conf
 ### Information
 
 **Description**: Shell configuration file modification  
-**Tactic**: [Defense Evasion](../../mitre/tactics/TA0005.md)  
-**Technique**: [Modify Authentication Process](../../mitre/techniques/T1556.md)  
-**Sub-Technique**: [Pluggable Authentication Modules](../../mitre/techniques/T1556.003.md)  
+**Tactic**: [Defense Evasion](https://jibril.garnet.ai/mitre/mitre/ta0005)  
+**Technique**: [Modify Authentication Process](https://jibril.garnet.ai/mitre/mitre/ta0005/t1556)  
+**Sub-Technique**: [Pluggable Authentication Modules](https://jibril.garnet.ai/mitre/mitre/ta0005/t1556/t1556.003)  
 **Importance**: Medium to High
 
 ### Analysis of the Event

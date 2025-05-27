@@ -15,9 +15,9 @@ The `java_debug_lib_load` recipe monitors the loading of the `libjdwp.so` librar
 #### Information
 
 **Description**: Java debug library load  
-**Tactic**: [Defense Evasion](../../mitre/tactics/TA0005.md)  
-**Technique**: [Modify System Image](../../mitre/techniques/T1601.md)  
-**Sub-Technique**: [Patch System Image](../../mitre/techniques/T1601.001.md)  
+**Tactic**: [Defense Evasion](https://jibril.garnet.ai/mitre/mitre/ta0005)  
+**Technique**: [Modify System Image](https://jibril.garnet.ai/mitre/mitre/ta0005/t1601)  
+**Sub-Technique**: [Patch System Image](https://jibril.garnet.ai/mitre/mitre/ta0005/t1601/t1601.001)  
 **Importance**: Critical
 
 ### Analysis of the Event

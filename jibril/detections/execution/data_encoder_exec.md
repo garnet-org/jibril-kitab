@@ -13,9 +13,9 @@ The `data_encoder_exec` recipe monitors the execution of various data encoding t
 ### Information
 
 **Description**: Data encoder execution  
-**Tactic**: [Defense Evasion](../../mitre/tactics/TA0005.md)  
-**Technique**: [Obfuscated Files Or Information](../../mitre/techniques/T1027.md)  
-**Sub-Technique**: [Software Packing](../../mitre/techniques/T1027.002.md)  
+**Tactic**: [Defense Evasion](https://jibril.garnet.ai/mitre/mitre/ta0005)  
+**Technique**: [Obfuscated Files Or Information](https://jibril.garnet.ai/mitre/mitre/ta0005/t1027)  
+**Sub-Technique**: [Software Packing](https://jibril.garnet.ai/mitre/mitre/ta0005/t1027/t1027.002)  
 **Importance**: High
 
 ### Analysis of the Event

@@ -13,9 +13,9 @@ The `denial_of_service_tools` recipe identifies the execution of Denial-of-Servi
 ### Information
 
 **Description**: Denial-of-Service (DoS) tools execution  
-**Tactic**: [Impact](../../mitre/tactics/TA0040.md)  
-**Technique**: [Network Denial Of Service](../../mitre/techniques/T1498.md)  
-**Sub-Technique**: [Direct Network Flood](../../mitre/techniques/T1498.001.md)  
+**Tactic**: [Impact](https://jibril.garnet.ai/mitre/mitre/ta0040)  
+**Technique**: [Network Denial Of Service](https://jibril.garnet.ai/mitre/mitre/ta0040/t1498)  
+**Sub-Technique**: [Direct Network Flood](https://jibril.garnet.ai/mitre/mitre/ta0040/t1498/t1498.001)  
 **Importance**: Critical
 
 ### Analysis of the Event

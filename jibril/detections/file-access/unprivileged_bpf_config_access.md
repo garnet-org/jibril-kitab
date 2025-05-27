@@ -13,9 +13,9 @@ The `unprivileged_bpf_config_access` recipe identifies attempts to access BPF (B
 ### Information
 
 **Description**: Unprivileged BPF config file access  
-**Tactic**: [Defense Evasion](../../mitre/tactics/TA0005.md)  
-**Technique**: [Impair Defenses](../../mitre/techniques/T1562.md)  
-**Sub-Technique**: [Disable Or Modify System Firewall](../../mitre/techniques/T1562.004.md)  
+**Tactic**: [Defense Evasion](https://jibril.garnet.ai/mitre/mitre/ta0005)  
+**Technique**: [Impair Defenses](https://jibril.garnet.ai/mitre/mitre/ta0005/t1562)  
+**Sub-Technique**: [Disable Or Modify System Firewall](https://jibril.garnet.ai/mitre/mitre/ta0005/t1562/t1562.004)  
 **Importance**: High
 
 ### Analysis of the Event

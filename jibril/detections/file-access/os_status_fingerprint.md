@@ -13,8 +13,8 @@ The `os_status_fingerprint` recipe identifies attempts to gather detailed inform
 ### Information
 
 **Description**: OS status fingerprint  
-**Tactic**: [Discovery](../../mitre/tactics/TA0007.md)  
-**Technique**: [System Information Discovery](../../mitre/techniques/T1082.md)  
+**Tactic**: [Discovery](https://jibril.garnet.ai/mitre/mitre/ta0007)  
+**Technique**: [System Information Discovery](https://jibril.garnet.ai/mitre/mitre/ta0007/t1082)  
 **Importance**: Critical, High, Medium, Low
 
 ### Analysis of the Event

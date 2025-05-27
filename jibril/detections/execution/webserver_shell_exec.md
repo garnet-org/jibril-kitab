@@ -13,9 +13,9 @@ The `webserver_shell_exec` recipe indicates that a web server process spawned a 
 ### Information
 
 **Description**: webserver shell exec  
-**Tactic**: [Execution](../../mitre/tactics/TA0002.md)  
-**Technique**: [Command And Scripting Interpreter](../../mitre/techniques/T1059.md)  
-**Sub-Technique**: [Unix Shell](../../mitre/techniques/T1059.004.md)  
+**Tactic**: [Execution](https://jibril.garnet.ai/mitre/mitre/ta0002)  
+**Technique**: [Command And Scripting Interpreter](https://jibril.garnet.ai/mitre/mitre/ta0002/t1059)  
+**Sub-Technique**: [Unix Shell](https://jibril.garnet.ai/mitre/mitre/ta0002/t1059/t1059.004)  
 **Importance**: Critical
 
 ### Analysis of the Event

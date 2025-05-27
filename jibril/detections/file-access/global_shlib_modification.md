@@ -13,9 +13,9 @@ The `global_shlib_modification` recipe detects modifications to the `/etc/ld.so.
 ### Information
 
 **Description**: Global shared library injection  
-**Tactic**: [Persistence](../../mitre/tactics/TA0003.md)  
-**Technique**: [Boot Or Logon Autostart Execution](../../mitre/techniques/T1547.md)  
-**Sub-Technique**: [Kernel Modules And Extensions](../../mitre/techniques/T1547.006.md)  
+**Tactic**: [Persistence](https://jibril.garnet.ai/mitre/mitre/ta0003)  
+**Technique**: [Boot Or Logon Autostart Execution](https://jibril.garnet.ai/mitre/mitre/ta0003/t1547)  
+**Sub-Technique**: [Kernel Modules And Extensions](https://jibril.garnet.ai/mitre/mitre/ta0003/t1547/t1547.006)  
 **Importance**: Critical
 
 ### Analysis of the Event

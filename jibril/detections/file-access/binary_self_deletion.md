@@ -13,9 +13,9 @@ The `binary_self_deletion` detection recipe identifies instances where a binary 
 ### Information
 
 **Description**: Binary executed and self-deleted  
-**Tactic**: [Defense Evasion](../../mitre/tactics/TA0005.md)  
-**Technique**: [Indicator Removal](../../mitre/techniques/T1070.md)  
-**Sub-Technique**: [File Deletion](../../mitre/techniques/T1070.004.md)  
+**Tactic**: [Defense Evasion](https://jibril.garnet.ai/mitre/mitre/ta0005)  
+**Technique**: [Indicator Removal](https://jibril.garnet.ai/mitre/mitre/ta0005/t1070)  
+**Sub-Technique**: [File Deletion](https://jibril.garnet.ai/mitre/mitre/ta0005/t1070/t1070.004)  
 **Importance**: Critical
 
 ### Analysis of the Event

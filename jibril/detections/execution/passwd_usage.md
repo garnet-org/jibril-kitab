@@ -13,8 +13,8 @@ The `passwd_usage` recipe identifies the use of password management commands wit
 ### Information
 
 **Description**: Password related command usage  
-**Tactic**: [Credential Access](../../mitre/tactics/TA0006.md)  
-**Technique**: [OS Credential Dumping](../../mitre/techniques/T1003.md)  
+**Tactic**: [Credential Access](https://jibril.garnet.ai/mitre/mitre/ta0006)  
+**Technique**: [OS Credential Dumping](https://jibril.garnet.ai/mitre/mitre/ta0006/t1003)  
 **Importance**: Medium
 
 ### Analysis of the Event

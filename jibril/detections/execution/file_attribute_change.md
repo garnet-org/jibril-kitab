@@ -15,9 +15,9 @@ The `file_attribute_change` recipe identifies modifications to file attributes, 
 ### Information
 
 **Description**: File attributes change  
-**Tactic**: [Defense Evasion](../../mitre/tactics/TA0005.md)  
-**Technique**: [File And Directory Permissions Modification](../../mitre/techniques/T1222.md)  
-**Sub-Technique**: [Linux And Mac File And Directory Permissions Modification](../../mitre/techniques/T1222.002.md)  
+**Tactic**: [Defense Evasion](https://jibril.garnet.ai/mitre/mitre/ta0005)  
+**Technique**: [File And Directory Permissions Modification](https://jibril.garnet.ai/mitre/mitre/ta0005/t1222)  
+**Sub-Technique**: [Linux And Mac File And Directory Permissions Modification](https://jibril.garnet.ai/mitre/mitre/ta0005/t1222/t1222.002)  
 **Importance**: High
 
 ### Analysis of the Event

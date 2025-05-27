@@ -13,9 +13,9 @@ This Jibril detection recipe targets suspicious files and commands related to cr
 ### Information
 
 **Description**: Crypto miner execution  
-**Tactic**: [Impact](../../mitre/tactics/TA0040.md)  
-**Technique**: [Resource Hijacking](../../mitre/techniques/T1496.md)  
-**Sub-Technique**: [Compute Hijacking](../../mitre/techniques/T1496.001.md)  
+**Tactic**: [Impact](https://jibril.garnet.ai/mitre/mitre/ta0040)  
+**Technique**: [Resource Hijacking](https://jibril.garnet.ai/mitre/mitre/ta0040/t1496)  
+**Sub-Technique**: [Compute Hijacking](https://jibril.garnet.ai/mitre/mitre/ta0040/t1496/t1496.001)  
 **Importance**: High
 
 ### Analysis of the Event
