@@ -13,8 +13,8 @@ The `os_network_fingerprint` recipe identifies access to network configuration f
 ### Information
 
 **Description**: OS network fingerprint  
-**Tactic**: [Discovery](../../mitre/tactics/TA0007.md)  
-**Technique**: [System Information Discovery](../../mitre/techniques/T1082.md)  
+**Tactic**: [Discovery](https://jibril.garnet.ai/mitre/mitre/ta0007)  
+**Technique**: [System Information Discovery](https://jibril.garnet.ai/mitre/mitre/ta0007/t1082)  
 **Importance**: Low
 
 ### Analysis of the Event

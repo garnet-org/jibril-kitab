@@ -13,8 +13,8 @@ The `example` recipe detects communication with specific network peers, serving 
 ### Information
 
 **Description**: Detect communication with example network peers  
-**Tactic**: [Example](../../mitre/tactics/TA0000.md)  
-**Technique**: [Example](../../mitre/techniques/T1000.md)  
+**Tactic**: [Example](https://jibril.garnet.ai/mitre/mitre/ta0000)  
+**Technique**: [Example](https://jibril.garnet.ai/mitre/mitre/ta0000/t1000)  
 **Importance**: None
 
 ### Analysis of the Event

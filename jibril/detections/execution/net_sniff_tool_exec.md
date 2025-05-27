@@ -13,8 +13,8 @@ The `net_sniff_tool_exec` recipe identifies the execution of network sniffing to
 ### Information
 
 **Description**: Network sniffing tool execution  
-**Tactic**: [Discovery](../../mitre/tactics/TA0007.md)  
-**Technique**: [Network Sniffing](../../mitre/techniques/T1040.md)  
+**Tactic**: [Discovery](https://jibril.garnet.ai/mitre/mitre/ta0007)  
+**Technique**: [Network Sniffing](https://jibril.garnet.ai/mitre/mitre/ta0007/t1040)  
 **Importance**: Critical
 
 ### Analysis of the Event

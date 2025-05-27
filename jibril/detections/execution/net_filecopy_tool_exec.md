@@ -13,8 +13,8 @@ The `net_filecopy_tool_exec` recipe identifies the execution of network file cop
 ### Information
 
 **Description**: Network file copy tool execution  
-**Tactic**: [Exfiltration](../../mitre/tactics/TA0010.md)  
-**Technique**: [Exfiltration Over Other Network Medium](../../mitre/techniques/T1011.md)  
+**Tactic**: [Exfiltration](https://jibril.garnet.ai/mitre/mitre/ta0010)  
+**Technique**: [Exfiltration Over Other Network Medium](https://jibril.garnet.ai/mitre/mitre/ta0010/t1011)  
 **Importance**: Critical
 
 ### Analysis of the Event

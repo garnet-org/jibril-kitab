@@ -13,9 +13,9 @@ The `auth_logs_tamper` detection recipe identifies suspicious file operations su
 ### Information
 
 **Description**: Authentication logs tampering  
-**Tactic**: [Defense Evasion](../../mitre/tactics/TA0005.md)  
-**Technique**: [Indicator Removal](../../mitre/techniques/T1070.md)  
-**Sub-Technique**: [File Deletion](../../mitre/techniques/T1070.004.md)  
+**Tactic**: [Defense Evasion](https://jibril.garnet.ai/mitre/mitre/ta0005)  
+**Technique**: [Indicator Removal](https://jibril.garnet.ai/mitre/mitre/ta0005/t1070)  
+**Sub-Technique**: [File Deletion](https://jibril.garnet.ai/mitre/mitre/ta0005/t1070/t1070.004)  
 **Importance**: High
 
 ### Analysis of the Event

@@ -13,9 +13,9 @@ The `gambling_domain_access` recipe detects connections to gambling-related doma
 ### Information
 
 **Description**: Access to gambling, betting, mining, etc.  
-**Tactic**: [Command And Control](../../mitre/tactics/TA0011.md)  
-**Technique**: [Application Layer Protocol](../../mitre/techniques/T1071.md)  
-**Sub-Technique**: [DNS](../../mitre/techniques/T1071.004.md)  
+**Tactic**: [Command And Control](https://jibril.garnet.ai/mitre/mitre/ta0011)  
+**Technique**: [Application Layer Protocol](https://jibril.garnet.ai/mitre/mitre/ta0011/t1071)  
+**Sub-Technique**: [DNS](https://jibril.garnet.ai/mitre/mitre/ta0011/t1071/t1071.004)  
 **Importance**: Critical
 
 ### Analysis of the Event

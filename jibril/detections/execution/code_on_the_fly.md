@@ -13,8 +13,8 @@ The `code_on_the_fly` recipe identifies attempts to execute code dynamically usi
 ### Information
 
 **Description**: Code on the fly  
-**Tactic**: [Collection](../../mitre/tactics/TA0009.md)  
-**Technique**: [Data From Local System](../../mitre/techniques/T1005.md)  
+**Tactic**: [Collection](https://jibril.garnet.ai/mitre/mitre/ta0009)  
+**Technique**: [Data From Local System](https://jibril.garnet.ai/mitre/mitre/ta0009/t1005)  
 **Importance**: Critical
 
 ### Analysis of the Event

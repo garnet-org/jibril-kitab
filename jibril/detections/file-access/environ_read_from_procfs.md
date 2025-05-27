@@ -13,8 +13,8 @@ The `environ_read_from_procfs` recipe detects when a process accesses the enviro
 ### Information
 
 **Description**: environ read from procfs  
-**Tactic**: [Discovery](../../mitre/tactics/TA0007.md)  
-**Technique**: [System Information Discovery](../../mitre/techniques/T1082.md)  
+**Tactic**: [Discovery](https://jibril.garnet.ai/mitre/mitre/ta0007)  
+**Technique**: [System Information Discovery](https://jibril.garnet.ai/mitre/mitre/ta0007/t1082)  
 **Importance**: High
 
 ### Analysis of the Event

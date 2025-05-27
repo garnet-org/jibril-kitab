@@ -13,8 +13,8 @@ The `net_mitmit_tool_exec` detection identifies the execution of network man-in-
 ### Information
 
 **Description**: Network man-in-the-middle tool execution  
-**Tactic**: [Credential Access](../../mitre/tactics/TA0006.md)  
-**Technique**: [Adversary In The Middle](../../mitre/techniques/T1557.md)  
+**Tactic**: [Credential Access](https://jibril.garnet.ai/mitre/mitre/ta0006)  
+**Technique**: [Adversary In The Middle](https://jibril.garnet.ai/mitre/mitre/ta0006/t1557)  
 **Importance**: Critical
 
 ### Analysis of the Event

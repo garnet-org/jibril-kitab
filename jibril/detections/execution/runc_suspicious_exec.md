@@ -13,8 +13,8 @@ The `runc_suspicious_exec` detection recipe identifies instances where the `runc
 ### Information
 
 **Description**: `runc` binary executed by a suspicious process  
-**Tactic**: [Execution](../../mitre/tactics/TA0002.md)  
-**Technique**: [Container Administration Command](../../mitre/techniques/T1609.md)  
+**Tactic**: [Execution](https://jibril.garnet.ai/mitre/mitre/ta0002)  
+**Technique**: [Container Administration Command](https://jibril.garnet.ai/mitre/mitre/ta0002/t1609)  
 **Importance**: Critical
 
 ### Analysis of the Event

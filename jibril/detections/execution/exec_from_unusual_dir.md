@@ -13,8 +13,8 @@ The `exec_from_unusual_dir` event identifies the execution of files from non-sta
 ### Information
 
 **Description**: Execution from unusual directory  
-**Tactic**: [Defense Evasion](../../mitre/tactics/TA0005.md)  
-**Technique**: [Hide Artifacts](../../mitre/techniques/T1564.md)  
+**Tactic**: [Defense Evasion](https://jibril.garnet.ai/mitre/mitre/ta0005)  
+**Technique**: [Hide Artifacts](https://jibril.garnet.ai/mitre/mitre/ta0005/t1564)  
 **Importance**: High, Critical
 
 ### Analysis of the Event

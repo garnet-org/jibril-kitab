@@ -13,8 +13,8 @@ The `net_suspicious_tool_exec` recipe identifies the execution of network tools 
 ### Information
 
 **Description**: Network suspicious tool execution  
-**Tactic**: [Discovery](../../mitre/tactics/TA0007.md)  
-**Technique**: [Network Service Discovery](../../mitre/techniques/T1046.md)  
+**Tactic**: [Discovery](https://jibril.garnet.ai/mitre/mitre/ta0007)  
+**Technique**: [Network Service Discovery](https://jibril.garnet.ai/mitre/mitre/ta0007/t1046)  
 **Importance**: Critical
 
 ### Analysis of the Event

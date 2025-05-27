@@ -13,9 +13,9 @@ The `code_modification_through_procfs` event is a critical security issue that d
 ### Information
 
 **Description**: Code modification through procfs  
-**Tactic**: [Defense Evasion](../../mitre/tactics/TA0005.md)  
-**Technique**: [Process Injection](../../mitre/techniques/T1055.md)  
-**Sub-Technique**: [Proc Memory](../../mitre/techniques/T1055.009.md)  
+**Tactic**: [Defense Evasion](https://jibril.garnet.ai/mitre/mitre/ta0005)  
+**Technique**: [Process Injection](https://jibril.garnet.ai/mitre/mitre/ta0005/t1055)  
+**Sub-Technique**: [Proc Memory](https://jibril.garnet.ai/mitre/mitre/ta0005/t1055/t1055.009)  
 **Importance**: High
 
 ### Analysis of the Event

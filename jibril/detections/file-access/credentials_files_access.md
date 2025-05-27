@@ -13,9 +13,9 @@ The `credentials_files_access` recipe detects access to files that may contain s
 ### Information
 
 **Description**: credentials files access  
-**Tactic**: [Credential Access](../../mitre/tactics/TA0006.md)  
-**Technique**: [Credentials From Password Stores](../../mitre/techniques/T1555.md)  
-**Sub-Technique**: [Credentials From Web Browsers](../../mitre/techniques/T1555.003.md)  
+**Tactic**: [Credential Access](https://jibril.garnet.ai/mitre/mitre/ta0006)  
+**Technique**: [Credentials From Password Stores](https://jibril.garnet.ai/mitre/mitre/ta0006/t1555)  
+**Sub-Technique**: [Credentials From Web Browsers](https://jibril.garnet.ai/mitre/mitre/ta0006/t1555/t1555.003)  
 **Importance**: Critical
 
 ### Analysis of the Event

@@ -13,9 +13,9 @@ The `sudoers_modification` recipe identifies access and modifications to the sud
 ### Information
 
 **Description**: sudoers modification  
-**Tactic**: [Privilege Escalation](../../mitre/tactics/TA0004.md)  
-**Technique**: [Abuse Elevation Control Mechanism](../../mitre/techniques/T1548.md)  
-**Sub-Technique**: [Sudo And Sudo Caching](../../mitre/techniques/T1548.003.md)  
+**Tactic**: [Privilege Escalation](https://jibril.garnet.ai/mitre/mitre/ta0004)  
+**Technique**: [Abuse Elevation Control Mechanism](https://jibril.garnet.ai/mitre/mitre/ta0004/t1548)  
+**Sub-Technique**: [Sudo And Sudo Caching](https://jibril.garnet.ai/mitre/mitre/ta0004/t1548/t1548.003)  
 **Importance**: Critical
 
 ### Analysis of the Event

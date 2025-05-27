@@ -13,9 +13,9 @@ The `ssl_certificate_access` event identifies unauthorized modifications or acce
 ### Information
 
 **Description**: ssl certificate access  
-**Tactic**: [Credential Access](../../mitre/tactics/TA0006.md)  
-**Technique**: [Unsecured Credentials](../../mitre/techniques/T1552.md)  
-**Sub-Technique**: [Credentials In Files](../../mitre/techniques/T1552.001.md)  
+**Tactic**: [Credential Access](https://jibril.garnet.ai/mitre/mitre/ta0006)  
+**Technique**: [Unsecured Credentials](https://jibril.garnet.ai/mitre/mitre/ta0006/t1552)  
+**Sub-Technique**: [Credentials In Files](https://jibril.garnet.ai/mitre/mitre/ta0006/t1552/t1552.001)  
 **Importance**: Critical
 
 ### Analysis of the Event

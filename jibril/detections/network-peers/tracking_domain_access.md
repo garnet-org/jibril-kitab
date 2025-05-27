@@ -13,9 +13,9 @@ The `tracking_domain_access` detection monitors connections to domains associate
 ### Information
 
 **Description**: Access to tracking domains  
-**Tactic**: [Command And Control](../../mitre/tactics/TA0011.md)  
-**Technique**: [Application Layer Protocol](../../mitre/techniques/T1071.md)  
-**Sub-Technique**: [DNS](../../mitre/techniques/T1071.004.md)  
+**Tactic**: [Command And Control](https://jibril.garnet.ai/mitre/mitre/ta0011)  
+**Technique**: [Application Layer Protocol](https://jibril.garnet.ai/mitre/mitre/ta0011/t1071)  
+**Sub-Technique**: [DNS](https://jibril.garnet.ai/mitre/mitre/ta0011/t1071/t1071.004)  
 **Importance**: High
 
 ### Analysis of the Event

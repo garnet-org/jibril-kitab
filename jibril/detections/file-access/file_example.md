@@ -13,8 +13,8 @@ The `example` recipe detects access to random files, serving as an example of ho
 ### Information
 
 **Description**: Detect access to some specific files  
-**Tactic**: [Example](../../mitre/tactics/TA0000.md) (TA0000)  
-**Technique**: [Example](../../mitre/techniques/T1000.md) (T1000)  
+**Tactic**: [Example](https://jibril.garnet.ai/mitre/mitre/ta0000) (TA0000)  
+**Technique**: [Example](https://jibril.garnet.ai/mitre/mitre/ta0000/t1000) (T1000)  
 **Importance**: None
 
 ### Analysis of the Event

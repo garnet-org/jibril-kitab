@@ -13,9 +13,9 @@ The `hidden_elf_exec` recipe identifies the execution of hidden ELF (Executable 
 ### Information
 
 **Description**: Hidden ELF execution  
-**Tactic**: [Defense Evasion](../../mitre/tactics/TA0005.md)  
-**Technique**: [Hide Artifacts](../../mitre/techniques/T1564.md)  
-**Sub-Technique**: [Hidden Files And Directories](../../mitre/techniques/T1564.001.md)  
+**Tactic**: [Defense Evasion](https://jibril.garnet.ai/mitre/mitre/ta0005)  
+**Technique**: [Hide Artifacts](https://jibril.garnet.ai/mitre/mitre/ta0005/t1564)  
+**Sub-Technique**: [Hidden Files And Directories](https://jibril.garnet.ai/mitre/mitre/ta0005/t1564/t1564.001)  
 **Importance**: Critical
 
 ### Analysis of the Event
