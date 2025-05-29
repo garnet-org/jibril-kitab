@@ -40,6 +40,8 @@ This extensive coverage ensures no security-relevant activity escapes detection,
 
 ## <mark style="color:yellow;">Action Visibility</mark>
 
+<figure><img src="../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
+
 Jibril records every interaction with system resources, creating a comprehensive audit trail for both security analysis and operational monitoring:
 
 **Lifecycle Events**
