@@ -23,6 +23,8 @@ Jibril mission: to deliver **real-time insights** with minimal overhead while ma
 
 ## <mark style="color:yellow;">Resource Tracking</mark> <a href="#comprehensive-resource-tracking" id="comprehensive-resource-tracking"></a>
 
+<figure><img src="../../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
+
 Jibril delivers complete observability through exhaustive monitoring of critical system elements:
 
 * **Identity**: Users and Groups
