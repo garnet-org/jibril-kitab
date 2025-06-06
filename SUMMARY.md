@@ -11,6 +11,7 @@
   * [Compare](jibril/readme/compare.md)
 * [Install and Run](jibril/installation/README.md)
   * [Requirements](jibril/installation/requirements.md)
+  * [Repositories](jibril/installation/repositories.md)
   * [Systemd Service](jibril/installation/systemd-service/README.md)
     * [Systemd Config](jibril/installation/systemd-service/systemd-config.md)
   * [Command Line](jibril/installation/command-line.md)
