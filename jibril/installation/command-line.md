@@ -11,7 +11,7 @@ icon: square-terminal
 ## <mark style="color:yellow;">Obtain Jibril binaries</mark> <a href="#run-jibril-using-command-line-arguments" id="run-jibril-using-command-line-arguments"></a>
 
 ```sh
-$ sudo curl -L -o /usr/bin/jibril https://rb.gy/b0x3wv
+$ sudo curl -L -o /usr/bin/jibril https://bit.ly/3FLyV1x
 
 $ sudo chmod +x /usr/bin/jibril
 

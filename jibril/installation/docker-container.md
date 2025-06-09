@@ -21,7 +21,7 @@ $ vi /etc/jibril/config.yaml
 ## <mark style="color:yellow;">Obtain the Image</mark> <a href="#run-jibril-using-command-line-arguments" id="run-jibril-using-command-line-arguments"></a>
 
 ```sh
-$ docker pull garnetlabs/jibril:v2.1
+$ docker pull garnetlabs/jibril:v2.2
 ```
 
 ## <mark style="color:yellow;">Run Jibril using Docker</mark> <a href="#run-jibril-using-command-line-arguments" id="run-jibril-using-command-line-arguments"></a>
@@ -33,7 +33,7 @@ $ docker run --rm --name=jibril --privileged \
     -v /sys/fs/bpf:/sys/fs/bpf:rw \
     -v /etc/jibril/:/etc/jibril:rw \
     -v /var/log/jibril:/var/log/jibril:rw \
-    garnetlabs/jibril:v2.1 --config /etc/jibril/config.yaml
+    garnetlabs/jibril:v2.2 --config /etc/jibril/config.yaml
 ```
 
 > This command is an example of how one can run Jibril using its docker image.
@@ -58,7 +58,7 @@ $ docker run --rm --name=jibril --privileged \
     -v /sys/fs/bpf:/sys/fs/bpf:rw \
     -v /etc/jibril/:/etc/jibril:rw \
     -v /var/log/jibril:/var/log/jibril:rw \
-    garnetlabs/jibril:v2.1 \
+    garnetlabs/jibril:v2.2 \
     --config /etc/jibril/config.yaml
 ```
 
