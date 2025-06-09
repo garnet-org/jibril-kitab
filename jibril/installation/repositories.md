@@ -10,7 +10,7 @@ Public Detection Recipes (YAML)\
 [https://github.com/garnet-org/jibril-wahy](https://github.com/garnet-org/jibril-wahy)
 
 {% hint style="success" %}
-Detection recipes to be used with Jibril [alchemies](../components/alchemies/ "mention")feature.
+Detection recipes to be used with Jibril [alchemies](../components/alchemies/ "mention") feature.
 {% endhint %}
 
 ### <mark style="color:yellow;">Jibril Ashkaal - أشكال</mark>
@@ -37,5 +37,5 @@ Jibril Gitbook Source\
 [https://github.com/garnet-org/jibril-kitab](https://github.com/garnet-org/jibril-kitab)
 
 {% hint style="info" %}
-Use this repository to easily unmarshal detection events.
+The GitBook source code (not really a thing for you).
 {% endhint %}
