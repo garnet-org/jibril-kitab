@@ -32,7 +32,7 @@ Jibril is a cutting-edge runtime monitoring and threat detection engine, designe
 
 ### <mark style="color:yellow;">Insights</mark>
 
-<figure><img src=".gitbook/assets/image (1) (1).png" alt=""><figcaption><p>Deep Visibility on Root Causes</p></figcaption></figure>
+<figure><img src=".gitbook/assets/image (1) (1) (1).png" alt=""><figcaption><p>Deep Visibility on Root Causes</p></figcaption></figure>
 
 {% hint style="info" %}
 <mark style="color:yellow;">**Key Benefits**</mark>
