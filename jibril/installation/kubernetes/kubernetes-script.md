@@ -7,13 +7,13 @@ icon: box-open
 ## <mark style="color:yellow;">Quick Steps</mark>
 
 ```sh
-$ ./setup-k8s.sh --help
+./setup-k8s.sh --help
 
-$ kubectl create namespace jibril
+kubectl create namespace jibril
 
-$ ./setup-k8s.sh --namespace=jibril
+./setup-k8s.sh --namespace=jibril
 
-$ kubectl apply -f jibril-k8s.yaml # if not applied automatically
+kubectl apply -f jibril-k8s.yaml # if not applied automatically
 ```
 
 ## <mark style="color:yellow;">Script</mark>
@@ -293,6 +293,7 @@ else
       - jibril:detect:exec_example
       - jibril:detect:binary_executed_by_loader
       - jibril:detect:code_on_the_fly
+      - jibril:detect:credentials_text_lookup
       - jibril:detect:crypto_miner_execution
       - jibril:detect:data_encoder_exec
       - jibril:detect:denial_of_service_tools
@@ -313,6 +314,7 @@ else
       # Method: network peers.
       - jibril:detect:adult_domain_access
       - jibril:detect:badware_domain_access
+      - jibril:detect:cloud_metadata_access
       - jibril:detect:dyndns_domain_access
       - jibril:detect:fake_domain_access
       - jibril:detect:gambling_domain_access

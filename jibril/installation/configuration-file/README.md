@@ -71,12 +71,17 @@ event:
   - jibril:detect:flow
   # Method: file access.
   # - jibril:detect:file_example
+  - jibril:detect:auth_logs_tamper
+  - jibril:detect:binary_self_deletion
   - jibril:detect:capabilities_modification
   - jibril:detect:code_modification_through_procfs
   - jibril:detect:core_pattern_access
   - jibril:detect:cpu_fingerprint
   - jibril:detect:credentials_files_access
+  - jibril:detect:crypto_miner_files
+  - jibril:detect:environ_read_from_procfs
   - jibril:detect:filesystem_fingerprint
+  - jibril:detect:global_shlib_modification
   - jibril:detect:java_debug_lib_load
   - jibril:detect:java_instrument_lib_load
   - jibril:detect:machine_fingerprint
@@ -91,15 +96,12 @@ event:
   - jibril:detect:sudoers_modification
   - jibril:detect:sysrq_access
   - jibril:detect:unprivileged_bpf_config_access
-  - jibril:detect:global_shlib_modification
-  - jibril:detect:environ_read_from_procfs
-  - jibril:detect:binary_self_deletion
-  - jibril:detect:crypto_miner_files
-  - jibril:detect:auth_logs_tamper
   # Method: execution.
   # - jibril:detect:exec_example
   - jibril:detect:binary_executed_by_loader
   - jibril:detect:code_on_the_fly
+  - jibril:detect:credentials_text_lookup
+  - jibril:detect:crypto_miner_execution
   - jibril:detect:data_encoder_exec
   - jibril:detect:denial_of_service_tools
   - jibril:detect:exec_from_unusual_dir
@@ -116,11 +118,11 @@ event:
   - jibril:detect:runc_suspicious_exec
   - jibril:detect:webserver_exec
   - jibril:detect:webserver_shell_exec
-  - jibril:detect:crypto_miner_execution
   # Method: network peers.
   # - jibril:detect:peer_example
   - jibril:detect:adult_domain_access
   - jibril:detect:badware_domain_access
+  - jibril:detect:cloud_metadata_access
   - jibril:detect:dyndns_domain_access
   - jibril:detect:fake_domain_access
   - jibril:detect:gambling_domain_access
