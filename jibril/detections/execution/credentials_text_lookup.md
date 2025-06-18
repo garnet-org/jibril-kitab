@@ -1,5 +1,5 @@
 ---
-icon: text_search
+icon: id-badge
 ---
 
 # Credentials Text Lookup
@@ -12,17 +12,17 @@ The `credentials_text_lookup` recipe detects attempts to search for or access se
 
 ### Information
 
-**Description**: Credentials text lookup  
-**Tactic**: [Credential Access](https://jibril.garnet.ai/mitre/mitre/ta0006)  
-**Technique**: [Unsecured Credentials](https://jibril.garnet.ai/mitre/mitre/ta0006/t1552)  
-**Sub-Technique**: [Credentials in Files](https://jibril.garnet.ai/mitre/mitre/ta0006/t1552/t1552.001)  
+**Description**: Credentials text lookup\
+**Tactic**: [Credential Access](https://jibril.garnet.ai/mitre/mitre/ta0006)\
+**Technique**: [Unsecured Credentials](https://jibril.garnet.ai/mitre/mitre/ta0006/t1552)\
+**Sub-Technique**: [Credentials in Files](https://jibril.garnet.ai/mitre/mitre/ta0006/t1552/t1552.001)\
 **Importance**: Critical
 
 ### Analysis of the Event
 
 The `credentials_text_lookup` detection event identifies command-line patterns commonly associated with credential harvesting attempts. Attackers frequently leverage standard text-processing utilities to search through configuration files, environment variables, scripts, and logs to extract sensitive credentials.
 
-According to the MITRE ATT&CK framework, this behavior aligns with the Credential Access tactic, specifically the Unsecured Credentials technique. Historical attack patterns demonstrate that adversaries often exploit these methods to escalate privileges, move laterally within networks, and gain persistent unauthorized access.
+According to the MITRE ATT\&CK framework, this behavior aligns with the Credential Access tactic, specifically the Unsecured Credentials technique. Historical attack patterns demonstrate that adversaries often exploit these methods to escalate privileges, move laterally within networks, and gain persistent unauthorized access.
 
 ### Implications
 
