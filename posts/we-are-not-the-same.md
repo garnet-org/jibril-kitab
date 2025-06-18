@@ -1,6 +1,10 @@
+---
+icon: not-equal
+---
+
 # We are not the same
 
-<figure><img src="../../.gitbook/assets/image.png" alt="" width="250"><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image.png" alt="" width="250"><figcaption></figcaption></figure>
 
 ## Not All eBPF Sensors are Created Equal
 

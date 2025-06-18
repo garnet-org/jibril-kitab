@@ -2,9 +2,7 @@
 
 ## Jibril
 
-* [Engineering](README.md)
-  * [We are not the same](jibril/engineering/we-are-not-the-same.md)
-* [Jibril](<README (1).md>)
+* [Jibril](README.md)
   * [New Era](jibril/readme/new-era.md)
   * [Theory Behind](jibril/readme/theory-behind.md)
   * [Architecture](jibril/readme/architecture.md)
@@ -916,3 +914,7 @@
       * [Spearphishing Attachment](mitre/TA0043/T1598.002.md)
       * [Spearphishing Link](mitre/TA0043/T1598.003.md)
       * [Spearphishing Voice](mitre/TA0043/T1598.004.md)
+
+## POSTS
+
+* [We are not the same](posts/we-are-not-the-same.md)
