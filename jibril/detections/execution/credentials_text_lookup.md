@@ -1,5 +1,5 @@
 ---
-icon: text_search
+icon: search
 ---
 
 # Credentials Text Lookup
