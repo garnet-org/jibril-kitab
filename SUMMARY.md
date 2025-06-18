@@ -2,7 +2,9 @@
 
 ## Jibril
 
-* [Jibril](README.md)
+* [Engineering](README.md)
+  * [Not All eBPF Sensors Are Created Equal](jibril/engineering/not-all-ebpf-sensors-are-created-equal.md)
+* [Jibril](<README (1).md>)
   * [New Era](jibril/readme/new-era.md)
   * [Theory Behind](jibril/readme/theory-behind.md)
   * [Architecture](jibril/readme/architecture.md)
