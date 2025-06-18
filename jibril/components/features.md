@@ -15,7 +15,7 @@ layout:
 
 # Features
 
-<div align="center"><figure><img src="../../.gitbook/assets/image (7).png" alt="" width="128"><figcaption></figcaption></figure></div>
+<div align="center"><figure><img src="../../.gitbook/assets/image (7) (1).png" alt="" width="128"><figcaption></figcaption></figure></div>
 
 ## <mark style="color:yellow;">List all the Features</mark>
 

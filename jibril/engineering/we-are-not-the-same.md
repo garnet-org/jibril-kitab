@@ -4,7 +4,7 @@ icon: not-equal
 
 # We are not the same
 
-<figure><img src="../.gitbook/assets/image.png" alt="" width="250"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7).png" alt="" width="250"><figcaption></figcaption></figure>
 
 ## Not All eBPF Sensors are Created Equal
 
@@ -13,6 +13,8 @@ icon: not-equal
 {% endhint %}
 
 ## Why Jibril’s Query‑Driven Depth Matters Even More
+
+<figure><img src="../../.gitbook/assets/data.png" alt="" width="128"><figcaption></figcaption></figure>
 
 Runtime security solutions have traditionally fallen into two problematic categories: superficial event collection leading to excessive noise, or cumbersome, fragile application-level tracing requiring extensive setup and maintenance.
 
@@ -26,6 +28,8 @@ Jibril bypasses these limitations entirely with its innovative query-driven, ker
 
 ### Pitfalls of Traditional eBPF Monitoring
 
+<figure><img src="../../.gitbook/assets/image (1).png" alt="" width="128"><figcaption></figcaption></figure>
+
 Traditional kernel-level eBPF monitoring often relies on capturing every syscall event, leading to critical problems:
 
 * **Massive Noise and Alert Fatigue**: Millions of unfiltered events overwhelm analysts.
@@ -35,6 +39,8 @@ Traditional kernel-level eBPF monitoring often relies on capturing every syscall
 Jibril rejects this inefficient model, providing instead focused, context-rich, and actionable insights.
 
 ### The False Promise of Application-Level Debug Tracing
+
+<figure><img src="../../.gitbook/assets/image.png" alt="" width="128"><figcaption></figcaption></figure>
 
 Vendors promoting deep application tracing often overlook substantial issues:
 
@@ -50,6 +56,8 @@ Jibril sidesteps these challenges, offering deep, reliable visibility through in
 
 ### Efficiency, Scalability, and Reliability by Design
 
+<figure><img src="../../.gitbook/assets/image (2).png" alt="" width="128"><figcaption></figcaption></figure>
+
 Jibril emphasizes robustness, scalability, and simplicity:
 
 * **Ultra-Lightweight Footprint**: Consumes less than 10% CPU, ideal for resource-constrained production environments and containers.
@@ -57,6 +65,8 @@ Jibril emphasizes robustness, scalability, and simplicity:
 * **Kernel Safety Guaranteed**: Fully verified by Linux kernel, ensuring system stability and resilience.
 
 ### Deep Visibility Without Compromise
+
+<figure><img src="../../.gitbook/assets/seo.png" alt="" width="128"><figcaption></figcaption></figure>
 
 Jibril provides comprehensive insights without fragile complexity:
 
@@ -69,6 +79,8 @@ Jibril provides comprehensive insights without fragile complexity:
 
 ### The Largest Free Library of Detection Recipes
 
+<figure><img src="../../.gitbook/assets/image (4).png" alt="" width="128"><figcaption></figcaption></figure>
+
 Jibril ships with over **80 built-in detection recipes** across key threat categories:
 
 * **File Access**: Detects auth-log tampering, SSL cert reads, credential file access, crypto-miner artifacts, environment leaks, shell config modifications, sudoers changes, and more.
@@ -77,7 +89,9 @@ Jibril ships with over **80 built-in detection recipes** across key threat categ
 
 This library represents the most comprehensive free set of detections available in runtime EDR solutions, covering numerous MITRE ATT\&CK TTPs at no cost.
 
-### Alchemies: DIY Detection Recipes with YAML Simplicity
+### Alchemies: Do-It-Yourself YAML  Detection Recipes
+
+<figure><img src="../../.gitbook/assets/image (5).png" alt="" width="128"><figcaption></figcaption></figure>
 
 Jibril further empowers users with **Alchemies**, allowing easy creation of detection logic using simple, human-readable YAML:
 
@@ -92,6 +106,8 @@ Your team can rapidly craft unlimited custom detections, greatly outperforming t
 
 ## AI-Powered Noise Reduction with Attenuator
 
+<figure><img src="../../.gitbook/assets/image (6).png" alt="" width="128"><figcaption></figcaption></figure>
+
 Jibril addresses alert fatigue with **Attenuator**, an intelligent system leveraging heuristics and AI:
 
 * **Suppression of repetitive patterns** (e.g., routine cron job activity).
@@ -103,6 +119,8 @@ Attenuator ensures meaningful alerts without overwhelming analysts, significantl
 ***
 
 ## How Jibril Works at the Kernel Level
+
+<figure><img src="../../.gitbook/assets/linux.png" alt="" width="128"><figcaption></figcaption></figure>
 
 Jibril leverages a powerful, stateful, and query-driven approach:
 
@@ -116,6 +134,8 @@ Jibril leverages a powerful, stateful, and query-driven approach:
 
 ## Why Jibril’s Model Triumphs
 
+<figure><img src="../../.gitbook/assets/success.png" alt="" width="128"><figcaption></figcaption></figure>
+
 Jibril uniquely combines deep visibility, efficiency, and ease of use:
 
 * **Largest library of free detection recipes**.
@@ -127,6 +147,8 @@ Jibril uniquely combines deep visibility, efficiency, and ease of use:
 ***
 
 ## TL;DR
+
+<figure><img src="../../.gitbook/assets/decrease.png" alt="" width="128"><figcaption></figcaption></figure>
 
 Jibril transcends traditional eBPF-based monitoring. It’s a comprehensive, production-grade runtime security platform that uniquely combines extensive detection capabilities, dynamic YAML-based customizations, and AI-driven noise reduction, ensuring maximum protection, minimal overhead, and effortless operational management.
 

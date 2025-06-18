@@ -917,4 +917,4 @@
 
 ## POSTS
 
-* [We are not the same](posts/we-are-not-the-same.md)
+* [We are not the same](jibril/engineering/we-are-not-the-same.md)
