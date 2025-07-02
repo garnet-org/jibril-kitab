@@ -5,7 +5,7 @@ icon: arrows-to-circle
 
 # Builtin Recipes
 
-<figure><img src="../../../.gitbook/assets/image (28).png" alt="" width="128"><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (18).png" alt="" width="128"><figcaption></figcaption></figure>
 
 ## <mark style="color:yellow;">Public Detection Recipes</mark>
 

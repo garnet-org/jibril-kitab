@@ -15,7 +15,7 @@ layout:
 
 # Extensions
 
-<figure><img src="../../.gitbook/assets/image (27).png" alt="" width="128"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (17).png" alt="" width="128"><figcaption></figcaption></figure>
 
 ## <mark style="color:yellow;">Jibril Extensions</mark>
 

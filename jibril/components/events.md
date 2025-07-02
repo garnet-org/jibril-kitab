@@ -16,7 +16,7 @@ layout:
 
 # Events
 
-<figure><img src="../../.gitbook/assets/image (25).png" alt="" width="128"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15).png" alt="" width="128"><figcaption></figcaption></figure>
 
 ## <mark style="color:yellow;">Jibril Extension Network Policy (netpolicy) Plugin</mark> <a href="#jibril-netpolicy" id="jibril-netpolicy"></a>
 

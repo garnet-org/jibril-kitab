@@ -16,7 +16,7 @@ layout:
 
 # Printers
 
-<figure><img src="../../.gitbook/assets/image (24).png" alt="" width="128"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14).png" alt="" width="128"><figcaption></figcaption></figure>
 
 ## <mark style="color:yellow;">Jibril Extension Printers</mark> <a href="#jibril_1" id="jibril_1"></a>
 

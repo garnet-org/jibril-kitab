@@ -36,6 +36,18 @@ Experience comprehensive monitoring without ring-buffer overruns, missed events,
 
 ### <mark style="color:yellow;">Core Innovations</mark> <a href="#id-1-core-innovations-in-jibrils-architecture" id="id-1-core-innovations-in-jibrils-architecture"></a>
 
+#### &#x20;<a href="#id-11-event-less-query-driven-monitoring" id="id-11-event-less-query-driven-monitoring"></a>
+
+{% tabs %}
+{% tab title="Jibril Runtime Security" %}
+<figure><img src="../../.gitbook/assets/image (23).png" alt=""><figcaption><p>3rd Generation Agent: Jibril Runtime Security</p></figcaption></figure>
+{% endtab %}
+
+{% tab title="Current eBPF Runtime Tools" %}
+<figure><img src="../../.gitbook/assets/image (22).png" alt=""><figcaption><p>2nd Generation Agents: Current eBPF Runtime Security Tools</p></figcaption></figure>
+{% endtab %}
+{% endtabs %}
+
 #### Event-Less, Query-Driven Monitoring <a href="#id-11-event-less-query-driven-monitoring" id="id-11-event-less-query-driven-monitoring"></a>
 
 *   **Jibril's Innovation**
@@ -44,16 +56,6 @@ Experience comprehensive monitoring without ring-buffer overruns, missed events,
 *   **Traditional Tools**
 
     Traditional solutions depend on event flooding via ring buffers to transfer kernel events to user space, creating bottlenecks under load.
-
-{% tabs %}
-{% tab title="Jibril Runtime Security" %}
-<figure><img src="../../.gitbook/assets/image (33).png" alt=""><figcaption><p>3rd Generation Agent: Jibril Runtime Security</p></figcaption></figure>
-{% endtab %}
-
-{% tab title="Current eBPF Runtime Tools" %}
-<figure><img src="../../.gitbook/assets/image (32).png" alt=""><figcaption><p>2nd Generation Agents: Current eBPF Runtime Security Tools</p></figcaption></figure>
-{% endtab %}
-{% endtabs %}
 
 #### Minimal Overhead, Maximum Visibility <a href="#id-12-minimal-overhead-maximum-visibility" id="id-12-minimal-overhead-maximum-visibility"></a>
 
@@ -65,16 +67,6 @@ Experience comprehensive monitoring without ring-buffer overruns, missed events,
 #### High-Frequency Event Efficiency <a href="#id-13-high-frequency-event-efficiency" id="id-13-high-frequency-event-efficiency"></a>
 
 * **Resiliency**: Jibril's in-kernel storage delivers reliable monitoring without CPU strain. While standard eBPF tools may drop events at enterprise loads - sometimes exceeding 50,000 events per second - Jibril maintains consistent performance without data loss.
-
-{% tabs %}
-{% tab title="Cadence and CPU Consumption" %}
-<figure><img src="../../.gitbook/assets/image (35).png" alt=""><figcaption><p>Deterministic CPU Consumption</p></figcaption></figure>
-{% endtab %}
-
-{% tab title="Minimal CPU Overhead, No Misses" %}
-<figure><img src="../../.gitbook/assets/image (36).png" alt=""><figcaption></figcaption></figure>
-{% endtab %}
-{% endtabs %}
 
 ***
 

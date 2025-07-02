@@ -4,7 +4,7 @@ icon: id-badge
 
 # License
 
-<figure><img src="../.gitbook/assets/image (20).png" alt="" width="256"><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (8).png" alt="" width="256"><figcaption></figcaption></figure>
 
 **License Issuer:** GARNET LABS INC.\
 **License Type:** MIT-BR: MIT-Binary-Restricted License\
