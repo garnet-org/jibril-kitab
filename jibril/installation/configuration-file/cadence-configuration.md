@@ -5,7 +5,7 @@ icon: stopwatch-20
 
 # Cadence Configuration
 
-<figure><img src="../../../.gitbook/assets/image (1) (1).png" alt="" width="128"><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1) (1) (1).png" alt="" width="128"><figcaption></figcaption></figure>
 
 ## <mark style="color:yellow;">What is Cadence?</mark>
 

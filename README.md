@@ -32,7 +32,7 @@ Jibril is a cutting-edge runtime monitoring and threat detection engine, designe
 
 ### <mark style="color:yellow;">Insights</mark>
 
-<figure><img src=".gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption><p>Deep Visibility on Root Causes</p></figcaption></figure>
+<figure><img src=".gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Deep Visibility on Root Causes</p></figcaption></figure>
 
 {% hint style="info" %}
 <mark style="color:yellow;">**Key Benefits**</mark>
@@ -63,7 +63,7 @@ Navigate the tabs for the main features.
 
 Jibril provides comprehensive tracking across all system resources, including users, processes, files, and network connections. Its query-driven architecture ensures complete visibility and actionable intelligence into system behavior.
 
-<div><figure><img src=".gitbook/assets/image (2) (1) (1).png" alt=""><figcaption><p>Context Information<br>(OS Package Versions)</p></figcaption></figure> <figure><img src=".gitbook/assets/image (3) (1) (1).png" alt=""><figcaption><p>Triggerer Ancestry Visibility<br>FULL File Access History</p></figcaption></figure> <figure><img src=".gitbook/assets/image (4) (1) (1).png" alt=""><figcaption><p>Track OS Package Dependencies Versions<br>Detection FULL Context<br>On Demand CVE Warnings</p></figcaption></figure></div>
+<div><figure><img src=".gitbook/assets/image (2) (1) (1) (1).png" alt=""><figcaption><p>Context Information<br>(OS Package Versions)</p></figcaption></figure> <figure><img src=".gitbook/assets/image (3) (1) (1).png" alt=""><figcaption><p>Triggerer Ancestry Visibility<br>FULL File Access History</p></figcaption></figure> <figure><img src=".gitbook/assets/image (4) (1) (1).png" alt=""><figcaption><p>Track OS Package Dependencies Versions<br>Detection FULL Context<br>On Demand CVE Warnings</p></figcaption></figure></div>
 {% endtab %}
 
 {% tab title="Noise Filtering" %}
