@@ -36,7 +36,7 @@
     * [Recipes Reference](jibril/components/alchemies/recipes-reference.md)
     * [Builtin Recipes](jibril/components/alchemies/builtin-recipes.md)
   * [Network Policy](jibril/components/network-policy.md)
-  * [Attenuator](jibril/components/attenuator.md)
+  * [The Attenuator](jibril/components/attenuator.md)
 * [Mechanisms](jibril/mechanisms/README.md)
   * [File Access](jibril/mechanisms/file_access.md)
   * [Execution](jibril/mechanisms/execution.md)

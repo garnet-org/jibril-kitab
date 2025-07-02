@@ -28,7 +28,7 @@ Jibril bypasses these limitations entirely with its innovative query-driven, ker
 
 ### Pitfalls of Traditional eBPF Monitoring
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt="" width="128"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt="" width="128"><figcaption></figcaption></figure>
 
 Traditional kernel-level eBPF monitoring often relies on capturing every syscall event, leading to critical problems:
 
@@ -40,7 +40,7 @@ Jibril rejects this inefficient model, providing instead focused, context-rich, 
 
 ### The False Promise of Application-Level Debug Tracing
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt="" width="128"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt="" width="128"><figcaption></figcaption></figure>
 
 Vendors promoting deep application tracing often overlook substantial issues:
 
@@ -56,7 +56,7 @@ Jibril sidesteps these challenges, offering deep, reliable visibility through in
 
 ### Efficiency, Scalability, and Reliability by Design
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt="" width="128"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt="" width="128"><figcaption></figcaption></figure>
 
 Jibril emphasizes robustness, scalability, and simplicity:
 
