@@ -47,11 +47,11 @@ Experience comprehensive monitoring without ring-buffer overruns, missed events,
 
 {% tabs %}
 {% tab title="Jibril Runtime Security" %}
-<figure><img src="../../.gitbook/assets/image (23).png" alt=""><figcaption><p>3rd Generation Agent: Jibril Runtime Security</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (33).png" alt=""><figcaption><p>3rd Generation Agent: Jibril Runtime Security</p></figcaption></figure>
 {% endtab %}
 
 {% tab title="Current eBPF Runtime Tools" %}
-<figure><img src="../../.gitbook/assets/image (22).png" alt=""><figcaption><p>2nd Generation Agents: Current eBPF Runtime Security Tools</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (32).png" alt=""><figcaption><p>2nd Generation Agents: Current eBPF Runtime Security Tools</p></figcaption></figure>
 {% endtab %}
 {% endtabs %}
 
@@ -68,11 +68,11 @@ Experience comprehensive monitoring without ring-buffer overruns, missed events,
 
 {% tabs %}
 {% tab title="Cadence and CPU Consumption" %}
-<figure><img src="../../.gitbook/assets/image (25).png" alt=""><figcaption><p>Deterministic CPU Consumption</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (35).png" alt=""><figcaption><p>Deterministic CPU Consumption</p></figcaption></figure>
 {% endtab %}
 
 {% tab title="Minimal CPU Overhead, No Misses" %}
-<figure><img src="../../.gitbook/assets/image (26).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (36).png" alt=""><figcaption></figcaption></figure>
 {% endtab %}
 {% endtabs %}
 

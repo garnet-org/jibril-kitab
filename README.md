@@ -32,7 +32,7 @@ Jibril is a cutting-edge runtime monitoring and threat detection engine, designe
 
 ### <mark style="color:yellow;">Insights</mark>
 
-<figure><img src=".gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Deep Visibility on Root Causes</p></figcaption></figure>
+<figure><img src=".gitbook/assets/image (1) (1).png" alt=""><figcaption><p>Deep Visibility on Root Causes</p></figcaption></figure>
 
 {% hint style="info" %}
 <mark style="color:yellow;">**Key Benefits**</mark>
@@ -63,7 +63,7 @@ Navigate the tabs for the main features.
 
 Jibril provides comprehensive tracking across all system resources, including users, processes, files, and network connections. Its query-driven architecture ensures complete visibility and actionable intelligence into system behavior.
 
-<div><figure><img src=".gitbook/assets/image (2) (1) (1) (1) (1).png" alt=""><figcaption><p>Context Information<br>(OS Package Versions)</p></figcaption></figure> <figure><img src=".gitbook/assets/image (3) (1) (1).png" alt=""><figcaption><p>Triggerer Ancestry Visibility<br>FULL File Access History</p></figcaption></figure> <figure><img src=".gitbook/assets/image (4) (1) (1).png" alt=""><figcaption><p>Track OS Package Dependencies Versions<br>Detection FULL Context<br>On Demand CVE Warnings</p></figcaption></figure></div>
+<div><figure><img src=".gitbook/assets/image (2) (1).png" alt=""><figcaption><p>Context Information<br>(OS Package Versions)</p></figcaption></figure> <figure><img src=".gitbook/assets/image (3) (1).png" alt=""><figcaption><p>Triggerer Ancestry Visibility<br>FULL File Access History</p></figcaption></figure> <figure><img src=".gitbook/assets/image (4) (1).png" alt=""><figcaption><p>Track OS Package Dependencies Versions<br>Detection FULL Context<br>On Demand CVE Warnings</p></figcaption></figure></div>
 {% endtab %}
 
 {% tab title="Noise Filtering" %}
@@ -77,14 +77,14 @@ Jibril has an automatic mechanism to reduce noise. Repetitive alerts are filtere
 {% tab title="Network Visibility" %}
 <mark style="color:yellow;">**Inbound and Outbound connections tied to Security Events**</mark>
 
-<figure><img src=".gitbook/assets/image (6) (1) (1).png" alt=""><figcaption><p>Complete View of Remote Peers Per Process<br>Detections are Linked With Corresponding Remote Peer<br>Full DNS Resolution Path per Peer and Flow</p></figcaption></figure>
+<figure><img src=".gitbook/assets/image (6) (1).png" alt=""><figcaption><p>Complete View of Remote Peers Per Process<br>Detections are Linked With Corresponding Remote Peer<br>Full DNS Resolution Path per Peer and Flow</p></figcaption></figure>
 
-<figure><img src=".gitbook/assets/image (10).png" alt=""><figcaption><p>All Processes Communicating with the same Remote Node Are Grouped<br>All Detections are Flagged on Each Entry (linked with Detections Feature)</p></figcaption></figure>
+<figure><img src=".gitbook/assets/image (10) (1).png" alt=""><figcaption><p>All Processes Communicating with the same Remote Node Are Grouped<br>All Detections are Flagged on Each Entry (linked with Detections Feature)</p></figcaption></figure>
 {% endtab %}
 
 {% tab title="Block Traffic" %}
 <mark style="color:yellow;">**Network Policy Enforcement**</mark>
 
-<figure><img src=".gitbook/assets/image (11).png" alt=""><figcaption><p>Block Network Connections Using Domains or IP CIDRs.<br>Get Bad Reputation Domains Alerts Realtime.</p></figcaption></figure>
+<figure><img src=".gitbook/assets/image (11) (1).png" alt=""><figcaption><p>Block Network Connections Using Domains or IP CIDRs.<br>Get Bad Reputation Domains Alerts Realtime.</p></figcaption></figure>
 {% endtab %}
 {% endtabs %}
