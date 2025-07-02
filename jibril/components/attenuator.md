@@ -21,6 +21,12 @@ The Attenuator is a powerful feature of Jibril that enhances its security detect
 
 > Quickly check how to use this feature at [docker-container.md](../installation/docker-container.md "mention") session.
 
+{% tabs %}
+{% tab title="Detection Event Reasoning" %}
+<figure><img src="../../.gitbook/assets/image (21).png" alt=""><figcaption></figcaption></figure>
+{% endtab %}
+{% endtabs %}
+
 ## <mark style="color:yellow;">Overview</mark>
 
 The Attenuator acts as an intelligent filter that can analyze security events detected by Jibril and provide additional context, severity classifications, and even determine if an event is likely a false positive. This feature leverages AI models (like GPT-4o) to bring expert-level security analysis to each detection.
