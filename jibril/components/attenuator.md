@@ -4,7 +4,7 @@ icon: filters
 
 # The Attenuator
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt="" width="375"><figcaption><p><mark style="color:green;">MISSION: To Exterminate False Positives</mark></p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt="" width="375"><figcaption><p><mark style="color:green;">MISSION: To Exterminate False Positives</mark></p></figcaption></figure>
 
 The Attenuator is a powerful feature of Jibril that enhances its security detection capabilities through AI-powered analysis of security events.
 

@@ -8,7 +8,7 @@ icon: shield
 
 <h2 align="center"><strong>Secure Linux workloads as they are executed ...</strong></h2>
 
-<div align="center"><figure><img src=".gitbook/assets/image.png" alt="" width="128"><figcaption><p>CI/CD Pipeline<br>GitHub<br>GitLab<br>Jenkins</p></figcaption></figure> <figure><img src=".gitbook/assets/image (1).png" alt="" width="128"><figcaption><p>Classic IT<br>Standalone OS</p></figcaption></figure> <figure><img src=".gitbook/assets/image (3).png" alt="" width="128"><figcaption><p>Cloud Native<br>Kubernetes<br>Virtual Private<br>Servers</p></figcaption></figure> <figure><img src=".gitbook/assets/image (4).png" alt="" width="128"><figcaption><p>IoT Devices<br>Embedded</p></figcaption></figure></div>
+<div align="center"><figure><img src=".gitbook/assets/image (1).png" alt="" width="128"><figcaption><p>CI/CD Pipeline<br>GitHub<br>GitLab<br>Jenkins</p></figcaption></figure> <figure><img src=".gitbook/assets/image (1) (1).png" alt="" width="128"><figcaption><p>Classic IT<br>Standalone OS</p></figcaption></figure> <figure><img src=".gitbook/assets/image (3).png" alt="" width="128"><figcaption><p>Cloud Native<br>Kubernetes<br>Virtual Private<br>Servers</p></figcaption></figure> <figure><img src=".gitbook/assets/image (4).png" alt="" width="128"><figcaption><p>IoT Devices<br>Embedded</p></figcaption></figure></div>
 
 <h2 align="center"><strong>... no matter where they are.</strong></h2>
 
