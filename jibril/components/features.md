@@ -1,21 +1,10 @@
 ---
 icon: cubes
-layout:
-  title:
-    visible: true
-  description:
-    visible: false
-  tableOfContents:
-    visible: true
-  outline:
-    visible: true
-  pagination:
-    visible: false
 ---
 
 # Features
 
-<div align="center"><figure><img src="../../.gitbook/assets/image (7) (1).png" alt="" width="128"><figcaption></figcaption></figure></div>
+<div align="center"><figure><img src="../../.gitbook/assets/image (19).png" alt="" width="128"><figcaption></figcaption></figure></div>
 
 ## <mark style="color:yellow;">List all the Features</mark>
 

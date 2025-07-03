@@ -1,21 +1,10 @@
 ---
 icon: filters
-layout:
-  title:
-    visible: true
-  description:
-    visible: false
-  tableOfContents:
-    visible: true
-  outline:
-    visible: true
-  pagination:
-    visible: true
 ---
 
 # The Attenuator
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt="" width="375"><figcaption><p><mark style="color:green;">MISSION: To Exterminate False Positives</mark></p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt="" width="375"><figcaption><p><mark style="color:green;">MISSION: To Exterminate False Positives</mark></p></figcaption></figure>
 
 The Attenuator is a powerful feature of Jibril that enhances its security detection capabilities through AI-powered analysis of security events.
 
@@ -23,7 +12,7 @@ The Attenuator is a powerful feature of Jibril that enhances its security detect
 
 {% tabs %}
 {% tab title="Detection Event Reasoning" %}
-<figure><img src="../../.gitbook/assets/image (21).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (31).png" alt=""><figcaption></figcaption></figure>
 {% endtab %}
 {% endtabs %}
 
@@ -91,7 +80,7 @@ export AI_MODE=reason
 
 ## <mark style="color:yellow;">Local and Private Models</mark>
 
-<figure><img src="../../.gitbook/assets/image (12).png" alt="" width="375"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (22).png" alt="" width="375"><figcaption></figcaption></figure>
 
 The Attenuator can be used with local inference engines like [Ollama](https://ollama.com/) to run private models on your own infrastructure. This approach offers several advantages:
 

@@ -1,22 +1,11 @@
 ---
 description: Jibril versus ...
 icon: chart-mixed
-layout:
-  title:
-    visible: true
-  description:
-    visible: true
-  tableOfContents:
-    visible: true
-  outline:
-    visible: true
-  pagination:
-    visible: true
 ---
 
 # Compare
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt="" width="256"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13).png" alt="" width="256"><figcaption></figcaption></figure>
 
 {% tabs %}
 {% tab title="Falco" %}

@@ -5,7 +5,7 @@ icon: truck-fast
 
 # Overview
 
-<figure><img src="../../../.gitbook/assets/image (18).png" alt="" width="128"><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (28).png" alt="" width="128"><figcaption></figcaption></figure>
 
 The **Alchemies** feature introduces a powerful dynamic recipe generation system for Jibril that allows users to define detection rules in YAML format instead of only relying in the built-in hardcoded recipes.
 

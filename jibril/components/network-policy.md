@@ -1,21 +1,10 @@
 ---
 icon: chart-network
-layout:
-  title:
-    visible: true
-  description:
-    visible: false
-  tableOfContents:
-    visible: true
-  outline:
-    visible: true
-  pagination:
-    visible: false
 ---
 
 # Network Policy
 
-<figure><img src="../../.gitbook/assets/image (16).png" alt="" width="128"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (26).png" alt="" width="128"><figcaption></figcaption></figure>
 
 ## <mark style="color:yellow;">Jibril Network Policy Plugin</mark>
 

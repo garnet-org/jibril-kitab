@@ -5,7 +5,7 @@ icon: object-group
 
 # Recipes Reference
 
-<figure><img src="../../../.gitbook/assets/image (18).png" alt="" width="128"><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (28).png" alt="" width="128"><figcaption></figcaption></figure>
 
 ## <mark style="color:yellow;">Required Fields</mark>
 

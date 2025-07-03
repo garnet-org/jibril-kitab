@@ -1,16 +1,5 @@
 ---
 icon: person-chalkboard
-layout:
-  title:
-    visible: true
-  description:
-    visible: true
-  tableOfContents:
-    visible: true
-  outline:
-    visible: true
-  pagination:
-    visible: true
 ---
 
 # Theory Behind
@@ -23,7 +12,7 @@ Jibril mission: to deliver **real-time insights** with minimal overhead while ma
 
 ## <mark style="color:yellow;">Resource Tracking</mark> <a href="#comprehensive-resource-tracking" id="comprehensive-resource-tracking"></a>
 
-<figure><img src="../../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (29).png" alt=""><figcaption></figcaption></figure>
 
 Jibril delivers complete observability through exhaustive monitoring of critical system elements:
 
@@ -40,7 +29,7 @@ This extensive coverage ensures no security-relevant activity escapes detection,
 
 ## <mark style="color:yellow;">Action Visibility</mark>
 
-<figure><img src="../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (30).png" alt=""><figcaption></figcaption></figure>
 
 Jibril records every interaction with system resources, creating a comprehensive audit trail for both security analysis and operational monitoring:
 
