@@ -9,7 +9,6 @@
   * [Security Model](jibril/readme/jibril.md)
   * [Agent Dashboard](jibril/readme/agent-dashboard.md)
   * [Compare](jibril/readme/compare.md)
-  * [Technical Team](jibril/readme/technical-team.md)
 * [Install and Run](jibril/installation/README.md)
   * [Requirements](jibril/installation/requirements.md)
   * [Repositories](jibril/installation/repositories.md)
