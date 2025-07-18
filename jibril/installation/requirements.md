@@ -5,34 +5,100 @@ icon: hand
 
 # Requirements
 
-## <mark style="color:yellow;">Linux Distributions</mark>
+## Linux
 
-<div align="center"><figure><img src="../../.gitbook/assets/Debian.png" alt="" width="64"><figcaption><p>Debian</p></figcaption></figure> <figure><img src="../../.gitbook/assets/Ubuntu.png" alt="" width="64"><figcaption><p>Ubuntu</p></figcaption></figure> <figure><img src="../../.gitbook/assets/Arch-Linux.png" alt="" width="64"><figcaption><p>Arch</p></figcaption></figure> <figure><img src="../../.gitbook/assets/Fedora.png" alt="" width="64"><figcaption><p>Fedora</p></figcaption></figure> <figure><img src="../../.gitbook/assets/Raspberry-Pi.png" alt="" width="64"><figcaption><p>Raspbian</p></figcaption></figure> <figure><img src="../../.gitbook/assets/Red-Hat.png" alt="" width="64"><figcaption><p>RedHat</p></figcaption></figure> <figure><img src="../../.gitbook/assets/openSUSE.png" alt="" width="64"><figcaption><p>SuSe</p></figcaption></figure></div>
+### 1. Kernel Version
 
-## <mark style="color:yellow;">Virtual Environments</mark>
+- **Minimum:** Linux kernel v5.2  
+- **Recommended:** v6.2 or higher (only v6.2+ is officially tested and supported)
+- **Check your kernel:**
 
-<div><figure><img src="../../.gitbook/assets/OpenStack.png" alt="" width="64"><figcaption><p>OpenStack</p></figcaption></figure> <figure><img src="../../.gitbook/assets/Docker.png" alt="" width="64"><figcaption><p>Docker</p></figcaption></figure> <figure><img src="../../.gitbook/assets/Composer.png" alt="" width="64"><figcaption><p>Composer</p></figcaption></figure> <figure><img src="../../.gitbook/assets/Red-Hat.png" alt="" width="64"><figcaption><p>RedHat<br>Ent Virt</p></figcaption></figure> <figure><img src="../../.gitbook/assets/Incus.png" alt="" width="63"><figcaption><p>Incus<br>or LXD</p></figcaption></figure> <figure><img src="../../.gitbook/assets/KVM.png" alt="" width="63"><figcaption><p>KVM</p></figcaption></figure></div>
+  ```sh
+  uname -r
+  ```
 
-## <mark style="color:yellow;">Cloud Providers</mark>
+### 2. Architecture and eBPF Support
 
-<div><figure><img src="../../.gitbook/assets/Kubernetes (1).png" alt="" width="63"><figcaption><p>Kubernetes</p></figcaption></figure> <figure><img src="../../.gitbook/assets/AWS.png" alt="" width="64"><figcaption><p>AWS</p></figcaption></figure> <figure><img src="../../.gitbook/assets/Digital-Ocean.png" alt="" width="64"><figcaption><p>Digital<br>Ocean</p></figcaption></figure> <figure><img src="../../.gitbook/assets/Google-Cloud.png" alt="" width="64"><figcaption><p>Google<br>Cloud</p></figcaption></figure> <figure><img src="../../.gitbook/assets/Oracle.png" alt="" width="64"><figcaption><p>Oracle<br>Cloud</p></figcaption></figure> <figure><img src="../../.gitbook/assets/IBM.png" alt="" width="64"><figcaption><p>IBM<br>Cloud</p></figcaption></figure></div>
+- **Required:** x86_64 architecture
+- **eBPF support:**
+  - Modern distributions (Ubuntu 22.04+, RHEL 9+, etc.) usually provide full eBPF support out of the box.
+  - To verify, check if the following kernel configs are enabled:  
+    `CONFIG_BPF=y`, `CONFIG_BPF_SYSCALL=y`, `CONFIG_HAVE_EBPF_JIT=y`
 
-and many others (consult).
+    ```sh
+    zcat /proc/config.gz | grep BPF
+    ```
 
-## <mark style="color:yellow;">CI/CD plugins</mark>
+  - Alternatively, run:
 
-<div><figure><img src="../../.gitbook/assets/GitHub.png" alt="" width="63"><figcaption><p>GitHub</p></figcaption></figure> <figure><img src="../../.gitbook/assets/Jenkins.png" alt="" width="64"><figcaption><p>Jenkins</p></figcaption></figure></div>
+    ```sh
+    bpftool feature probe
+    ```
 
-## <mark style="color:yellow;">Linux Requirements</mark>
+  - Look for BPF and JIT features marked as “available”.
 
-* Linux Kernel ≥ v6.2 recommended (works with ≥ 5.10)
-* x64 Linux OS with eBPF (most current distributions)
-* Root privileges with the following capabilities:
-  * CAP\_BPF (or CAP\_SYS\_ADMIN if not available)
-  * CAP\_PERFMON
-  * CAP\_NET\_ADMIN
+### 3. Privileges & Capabilities
 
-## <mark style="color:yellow;">Kubernetes Requirements</mark>
+- **Root access required.**
+- **Capabilities:**
+  - `CAP_BPF` (primary, present in kernel 5.8+)
+  - `CAP_SYS_ADMIN` (fallback for older kernels or tools)
+  - `CAP_PERFMON` (performance monitoring)
+  - `CAP_NET_ADMIN` (network observability)
+- **How to verify:**
+  - Check current capabilities:
 
-* Kubernetes cluster with version 1.16+
-* Command `kubectl` configured to communicate with your cluster
+    ```sh
+    capsh --print | grep cap_
+    ```
+
+  - For containerized environments, ensure capabilities are not dropped (see [Kubernetes docs](https://kubernetes.io/docs/) or [Docker docs](https://docs.docker.com/)).
+
+### 4. Distribution Compatibility
+
+- **Tested on:** Recent Ubuntu, Debian, CentOS/RHEL, Fedora.
+- **Note:** Custom kernels or minimal distributions may require enabling/configuring eBPF-related options.
+
+---
+
+## Kubernetes
+
+### 1. Cluster Version
+
+- **Minimum:** Kubernetes 1.16+
+- **Check version:**
+
+  ```sh
+  kubectl version --short
+  ```
+
+### 2. kubectl Access
+
+- Ensure `kubectl` is installed and configured to communicate with the target cluster:
+
+  ```sh
+  kubectl cluster-info
+  ```
+
+- You should receive cluster details, not errors.
+
+### 3. Cluster Capabilities
+
+- For cluster-wide deployments, confirm permission to create privileged DaemonSets and grant required Linux capabilities.
+- If using managed services (EKS, GKE, AKS), ensure nodes support eBPF and required kernel capabilities (see cloud provider documentation).
+
+---
+
+## Troubleshooting & Validation
+
+- **Check eBPF runtime support:**
+
+  ```sh
+  bpftool prog list
+  ```
+
+  - Lists loaded eBPF programs; command should succeed without errors.
+
+- **Validate capabilities in containers:**
+  - Review `securityContext.capabilities` in Pod specs for necessary capabilities.
+  - For troubleshooting, check container logs and system logs (`dmesg`, `/var/log/messages`).
