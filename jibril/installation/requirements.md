@@ -25,16 +25,12 @@ and many others (consult).
 
 ## <mark style="color:yellow;">Linux Requirements</mark>
 
-* Linux Kernel ≥ v6.2
+* Linux Kernel ≥ v6.2 recommended (works with ≥ 5.10)
 * x64 Linux OS with eBPF (most current distributions)
 * Root privileges with the following capabilities:
   * CAP\_BPF (or CAP\_SYS\_ADMIN if not available)
   * CAP\_PERFMON
   * CAP\_NET\_ADMIN
-
-{% hint style="warning" %}
-Works with kernels **≥ v5.2** but currently being **tested in v6.2 and higher only.**
-{% endhint %}
 
 ## <mark style="color:yellow;">Kubernetes Requirements</mark>
 
