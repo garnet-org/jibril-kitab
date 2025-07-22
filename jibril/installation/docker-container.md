@@ -33,7 +33,7 @@ $ docker run --rm --name=jibril --privileged \
     -v /sys/fs/bpf:/sys/fs/bpf:rw \
     -v /etc/jibril/:/etc/jibril:rw \
     -v /var/log/jibril:/var/log/jibril:rw \
-    garnetlabs/jibril:v2.2 --config /etc/jibril/config.yaml
+    garnetlabs/jibril:v2.4 --config /etc/jibril/config.yaml
 ```
 
 > This command is an example of how one can run Jibril using its docker image.
@@ -58,7 +58,7 @@ $ docker run --rm --name=jibril --privileged \
     -v /sys/fs/bpf:/sys/fs/bpf:rw \
     -v /etc/jibril/:/etc/jibril:rw \
     -v /var/log/jibril:/var/log/jibril:rw \
-    garnetlabs/jibril:v2.2 \
+    garnetlabs/jibril:v2.4 \
     --config /etc/jibril/config.yaml
 ```
 
