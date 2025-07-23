@@ -54,6 +54,6 @@ $ sudo -E jibril \
         --printer jibril:printers:stdout
 ```
 
-Jibril will detect the execution of network sniffers and print the events to the stdout.
+Jibril will detect the execution of network sniffers (try 'tcpdump') and print the events to the stdout.
 
 > This command runs the _loader_ (binary named _jibril_), enables the _config_, _data_ and _jibril_ extensions, the _detect_ plugin from the _jibril_ extension, the _net\_sniff\_tool\_exec_ event from the _detect_ plugin, and the _stdout_ printer from the _jibril_ extension.

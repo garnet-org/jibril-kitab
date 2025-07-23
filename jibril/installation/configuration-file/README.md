@@ -7,70 +7,69 @@ icon: sliders-up
 ## <mark style="color:yellow;">Defaults: /etc/jibril/config.yaml</mark>
 
 ```yaml
-#
-# Jibril Configuration File
-#
+#### Jibril Configuration File.
 
-# Pick one from quiet, fatal, error, warn, info, debug
+#### Basic configuration.
+
 log-level: info
-# Pick "stdout", "stderr" or a file path for logging
 stdout: stdout
 stderr: stderr
-# Chop long lines when output is a terminal
 chop-lines: false
-# Disable health checks (http://127.0.0.1:8082/health)
 no-health: false
-# Enable profiling (http://127.0.0.1:8082/debug/pprof)
 profiler: false
-# Enable hard-coded cardinal filters
 cardinal: true
-# Run as a daemon
 daemon: false
-# Notify systemd after startup (.service Type=notify)
 notify: false
 
-# Extensions
+#### Extensions, plugins and printers.
+
 extension:
-  - jibril
+  #### Enable extensions here
+  # - example
+  # - simple
   - config
   - data
-
-# Plugins
+  - jibril
 plugin:
+  #### Enable plugins here
+  # - example:helloworld
+  # - simple:printers
   - jibril:hold
   - jibril:procfs
   - jibril:printers
   # - jibril:jbconfig
   # - jibril:pause
+  # - jibril:attenuator:enabled=true:model=gpt-4o:temperature=0.3:mode=reason
   - jibril:detect
   - jibril:netpolicy:file=/etc/jibril/netpolicy.yaml
-
-# Printers
+  # - jibril:github
 printer:
+  #### Enable printers here
+  # - simple:printers:voidprinter
   # - jibril:printers:stdout
   # - jibril:printers:stdout:raw=true
   - jibril:printers:varlog
+  # - jibril:printers:garnet
+  # - jibril:printers:garnet:error_log_rate=30s
+  # - jibril:github:listendev
+  # - jibril:github:listendevdebug
 
-# Events
+#### Event configuration.
+
 event:
-  # Network Policy.
-  - jibril:netpolicy:dropip
-  - jibril:netpolicy:dropdomain
-  # Method: Flows.
+  #### Informational events about network policy applied
+  # - jibril:netpolicy:dropip
+  # - jibril:netpolicy:dropdomain
+  #### Informational events about network flows
   - jibril:detect:flow
-  # Method: file access.
-  # - jibril:detect:file_example
-  - jibril:detect:auth_logs_tamper
-  - jibril:detect:binary_self_deletion
+  #### Detection recipes for file access patterns
+  - jibril:detect:file_example
   - jibril:detect:capabilities_modification
   - jibril:detect:code_modification_through_procfs
   - jibril:detect:core_pattern_access
   - jibril:detect:cpu_fingerprint
   - jibril:detect:credentials_files_access
-  - jibril:detect:crypto_miner_files
-  - jibril:detect:environ_read_from_procfs
   - jibril:detect:filesystem_fingerprint
-  - jibril:detect:global_shlib_modification
   - jibril:detect:java_debug_lib_load
   - jibril:detect:java_instrument_lib_load
   - jibril:detect:machine_fingerprint
@@ -85,12 +84,16 @@ event:
   - jibril:detect:sudoers_modification
   - jibril:detect:sysrq_access
   - jibril:detect:unprivileged_bpf_config_access
-  # Method: execution.
-  # - jibril:detect:exec_example
+  - jibril:detect:global_shlib_modification
+  - jibril:detect:environ_read_from_procfs
+  - jibril:detect:binary_self_deletion
+  - jibril:detect:crypto_miner_files
+  - jibril:detect:auth_logs_tamper
+  ##### Detection recipes for execution patterns
+  - jibril:detect:exec_example
   - jibril:detect:binary_executed_by_loader
   - jibril:detect:code_on_the_fly
   - jibril:detect:credentials_text_lookup
-  - jibril:detect:crypto_miner_execution
   - jibril:detect:data_encoder_exec
   - jibril:detect:denial_of_service_tools
   - jibril:detect:exec_from_unusual_dir
@@ -107,23 +110,31 @@ event:
   - jibril:detect:runc_suspicious_exec
   - jibril:detect:webserver_exec
   - jibril:detect:webserver_shell_exec
-  # Method: network peers.
-  # - jibril:detect:peer_example
+  - jibril:detect:crypto_miner_execution
+  ##### Detection recipes for network peers patterns
+  - jibril:detect:peer_example
   - jibril:detect:adult_domain_access
+  - jibril:detect:algorithmic_domains
+  - jibril:detect:algorithmic_domains_light
   - jibril:detect:badware_domain_access
   - jibril:detect:cloud_metadata_access
   - jibril:detect:dyndns_domain_access
   - jibril:detect:fake_domain_access
   - jibril:detect:gambling_domain_access
+  - jibril:detect:gambling_domain_access_light
+  - jibril:detect:general_new_domains
+  - jibril:detect:general_new_domains_light
+  - jibril:detect:phishing_domains
+  - jibril:detect:phishing_domains_light
   - jibril:detect:piracy_domain_access
   - jibril:detect:plaintext_communication
   - jibril:detect:threat_domain_access
+  - jibril:detect:threat_domain_access_light
+  - jibril:detect:threat_domain_access_medium
   - jibril:detect:tracking_domain_access
   - jibril:detect:vpnlike_domain_access
 
-#
-# Advanced Options.
-#
+#### Advanced configuration.
 
 #
 # Cadence configuration.
@@ -150,32 +161,92 @@ cadences:
 # based on the expected rate of behavioral changes and the desired detection accuracy.
 #
 
-# Cache Sizes (read "cache configuration" docs).
+#### Average:
+#### Average memory consumption.
+#### Reasonable file-access miss-detection.
 caches:
-  # Tasks.
+  #### Tasks.
   jb_tasks: 65536 # Tasks.
   jb_cmds: 32768 # Commands.
   jb_args: 32768 # Arguments.
   jb_rectasks: 4096 # Recent tasks.
   jb_thashcache: 4096 # Task hash cache.
-  # Files.
+  #### Files.
   jb_files: 32768 # Files.
   jb_dirs: 8192 # Directories.
   jb_bases: 16384 # Bases.
-  # Files references.
+  #### Files references.
   jb_filetask: 32768 # File + Task.
   jb_taskfile: 32768 # Task + File.
   jb_filerefs: 32768 # File references.
-  # Flows.
+  #### Flows.
   jb_flows: 32768 # Flows.
-  # Flows references.
+  #### Flows references.
   jb_taskflow: 32768 # Task + Flow.
   jb_flowtask: 32768 # Flow + Task.
   jb_flowrefs: 32768 # Flow references.
-  # Domains.
+  #### Domains.
   jb_domains: 16384 # Domains.
   jb_canons: 16384 # Canonical domains.
   jb_peers: 16384 # Peers.
+
+#### Heavy I/O:
+#### Bigger memory consumption.
+#### Lower miss-detection.
+# caches:
+#   #### Tasks.
+#   jb_tasks: 65536
+#   jb_cmds: 32768
+#   jb_args: 32768
+#   jb_rectasks: 32768
+#   jb_thashcache: 8192
+#   #### Files.
+#   jb_files: 32768
+#   jb_dirs: 32768
+#   jb_bases: 32768
+#   #### Files references.
+#   jb_filetask: 524288
+#   jb_taskfile: 524288
+#   jb_filerefs: 524288
+#   #### Flows.
+#   jb_flows: 32768
+#   #### Flows references.
+#   jb_taskflow: 131072
+#   jb_flowtask: 131072
+#   jb_flowrefs: 131072
+#   #### Domains.
+#   jb_domains: 32768
+#   jb_canons: 32768
+#   jb_peers: 32768
+
+#### Low Footprint:
+#### Small memory consumption.
+#### Possible file-access miss-detection.
+# caches:
+#   #### Tasks.
+#   jb_tasks: 16384
+#   jb_cmds: 8192
+#   jb_args: 8192
+#   jb_rectasks: 8192
+#   jb_thashcache: 4096
+#   #### Files.
+#   jb_files: 8192
+#   jb_dirs: 8192
+#   jb_bases: 8192
+#   #### Files references.
+#   jb_filetask: 16384
+#   jb_taskfile: 16384
+#   jb_filerefs: 16384
+#   #### Flows.
+#   jb_flows: 8192
+#   #### Flows references.
+#   jb_taskflow: 16384
+#   jb_flowtask: 16384
+#   jb_flowrefs: 16384
+#   # Domains.
+#   jb_domains: 8192
+#   jb_canons: 8192
+#   jb_peers: 8192
 ```
 
 ## <mark style="color:yellow;">Run Jibril</mark>
