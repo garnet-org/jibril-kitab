@@ -18,6 +18,7 @@
   * [Docker Container](jibril/installation/docker-container.md)
   * [Kubernetes](jibril/installation/kubernetes/README.md)
     * [Kubernetes Script](jibril/installation/kubernetes/kubernetes-script.md)
+    * [Helm Chart](jibril/installation/helm-chart.md)
   * [Configuration File](jibril/installation/configuration-file/README.md)
     * [Cache Configuration](jibril/installation/configuration-file/cache-configuration.md)
     * [Cadence Configuration](jibril/installation/configuration-file/cadence-configuration.md)
