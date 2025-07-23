@@ -10,7 +10,7 @@ Jibril validates reaction configurations at startup. Common validation errors in
 
 ### **Missing Required Fields**
 
-```yaml
+```javascript
 reactions:
   - format: js
     # ERROR: Missing 'code' field
