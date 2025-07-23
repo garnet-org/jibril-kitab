@@ -195,7 +195,7 @@ Reactions are designed with security as a primary concern:
 
 Reactions are defined within detection recipes using YAML configuration (Alchemies):
 
-```yaml
+```javascript
 - kind: malicious_file_access
   name: detect_passwd_tampering
   # ... detection criteria ...
@@ -225,7 +225,10 @@ Reactions are defined within detection recipes using YAML configuration (Alchemi
 
 ## <mark style="color:yellow;">Next Steps</mark>
 
-* [JavaScript API Reference](javascript-api.md) - Complete guide to all helper functions
 * [Configuration Guide](configuration.md) - How to set up reactions in YAML
+* [Performance](performance.md) - Understand performance implications
+* [Security](security.md) - Understand security implications
 * [Examples](examples.md) - Real-world reaction scenarios
+* [Common Errors](common-errors.md) - Check for common mistakes and how to solve them
+* [JavaScript API Reference](javascript-api.md) - Complete guide to all helper functions
 * [Best Practices](best-practices.md) - Security and performance recommendations
