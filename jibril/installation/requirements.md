@@ -65,8 +65,6 @@ capsh --print | grep cap_
 For containerized environments, ensure capabilities are not dropped\
 (see [Kubernetes docs](https://kubernetes.io/docs/) or [Docker docs](https://docs.docker.com/)).
 
-***
-
 ## <mark style="color:yellow;">Kubernetes</mark>
 
 ### 1. Cluster Version
@@ -91,8 +89,6 @@ For containerized environments, ensure capabilities are not dropped\
 
 * For cluster-wide deployments, confirm permission to create privileged DaemonSets and grant required Linux capabilities.
 * If using managed services (EKS, GKE, AKS), ensure nodes support eBPF and required kernel capabilities (see cloud provider documentation).
-
-***
 
 ## <mark style="color:yellow;">Troubleshooting & Validation</mark>
 

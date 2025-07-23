@@ -1,5 +1,6 @@
 ---
 description: Jibril versus ...
+hidden: true
 icon: chart-mixed
 ---
 

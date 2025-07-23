@@ -4,8 +4,6 @@ icon: docker
 
 # Docker Container
 
-<figure><img src="../../.gitbook/assets/Docker.png" alt="" width="128"><figcaption></figcaption></figure>
-
 > Check out Jibril's public recipes repository at [https://github.com/garnet-org/jibril-balag](https://github.com/garnet-org/jibril-balag).
 
 ## <mark style="color:yellow;">Create a Configuration File</mark> <a href="#run-jibril-using-command-line-arguments" id="run-jibril-using-command-line-arguments"></a>

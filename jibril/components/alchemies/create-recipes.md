@@ -5,8 +5,6 @@ icon: grill-hot
 
 # Create Recipes
 
-<figure><img src="../../../.gitbook/assets/image (28).png" alt="" width="128"><figcaption></figcaption></figure>
-
 ## <mark style="color:yellow;">YAML Recipe Structure</mark>
 
 Detection recipes are defined in YAML files with the following structure:

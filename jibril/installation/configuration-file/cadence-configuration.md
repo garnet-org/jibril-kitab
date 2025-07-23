@@ -5,8 +5,6 @@ icon: stopwatch-20
 
 # Cadence Configuration
 
-<figure><img src="../../../.gitbook/assets/image (12).png" alt="" width="128"><figcaption></figcaption></figure>
-
 ## <mark style="color:yellow;">What is Cadence?</mark>
 
 In Jibril, **cadence** refers to the evaluation intervals that determine how frequently the system analyzes behavioral patterns for potential security threats. These intervals control the timing of pattern detection checks, not the detection accuracy itself.

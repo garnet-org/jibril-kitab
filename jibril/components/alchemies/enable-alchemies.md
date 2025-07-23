@@ -5,8 +5,6 @@ icon: square-check
 
 # Enable Alchemies
 
-<figure><img src="../../../.gitbook/assets/image (28).png" alt="" width="128"><figcaption></figcaption></figure>
-
 ## <mark style="color:yellow;">Enabling the Alchemies Plugin</mark>
 
 To use the alchemies feature, add it to your [config.yaml](../../installation/configuration-file/) file:

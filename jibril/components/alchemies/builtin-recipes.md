@@ -5,8 +5,6 @@ icon: arrows-to-circle
 
 # Builtin Recipes
 
-<figure><img src="../../../.gitbook/assets/image (28).png" alt="" width="128"><figcaption></figcaption></figure>
-
 ## <mark style="color:yellow;">Public Detection Recipes</mark>
 
 * [binary\_self\_deletion](../../detections/file-access/binary_self_deletion.md)

@@ -4,8 +4,6 @@ icon: chart-network
 
 # Network Policy
 
-<figure><img src="../../.gitbook/assets/image (26).png" alt="" width="128"><figcaption></figcaption></figure>
-
 ## <mark style="color:yellow;">Jibril Network Policy Plugin</mark>
 
 The **Network Policy Plugin** allows users to define and enforce traffic policies based on CIDRs (IP ranges) and domain resolutions. It supports advanced configurations for alerting, enforcing, and bypassing traffic rules, ensuring flexible network control.

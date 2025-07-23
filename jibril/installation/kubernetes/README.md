@@ -4,8 +4,6 @@ icon: box-open
 
 # Kubernetes
 
-<figure><img src="../../../.gitbook/assets/Kubernetes (1).png" alt="" width="125"><figcaption></figcaption></figure>
-
 > Check out Jibril's public recipes repository at [https://github.com/garnet-org/jibril-balag](https://github.com/garnet-org/jibril-balag).
 
 ## <mark style="color:yellow;">Deploy Jibril on Kubernetes Clusters</mark>

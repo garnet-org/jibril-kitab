@@ -4,8 +4,6 @@ icon: square-terminal
 
 # Command Line
 
-<figure><img src="../../.gitbook/assets/utilities-terminal.png" alt="" width="99"><figcaption></figcaption></figure>
-
 > Check out Jibril's public recipes repository at [https://github.com/garnet-org/jibril-balag](https://github.com/garnet-org/jibril-balag).
 
 ## <mark style="color:yellow;">Obtain Jibril binaries</mark> <a href="#run-jibril-using-command-line-arguments" id="run-jibril-using-command-line-arguments"></a>

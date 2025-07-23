@@ -6,6 +6,8 @@ icon: shield
 
 ## <mark style="color:yellow;">Why Jibril Stands Out</mark>
 
+***
+
 IT environments generate vast amounts of logs, with security teams relying on real-time kernel event streaming tools that often falter during high traffic, causing system slowdowns and data loss.
 
 Jibril's query-driven eBPF approach, unlike traditional event-streaming models, collects kernel behavioral data with minimal overhead, eliminating performance bottlenecks while maintaining monitoring integrity.
@@ -21,9 +23,9 @@ Experience comprehensive monitoring without ring-buffer overruns, missed events,
 * **Scalable & Compliant**
 {% endhint %}
 
-***
-
 ### <mark style="color:yellow;">Core Innovations</mark> <a href="#id-1-core-innovations-in-jibrils-architecture" id="id-1-core-innovations-in-jibrils-architecture"></a>
+
+***
 
 #### Event-Less, Query-Driven Monitoring <a href="#id-11-event-less-query-driven-monitoring" id="id-11-event-less-query-driven-monitoring"></a>
 
@@ -65,9 +67,9 @@ Experience comprehensive monitoring without ring-buffer overruns, missed events,
 {% endtab %}
 {% endtabs %}
 
-***
-
 ### <mark style="color:yellow;">Jibril Security Model</mark> <a href="#id-2-jibril-security-model-the-technical-deep-dive" id="id-2-jibril-security-model-the-technical-deep-dive"></a>
+
+***
 
 **Behavioral Data Integrity**
 
@@ -104,9 +106,9 @@ Experience comprehensive monitoring without ring-buffer overruns, missed events,
 * **ISO 27001 Ready**\
   Robust logging, granular access controls, and tamper alerting facilitate compliance with ISO 27001 security framework requirements.
 
-***
-
 ### <mark style="color:yellow;">From Kernel to Userland</mark> <a href="#id-3-end-to-end-flow-from-kernel-to-userland" id="id-3-end-to-end-flow-from-kernel-to-userland"></a>
+
+***
 
 **Data Collection (Kernel Space)**
 
@@ -127,9 +129,9 @@ Experience comprehensive monitoring without ring-buffer overruns, missed events,
 * **Flexible Output**: Detection events can be routed to multiple destinations including stdout, logs, external dashboards.
 * **Secure Submissions**: All data transmission occurs over authenticated channels (HTTPS with API tokens) to maintain confidentiality and integrity.
 
-***
-
 ### <mark style="color:yellow;">Extensibility</mark> <a href="#id-5-extensibility-future-ready" id="id-5-extensibility-future-ready"></a>
+
+***
 
 **Plugins & Extensions**
 
@@ -145,18 +147,18 @@ Experience comprehensive monitoring without ring-buffer overruns, missed events,
 * **Optional AI Integrations**\
   For advanced threat analytics, Jibril can transmit summarized data to OpenAI services, leveraging machine learning for intuitive pattern interpretation while protecting raw data.
 
-***
-
 ## <mark style="color:yellow;">Roadmap</mark>
+
+***
 
 * **Enhanced Data Protection**\
   Future updates will implement data anonymization for sensitive information and optional encryption for kernel-collected data.
 * **Comprehensive Compliance**\
   Planned enhancements include expanded GDPR and ISO 27001 audit support through detailed access logs, improved documentation, and configurable redaction capabilities.
 
-***
-
 ## <mark style="color:yellow;">Conclusion</mark> <a href="#conclusion-embrace-the-next-generation" id="conclusion-embrace-the-next-generation"></a>
+
+***
 
 **Jibril redefines runtime security with its revolutionary approach to kernel event management—collecting, storing, and analyzing system activity with unprecedented efficiency, minimal latency, and tamper-resistant architecture.**
 

@@ -5,8 +5,6 @@ icon: equals
 
 # Events
 
-<figure><img src="../../.gitbook/assets/image (25).png" alt="" width="128"><figcaption></figcaption></figure>
-
 ## <mark style="color:yellow;">Jibril Extension Network Policy (netpolicy) Plugin</mark> <a href="#jibril-netpolicy" id="jibril-netpolicy"></a>
 
 <table><thead><tr><th width="161.34375">Event</th><th>Description</th></tr></thead><tbody><tr><td><strong>dropip</strong></td><td>Alerts when network flows are dropped by existing policy due to CIDR or domain name restrictions</td></tr><tr><td><strong>dropdomain</strong></td><td>Alerts when domain resolutions are dropped by existing policy due to domain name restrictions</td></tr></tbody></table>

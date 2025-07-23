@@ -6,11 +6,13 @@ icon: archway
 
 ## <mark style="color:yellow;">Overview</mark> <a href="#overview" id="overview"></a>
 
-Jibril is a modular runtime security tool that combines an **eBPF loader** and a **userland daemon** to monitor, detect, and respond to system behaviors. Its design emphasizes **extensibility** through **plugins**, **printers**, and **events**, all controlled by a centralized configuration file. This architecture ensures flexibility while maintaining a low resource footprint.
-
 ***
 
+Jibril is a modular runtime security tool that combines an **eBPF loader** and a **userland daemon** to monitor, detect, and respond to system behaviors. Its design emphasizes **extensibility** through **plugins**, **printers**, and **events**, all controlled by a centralized configuration file. This architecture ensures flexibility while maintaining a low resource footprint.
+
 ## <mark style="color:yellow;">Key Components</mark> <a href="#id-1-key-components" id="id-1-key-components"></a>
+
+***
 
 ### <mark style="color:yellow;">eBPF Loader</mark>
 
@@ -38,9 +40,9 @@ _Userland processing engine_
 
 This modular architecture ensures both flexibility and performance, allowing Jibril to maintain comprehensive visibility while adapting to evolving security requirements.
 
-***
-
 ## <mark style="color:yellow;">Execution Flow</mark> <a href="#id-2-execution-flow" id="id-2-execution-flow"></a>
+
+***
 
 Jibril components follow a structured execution order:
 
@@ -52,9 +54,9 @@ Jibril components follow a structured execution order:
 
 Each component runs through five lifecycle stages: `init`, `start`, `execute`, `finish`, and `exit`, ensuring stability and clear state management.
 
-***
-
 ## <mark style="color:yellow;">Modular Design</mark> <a href="#id-3-modular-design-plugins-printers-and-events" id="id-3-modular-design-plugins-printers-and-events"></a>
+
+***
 
 ### <mark style="color:yellow;">Plugins</mark> <a href="#id-31-plugins" id="id-31-plugins"></a>
 
@@ -108,9 +110,9 @@ Events represent system behaviors or states that Jibril monitors and processes. 
   * `jibril:github:change_summary`:\
     Highlights changes in repositories.
 
-***
-
 ## <mark style="color:yellow;">Configuration-Driven Behavior</mark> <a href="#id-4-configuration-driven-behavior" id="id-4-configuration-driven-behavior"></a>
+
+***
 
 Jibril’s flexibility comes from its configuration file, which governs how components are enabled and interact. Key configurable elements include:
 
@@ -122,9 +124,9 @@ Jibril’s flexibility comes from its configuration file, which governs how comp
 
 These options allow Jibril to integrate seamlessly into various operational environments.
 
-***
-
 ## <mark style="color:yellow;">Why Jibril’s Architecture Works</mark> <a href="#id-5-why-jibrils-architecture-works" id="id-5-why-jibrils-architecture-works"></a>
+
+***
 
 **Flexibility**
 
@@ -156,8 +158,8 @@ These options allow Jibril to integrate seamlessly into various operational envi
 * Flexible output options for dashboards, SIEM systems, and logs
 * API-friendly architecture for custom tool integration
 
-***
-
 ## <mark style="color:yellow;">Conclusion</mark> <a href="#conclusion" id="conclusion"></a>
+
+***
 
 Jibril combines the power of eBPF with a modular, extensible framework to deliver advanced runtime security monitoring. Its architecture balances flexibility, efficiency, and ease of use, making it a robust solution for detecting and responding to threats in modern IT environments. Whether monitoring network flows, detecting file access anomalies, or integrating with GitHub workflows, Jibril offers the tools needed to secure your systems effectively.

@@ -24,7 +24,6 @@
     * [Cadence Configuration](jibril/installation/configuration-file/cadence-configuration.md)
     * [Network Policy File](jibril/installation/configuration-file/network-policy-file.md)
 * [Components](jibril/components/README.md)
-  * [Features](jibril/components/features.md)
   * [Extensions](jibril/components/extensions.md)
   * [Plugins](jibril/components/plugins.md)
   * [Printers](jibril/components/printers.md)

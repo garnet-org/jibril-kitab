@@ -6,11 +6,13 @@ icon: person-chalkboard
 
 ## <mark style="color:yellow;">Introduction</mark> <a href="#introduction" id="introduction"></a>
 
-Jibril mission: to deliver **real-time insights** with minimal overhead while maintaining robust security and reliability.
-
 ***
 
+Jibril mission: to deliver **real-time insights** with minimal overhead while maintaining robust security and reliability.
+
 ## <mark style="color:yellow;">Resource Tracking</mark> <a href="#comprehensive-resource-tracking" id="comprehensive-resource-tracking"></a>
+
+***
 
 <figure><img src="../../.gitbook/assets/image (29).png" alt=""><figcaption></figcaption></figure>
 
@@ -25,9 +27,9 @@ Jibril delivers complete observability through exhaustive monitoring of critical
 
 This extensive coverage ensures no security-relevant activity escapes detection, providing the comprehensive foundation needed for actionable security insights and decisive response capabilities.
 
-***
-
 ## <mark style="color:yellow;">Action Visibility</mark>
+
+***
 
 <figure><img src="../../.gitbook/assets/image (30).png" alt=""><figcaption></figcaption></figure>
 
@@ -59,9 +61,9 @@ Jibril records every interaction with system resources, creating a comprehensive
 
 This detailed activity logging provides security teams with the precise chronology and context needed to confidently analyze system behavior, identify suspicious patterns, and respond to potential threats with complete information.
 
-***
-
 ## <mark style="color:yellow;">Advantages</mark> <a href="#key-features-and-innovations" id="key-features-and-innovations"></a>
+
+***
 
 **Data Immutability**
 
@@ -78,9 +80,9 @@ This detailed activity logging provides security teams with the precise chronolo
 * Provides immediate threat visibility
 * Enables rapid response to emerging security incidents
 
-***
-
 ## <mark style="color:yellow;">Capabilities</mark>
+
+***
 
 **Integrated Kernel Status**
 
@@ -107,9 +109,9 @@ This detailed activity logging provides security teams with the precise chronolo
 * Supports external data store plugins (SQLite, etc.)
 * Facilitates seamless integration with existing security infrastructure
 
-***
-
 ## <mark style="color:yellow;">Information Acquisition</mark> <a href="#efficient-information-acquisition" id="efficient-information-acquisition"></a>
+
+***
 
 Three Powerful Approaches
 
@@ -133,9 +135,9 @@ Three Powerful Approaches
 
 These complementary methods ensure comprehensive security coverage while optimizing system resources—providing both the detailed visibility and performance efficiency modern enterprises require.
 
-***
-
 ## <mark style="color:yellow;">Why Choose Jibril?</mark> <a href="#why-choose-jibril" id="why-choose-jibril"></a>
+
+***
 
 1. **Unmatched Visibility**\
    Jibril tracks every system resource and interaction, offering a level of detail no traditional tool can match.
@@ -146,15 +148,15 @@ These complementary methods ensure comprehensive security coverage while optimiz
 4. **Integration Ready**\
    Flexible plugin support ensures Jibril fits seamlessly into your existing infrastructure.
 
-***
-
 ## <mark style="color:yellow;">Redefining Security</mark>
+
+***
 
 Jibril transforms runtime monitoring by unifying comprehensive tracking, advanced querying, and innovative detection into a single, cohesive framework. Its unique architecture delivers unprecedented visibility with minimal performance impact—setting a new standard for modern security operations.
 
-***
-
 ## <mark style="color:yellow;">Complete Solution</mark>
+
+***
 
 * **Unmatched Visibility**: Capture every system interaction
 * **Real-Time Intelligence**: Access insights when they matter most
