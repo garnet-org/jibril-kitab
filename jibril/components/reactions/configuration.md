@@ -22,6 +22,7 @@ Reactions are configured as part of detection recipes. Here's the basic structur
   mechanism: detection_mechanism
   tactic: mitre_tactic
   technique: mitre_technique
+  subtechnique: mitre_subtechnique
   importance: severity_level
   
   # Detection criteria (varies by type)
@@ -53,7 +54,7 @@ Specifies the execution format for the reaction code.
 
 **Example:**
 
-```yaml
+```javascript
 reactions:
   - format: js
     code: |
@@ -79,11 +80,10 @@ Contains the actual reaction code to execute.
 
 * Can be any valid shell script
 * Event data is provided via `REACTION_DATA` environment variable as JSON
-* Should include shebang line for clarity
 
 **JavaScript Example:**
 
-```yaml
+```javascript
 reactions:
   - format: js
     code: |
@@ -108,7 +108,7 @@ reactions:
 
 **Shell Example:**
 
-```yaml
+```bash
 reactions:
   - format: shell
     code: |
@@ -133,13 +133,14 @@ reactions:
 File access reactions receive detailed information about file operations.
 
 ```yaml
-- kind: sensitive_file_monitor
-  name: monitor_passwd_access
+- kind: monitor_passwd_access
+  name: monitor_passwd_access_01
   enabled: true
   breed: file_access
   mechanism: file_access
-  tactic: credential_access
-  technique: T1003
+  tactic: mitre_tactic
+  technique: mitre_technique
+  subtechnique: mitre_sub_technique
   importance: high
   
   # File detection criteria
@@ -150,7 +151,9 @@ File access reactions receive detailed information about file operations.
     - read
     - write
   file_actions_how: any
-  
+```
+
+```javascript
   reactions:
     - format: js
       code: |
@@ -174,13 +177,14 @@ File access reactions receive detailed information about file operations.
 Execution reactions monitor process creation and can access ancestry information.
 
 ```yaml
-- kind: malicious_execution
-  name: detect_reverse_shells
+- kind: detect_reverse_shells
+  name: detect_reverse_shells_01
   enabled: true
   breed: execution
   mechanism: execution
-  tactic: execution
-  technique: T1059
+  tactic: mitre_tactic
+  technique: mitre_technique
+  subtechnique: mitre_sub_technique
   importance: critical
   
   # Process detection criteria
@@ -197,7 +201,9 @@ Execution reactions monitor process creation and can access ancestry information
         - what: cmd
           which: contains
           pattern: "/dev/tcp/"
-  
+```
+
+```javascript
   reactions:
     - format: js
       code: |
@@ -232,21 +238,26 @@ Network reactions can access flow information and remote connection details.
 
 ```yaml
 - kind: malicious_network
-  name: block_tor_connections
+  name: malicious_network_01
   enabled: true
   breed: remote_domains
   mechanism: network_peers
-  tactic: command_and_control
-  technique: T1090
+  tactic: mitre_tactic
+  technique: mitre_technique
+  subtechnique: mitre_sub_technique
   importance: high
   
   # Network detection criteria
   remote_domains:
-    - "*.onion"
-  remote_domains_type: wildcard
+    - onion
+  remote_domains_type: suffix
   flow_actions:
+    - ingress
     - egress
-  
+  flow_actions_how: any
+```
+
+```javascript
   reactions:
     - format: js
       code: |
@@ -298,14 +309,18 @@ You can define multiple reactions for a single detection recipe. They will execu
   enabled: true
   breed: file_access
   mechanism: file_access
+  tactic: mitre_tactic
+  technique: mitre_technique
+  subtechnique: mitre_sub_technique
   importance: high
   
   bases:
     - dir: /etc/ssh
-      regex: ".*"
   file_actions:
     - write
-  
+```
+
+```javascript
   reactions:
     # Reaction 1: Immediate logging
     - format: js
@@ -347,7 +362,9 @@ You can define multiple reactions for a single detection recipe. They will execu
             Info("Evidence saved to: " + forensicDir);
           }
         }
-    
+```
+
+```bash
     # Reaction 4: System backup (shell script)
     - format: shell
       code: |
@@ -364,220 +381,13 @@ You can define multiple reactions for a single detection recipe. They will execu
         logger "Jibril: SSH configuration backed up to $BACKUP_DIR"
 ```
 
-## <mark style="color:yellow;">Configuration Validation</mark>
-
-Jibril validates reaction configurations at startup. Common validation errors include:
-
-### **Missing Required Fields**
-
-```yaml
-reactions:
-  - format: js
-    # ERROR: Missing 'code' field
-```
-
-**Fix:**
-
-```yaml
-reactions:
-  - format: js
-    code: |
-      function process(data) {
-        Info("Valid reaction");
-      }
-```
-
-### **Invalid Format**
-
-```yaml
-reactions:
-  - format: python  # ERROR: Invalid format
-    code: |
-      print("Not supported")
-```
-
-**Fix:**
-
-```yaml
-reactions:
-  - format: js  # Valid: js or shell only
-    code: |
-      function process(data) {
-        Info("Valid format");
-      }
-```
-
-### **Missing Process Function (JavaScript)**
-
-```yaml
-reactions:
-  - format: js
-    code: |
-      # ERROR: Missing process() function
-      Info("This won't work");
-```
-
-**Fix:**
-
-```yaml
-reactions:
-  - format: js
-    code: |
-      function process(data) {
-        Info("This will work");
-      }
-```
-
-### **Network Helper Without netpolicy Plugin**
-
-```yaml
-reactions:
-  - format: js
-    code: |
-      function process(data) {
-        NetBlockIp(); # ERROR: Requires netpolicy plugin
-      }
-```
-
-**Fix:** Ensure the netpolicy plugin is enabled in your Jibril configuration, or avoid using network helper functions.
-
-## <mark style="color:yellow;">Performance Considerations</mark>
-
-### **Reaction Execution**
-
-* **Parallel Execution**: Multiple reactions for the same recipe run concurrently
-* **V8 Compilation**: JavaScript reactions are pre-compiled for fast execution
-* **Context Isolation**: Each reaction runs in its own isolated environment
-* **Resource Management**: Automatic cleanup prevents memory leaks
-
-### **Best Practices for Performance**
-
-1. **Keep reactions lightweight** - Avoid complex computations
-2. **Use the data store efficiently** - Don't store large objects
-3. **Minimize file I/O** - Only write essential data
-4. **Handle errors gracefully** - Don't let failed reactions impact others
-5. **Test thoroughly** - Validate reactions before production deployment
-
-### **Example: Optimized Reaction**
-
-```yaml
-reactions:
-  - format: js
-    code: |
-      function process(data) {
-        // Fast path for common cases
-        if (!data.process || !data.process.cmd) {
-          return; // Exit early if no process data
-        }
-        
-        // Efficient data access
-        let cmd = data.process.cmd;
-        let isHighRisk = cmd.includes("wget") || cmd.includes("curl");
-        
-        if (isHighRisk) {
-          // Only log essential information
-          Info("High-risk process: " + cmd);
-          
-          // Use efficient data store operations
-          let count = parseInt(DataGet("risk_count") || "0") + 1;
-          DataSet("risk_count", String(count));
-          
-          // Take action only when necessary
-          if (count > 5) {
-            NetBlockIp();
-          }
-        }
-      }
-```
-
-## <mark style="color:yellow;">Security Considerations</mark>
-
-### **Input Validation**
-
-Always validate data before using it in operations:
-
-```yaml
-reactions:
-  - format: js
-    code: |
-      function process(data) {
-        // Validate input data
-        if (!data || !data.process) {
-          Error("Invalid event data received");
-          return;
-        }
-        
-        // Sanitize strings before logging
-        let cmd = data.process.cmd || "unknown";
-        if (cmd.length > 1000) {
-          cmd = cmd.substring(0, 1000) + "... (truncated)";
-        }
-        
-        Info("Process: " + cmd);
-      }
-```
-
-### **File Path Security**
-
-Be careful with file operations:
-
-```yaml
-reactions:
-  - format: js
-    code: |
-      function process(data) {
-        // Validate file paths
-        let filePath = data.file ? data.file.file : "";
-        
-        // Ensure we're not writing to sensitive locations
-        if (filePath.startsWith("/etc/") || filePath.startsWith("/sys/")) {
-          Error("Attempted to write to sensitive location: " + filePath);
-          return;
-        }
-        
-        // Use safe temporary directories
-        let tmpDir = CreateTempDir("evidence-*");
-        if (tmpDir !== "") {
-          let safePath = tmpDir + "/safe-evidence.json";
-          WriteFile(safePath, JSON.stringify(data));
-        }
-      }
-```
-
-### **Network Security**
-
-Network operations should be used judiciously:
-
-```yaml
-reactions:
-  - format: js
-    code: |
-      function process(data) {
-        // Only block external IPs, not internal infrastructure
-        if (data.background && data.background.flows) {
-          // Extract remote IPs
-          let remoteIps = [];
-          // ... extraction logic ...
-          
-          for (let ip of remoteIps) {
-            // Don't block internal network ranges
-            if (!ip.startsWith("10.") && 
-                !ip.startsWith("192.168.") && 
-                !ip.startsWith("172.16.")) {
-              NetBlockIp(ip);
-            }
-          }
-        }
-      }
-```
-
 ## <mark style="color:yellow;">Debugging and Troubleshooting</mark>
 
 ### **Logging for Debugging**
 
 Use comprehensive logging to debug reaction issues:
 
-```yaml
+```javascript
 reactions:
   - format: js
     code: |
@@ -610,7 +420,7 @@ reactions:
 
 Implement proper error handling:
 
-```yaml
+```javascript
 reactions:
   - format: js
     code: |
@@ -640,7 +450,7 @@ reactions:
 
 Create test reactions with disabled state:
 
-```yaml
+```javascript
 - kind: test_reaction
   name: my_test_reaction
   enabled: false  # Start disabled for testing
