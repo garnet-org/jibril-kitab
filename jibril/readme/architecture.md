@@ -8,7 +8,7 @@ icon: archway
 
 ***
 
-Jibril is a modular runtime security tool that combines an **eBPF loader** and a **userland daemon** to monitor, detect, and respond to system behaviors. Its design emphasizes **extensibility** through **plugins**, **printers**, and **events**, all controlled by a centralized configuration file. This architecture ensures flexibility while maintaining a low resource footprint.
+Jibril is a modular runtime security tool that combines an eBPF loader, eBPF programs and a userland daemon to monitor, detect and respond to system behaviors causing minimal overhead. Its design emphasizes extensibility through plugins, printers, and events.
 
 ## <mark style="color:yellow;">Key Components</mark> <a href="#id-1-key-components" id="id-1-key-components"></a>
 
@@ -66,7 +66,6 @@ Plugins add specialized functionality to Jibril, focusing on monitoring, detecti
 * **Procfs:** Reads data from existing processes in `/proc`, allowing Jibril to analyze both historical and real-time process activity.
 * **Net:** Monitors network flows, capturing details about active connections and traffic.
 * **Detect:** Provides extensive detection capabilities, such as monitoring file modifications, unauthorized code execution, and suspicious network activity.
-* **GitHub:** Integrates with GitHub repositories to summarize pull requests or changes.
 
 ### <mark style="color:yellow;">Printers</mark> <a href="#id-32-printers" id="id-32-printers"></a>
 
@@ -74,10 +73,6 @@ Printers define how and where events are output. They are highly configurable an
 
 * **Stdout:** Prints event data directly to the console for immediate visibility.
 * **Varlog:** Outputs events to log files in `/var/log` for persistent storage.
-* **Listendev:** Sends data to the `dashboard.listen.dev` for real-time visualization.
-* **Datakeeper:** Maintains a recent history of events in memory for quick lookups by other components.
-
-Some printers like `datakeeper` are used as infrastructure for other components, not as regular event-dispatching printers.
 
 ### <mark style="color:yellow;">Events</mark> <a href="#id-33-events" id="id-33-events"></a>
 
@@ -89,26 +84,26 @@ Events represent system behaviors or states that Jibril monitors and processes. 
 * **Network Policy Drops**
   * `jibril:netpolicy:dropip`\
     Flags traffic dropped due to IP-based policies.
+  * `jibril:netpolicy:dropdomain`\
+    Flags traffic dropped due to DNS resolutions made to blocked domains.
 * **File Access:**
   * `jibril:detect:capabilities_modification`\
     Detects changes to file capabilities.
   * `jibril:detect:credentials_files_access`\
     Identifies unauthorized access to sensitive credential files.
+  * ...
 * **Execution Monitoring:**
   * `jibril:detect:hidden_elf_exec`\
     Detects hidden ELF binary execution.
   * `jibril:detect:binary_executed_by_loader`\
     Tracks executions made by ELF loaders.
+  * ...
 * **Network Activity:**
   * `jibril:detect:net_scan_tool_exec`\
     Flags usage of network scanning utilities.
   * `jibril:detect:net_sniff_tool_exec`\
     Identifies execution of network-sniffing tools.
-* **GitHub Integration Events:**
-  * `jibril:github:pull_summary`:\
-    Summarizes pull requests.
-  * `jibril:github:change_summary`:\
-    Highlights changes in repositories.
+  * ...
 
 ## <mark style="color:yellow;">Configuration-Driven Behavior</mark> <a href="#id-4-configuration-driven-behavior" id="id-4-configuration-driven-behavior"></a>
 
