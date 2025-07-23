@@ -104,14 +104,14 @@ reactions:
           Info("Network blocked successfully");
         }
       }
+reactions:
+  - format: shell
+    code: |
 ```
 
 **Shell Example:**
 
 ```bash
-reactions:
-  - format: shell
-    code: |
       #!/bin/bash
       
       # Parse event data
@@ -133,30 +133,39 @@ reactions:
 File access reactions receive detailed information about file operations.
 
 ```yaml
-- kind: monitor_passwd_access
-  name: monitor_passwd_access_01
-  enabled: true
+- kind: passwd_usage
+  name: passwd_usage
+  enabled: false
+  version: 1.0
+  description: Passwd related command usage
+  documentation: |
+    https://garnet.gitbook.io/jibril/detections/execution/passwd_usage
   breed: file_access
-  mechanism: file_access
-  tactic: mitre_tactic
-  technique: mitre_technique
-  subtechnique: mitre_sub_technique
+  mechanism: execution
+  tactic: persistence
+  technique: account_manipulation
+  subtechnique: local_account
   importance: high
-  
-  # File detection criteria
+  times:
+    - kind: times_per_parent_proc
+      max: 2
+    - kind: times_per_parent_exe
+      max: 4
+    - kind: times_per_full_ancestry
+      max: 4
+  arbitrary: []
+  file_actions:
+    - execve
+  file_actions_how: any
   bases:
     - dir: /etc
       base: passwd
-  file_actions:
-    - read
-    - write
-  file_actions_how: any
-```
-
-```javascript
   reactions:
     - format: js
       code: |
+```
+
+```javascript
         function process(data) {
           Info("Password file accessed!");
           Info("File: " + data.file.file);
@@ -177,36 +186,47 @@ File access reactions receive detailed information about file operations.
 Execution reactions monitor process creation and can access ancestry information.
 
 ```yaml
-- kind: detect_reverse_shells
-  name: detect_reverse_shells_01
-  enabled: true
-  breed: execution
+- kind: net_suspicious_tool_exec
+  name: net_suspicious_tool_exec_critical
+  enabled: false
+  version: 1.0
+  description: Network suspicious tool execution detected (with IP address argument)
+  documentation: |
+    https://garnet.gitbook.io/jibril/detections/execution/net_suspicious_tool_exec
+  breed: file_access
   mechanism: execution
-  tactic: mitre_tactic
-  technique: mitre_technique
-  subtechnique: mitre_sub_technique
+  tactic: discovery
+  technique: network_service_discovery
+  subtechnique: none
   importance: critical
-  
-  # Process detection criteria
+  times:
+    - kind: times_per_parent_proc
+      max: 2
+    - kind: times_per_parent_exe
+      max: 4
+    - kind: times_per_full_ancestry
+      max: 4
   arbitrary:
     - how: OR
-      which: pertinent
+      which: irrelevant
       items:
-        - what: cmd
-          which: contains
-          pattern: "nc.*-e"
-        - what: cmd
-          which: contains
-          pattern: "bash.*-i"
-        - what: cmd
-          which: contains
-          pattern: "/dev/tcp/"
+        - what: args
+          which: pertinent
+          # Match if IPv4 or IPv6 addresses appear in the command arguments.
+          pattern: ([^\w|\.](\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}([^\w|\.]|$)|[^\w|\.](([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))([^\w|\.]|$))
+  file_actions:
+    - execve
+  file_actions_how: any
+  bases:
+    - base: nc # TCP/UDP client/listener.
+    - base: ncat # Nmap's TCP/UDP client/listener.
+  reactions:
+  # yaml-embedded-languages: javascript
+  - format: js
+    code: |
 ```
 
 ```javascript
-  reactions:
-    - format: js
-      code: |
         function process(data) {
           Error("REVERSE SHELL DETECTED!");
           Info("Command: " + data.process.cmd);
@@ -239,28 +259,37 @@ Network reactions can access flow information and remote connection details.
 ```yaml
 - kind: malicious_network
   name: malicious_network_01
-  enabled: true
+  enabled: false
+  version: 1.0
+  description: Access to malicious domains
+  documentation: not available
   breed: remote_domains
   mechanism: network_peers
-  tactic: mitre_tactic
-  technique: mitre_technique
-  subtechnique: mitre_sub_technique
-  importance: high
-  
-  # Network detection criteria
-  remote_domains:
-    - onion
-  remote_domains_type: suffix
+  tactic: command_and_control
+  technique: application_layer_protocol
+  subtechnique: web_protocols
+  importance: critical
+  times:
+    - kind: times_per_proc
+      max: 2
+    - kind: times_per_exe
+      max: 4
+    - kind: times_per_full_ancestry
+      max: 4
+  arbitrary: []
   flow_actions:
     - ingress
     - egress
   flow_actions_how: any
-```
-
-```javascript
+  remote_domains_type: suffix
+  remote_domains:
+    - onion
   reactions:
     - format: js
       code: |
+```
+
+```javascript
         function process(data) {
           Warn("Tor connection detected");
           
@@ -313,15 +342,15 @@ You can define multiple reactions for a single detection recipe. They will execu
   technique: mitre_technique
   subtechnique: mitre_sub_technique
   importance: high
-  
   bases:
     - dir: /etc/ssh
   file_actions:
     - write
+  reactions: 
 ```
 
 ```javascript
-  reactions:
+
     # Reaction 1: Immediate logging
     - format: js
       code: |
@@ -450,7 +479,7 @@ reactions:
 
 Create test reactions with disabled state:
 
-```javascript
+```yaml
 - kind: test_reaction
   name: my_test_reaction
   enabled: false  # Start disabled for testing
@@ -469,6 +498,9 @@ Create test reactions with disabled state:
   reactions:
     - format: js
       code: |
+```
+
+```javascript
         function process(data) {
           Info("=== TEST REACTION ===");
           Info("All systems operational");
