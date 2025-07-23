@@ -20,12 +20,18 @@ Reactions transform Jibril from a passive monitoring tool into an active securit
 
 When Jibril detects a security event through its monitoring mechanisms (file access, process execution, network activity, etc.), the following workflow occurs:
 
-1. **A Security Threat is Detected**: An event from the OS matches a configured detection recipe
-2. **Event Detection**: Security event is reported in all configured and enabled printers
-3. **Reaction Trigger**: All reactions associated with that recipe are triggered in parallel
-4. **Context Injection**: The complete event context (process ancestry, network flows, file details, etc.) is made available to the reaction
-5. **Code Execution**: The reaction code executes in an isolated environment with access to powerful helper functions
-6. **Response Actions**: The reaction can take various actions like blocking IPs, killing processes, or logging additional information
+1. **A Security Threat is Detected**:\
+   An event from the OS matches a configured detection recipe
+2. **Event Detection**:\
+   Security event is reported in all configured and enabled printers
+3. **Reaction Trigger**:\
+   All reactions associated with that recipe are triggered in parallel
+4. **Context Injection**:\
+   The complete event context (process ancestry, network flows, file details, etc.) is made available to the reaction
+5. **Code Execution**:\
+   The reaction code executes in an isolated environment with access to powerful helper functions
+6. **Response Actions**:\
+   The reaction can take various actions like blocking IPs, killing processes, or logging additional information
 
 ## <mark style="color:yellow;">Supported Formats</mark>
 
