@@ -4,11 +4,39 @@ icon: person-chalkboard
 
 # Theory Behind
 
-## <mark style="color:yellow;">Introduction</mark> <a href="#introduction" id="introduction"></a>
+## <mark style="color:yellow;">Mission</mark> <a href="#introduction" id="introduction"></a>
 
 ***
 
-Jibril mission: to deliver **real-time insights** with minimal overhead while maintaining robust security and reliability.
+To deliver **real-time insights** with minimal overhead while maintaining robust security and reliability.
+
+## <mark style="color:yellow;">Why Choose Jibril?</mark> <a href="#why-choose-jibril" id="why-choose-jibril"></a>
+
+***
+
+1. **Unmatched Visibility**\
+   Jibril tracks every system resource and interaction, offering a level of detail no traditional tool can match.
+2. **High Performance**\
+   By avoiding circular buffers and leveraging immutability, Jibril achieves superior speed and reliability, even in high-throughput environments.
+3. **Proactive Security**\
+   Rule-based detection and real-time event delivery empower teams to respond to threats before they escalate.
+4. **Integration Ready**\
+   Flexible plugin support ensures Jibril fits seamlessly into your existing infrastructure.
+
+## <mark style="color:yellow;">Redefining Security</mark>
+
+***
+
+Jibril transforms runtime monitoring by unifying comprehensive tracking, advanced querying, and innovative detection into a single, cohesive framework. Its unique architecture delivers unprecedented visibility with minimal performance impact—setting a new standard for modern security operations.
+
+## <mark style="color:yellow;">Complete Solution</mark>
+
+***
+
+* **Unmatched Visibility**: Capture every system interaction
+* **Real-Time Intelligence**: Access insights when they matter most
+* **Proactive Protection**: Detect threats before damage occurs
+* **Sustainable Performance**: Maintain monitoring at scale
 
 ## <mark style="color:yellow;">Resource Tracking</mark> <a href="#comprehensive-resource-tracking" id="comprehensive-resource-tracking"></a>
 
@@ -37,14 +65,16 @@ Jibril records every interaction with system resources, creating a comprehensive
 
 **Lifecycle Events**
 
-* Creation and Destruction
+* Create
+* Destroy
 
 **Modification Actions**
 
 * Truncate
 * Link
 * Rename
-* Open/Close operations
+* Open
+* Close
 
 **Data Operations**
 
@@ -55,9 +85,9 @@ Jibril records every interaction with system resources, creating a comprehensive
 
 **Advanced Interactions**
 
-* Memory Mapping
-* Synchronization
-* Locking mechanisms
+* Memory Map
+* Sync
+* Lock
 
 This detailed activity logging provides security teams with the precise chronology and context needed to confidently analyze system behavior, identify suspicious patterns, and respond to potential threats with complete information.
 
@@ -113,7 +143,7 @@ This detailed activity logging provides security teams with the precise chronolo
 
 ***
 
-Three Powerful Approaches
+Methods below ensure comprehensive security coverage while optimizing system resources - providing both the detailed visibility and performance efficiency modern enterprises require.
 
 **Queries**
 
@@ -132,33 +162,3 @@ Three Powerful Approaches
 * Implement interval-based queries to in-kernel data
 * Proactively identify threats through pattern recognition
 * Maintain persistent security monitoring without performance impact
-
-These complementary methods ensure comprehensive security coverage while optimizing system resources—providing both the detailed visibility and performance efficiency modern enterprises require.
-
-## <mark style="color:yellow;">Why Choose Jibril?</mark> <a href="#why-choose-jibril" id="why-choose-jibril"></a>
-
-***
-
-1. **Unmatched Visibility**\
-   Jibril tracks every system resource and interaction, offering a level of detail no traditional tool can match.
-2. **High Performance**\
-   By avoiding circular buffers and leveraging immutability, Jibril achieves superior speed and reliability, even in high-throughput environments.
-3. **Proactive Security**\
-   Rule-based detection and real-time event delivery empower teams to respond to threats before they escalate.
-4. **Integration Ready**\
-   Flexible plugin support ensures Jibril fits seamlessly into your existing infrastructure.
-
-## <mark style="color:yellow;">Redefining Security</mark>
-
-***
-
-Jibril transforms runtime monitoring by unifying comprehensive tracking, advanced querying, and innovative detection into a single, cohesive framework. Its unique architecture delivers unprecedented visibility with minimal performance impact—setting a new standard for modern security operations.
-
-## <mark style="color:yellow;">Complete Solution</mark>
-
-***
-
-* **Unmatched Visibility**: Capture every system interaction
-* **Real-Time Intelligence**: Access insights when they matter most
-* **Proactive Protection**: Detect threats before damage occurs
-* **Sustainable Performance**: Maintain monitoring at scale
