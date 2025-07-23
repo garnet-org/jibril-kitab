@@ -1,3 +1,7 @@
+---
+icon: subtitles
+---
+
 # Helm Chart
 
 This document describes how to deploy Jibril to Kubernetes using the Garnet Helm chart.
@@ -11,19 +15,20 @@ The Garnet Helm chart supports two deployment modes:
 
 ## Prerequisites
 
-- Kubernetes 1.16+
-- Helm 3.0+
-- A valid Garnet API token (required for Garnet mode only)
+* Kubernetes 1.16+
+* Helm 3.0+
+* A valid Garnet API token (required for Garnet mode only)
 
 ## Installation
 
 ### Jibril Standalone Mode
 
 The standalone mode allows you to deploy Jibril without requiring a Garnet API token or connection. This is useful for:
-- Testing and evaluation
-- Air-gapped environments
-- Custom integrations
-- Environments with older kernel versions
+
+* Testing and evaluation
+* Air-gapped environments
+* Custom integrations
+* Environments with older kernel versions
 
 #### Basic Standalone Installation
 
@@ -71,15 +76,15 @@ helm install garnet garnet/garnet \
 
 ### Key Configuration Parameters
 
-| Parameter | Description | Default |
-|-----------|-------------|---------|
-| `standalone.enabled` | Enable standalone mode (no Garnet API) | `false` |
-| `standalone.jibrilVersion` | Override Jibril version in standalone mode | `""` |
-| `garnet.url` | Garnet API URL | `https://api.garnet.ai` |
-| `garnet.token` | Your Garnet API token (required in standard mode) | `""` |
-| `cluster.name` | Name of the cluster | `garnet-cluster` |
-| `jibril.image.repository` | Repository for Jibril image | `garnetlabs/jibril` |
-| `jibril.image.tag` | Tag for Jibril image | `v2.4` |
+| Parameter                  | Description                                       | Default                 |
+| -------------------------- | ------------------------------------------------- | ----------------------- |
+| `standalone.enabled`       | Enable standalone mode (no Garnet API)            | `false`                 |
+| `standalone.jibrilVersion` | Override Jibril version in standalone mode        | `""`                    |
+| `garnet.url`               | Garnet API URL                                    | `https://api.garnet.ai` |
+| `garnet.token`             | Your Garnet API token (required in standard mode) | `""`                    |
+| `cluster.name`             | Name of the cluster                               | `garnet-cluster`        |
+| `jibril.image.repository`  | Repository for Jibril image                       | `garnetlabs/jibril`     |
+| `jibril.image.tag`         | Tag for Jibril image                              | `v2.4`                  |
 
 ### Custom Jibril Configuration
 
@@ -310,7 +315,7 @@ helm uninstall jibril -n security
 
 ## Additional Resources
 
-- [Jibril Architecture](../readme/architecture.md)
-- [Network Policy Configuration](../components/network-policy.md)
-- [Components Overview](../components/)
-- [Installation Methods](../installation/)
+* [Jibril Architecture](../readme/architecture.md)
+* [Network Policy Configuration](../components/network-policy.md)
+* [Components Overview](../components/)
+* [Installation Methods](./)
