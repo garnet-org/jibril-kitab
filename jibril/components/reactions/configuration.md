@@ -1,10 +1,10 @@
 ---
-icon: cog
+icon: square-sliders
 ---
 
-# Reaction Configuration
+# Configuration
 
-This document explains how to configure reactions within Jibril's detection recipes (Alchemies). Reactions are defined in YAML files and integrated into the broader detection system.
+This document explains how to configure reactions within Jibril's detection recipes. Reactions are defined in YAML files (the Alchemies) and integrated into the broader detection system.
 
 ## <mark style="color:yellow;">Basic Structure</mark>
 
@@ -48,8 +48,8 @@ Specifies the execution format for the reaction code.
 
 **Valid values:**
 
-- `js`: JavaScript execution using V8 engine (recommended)
-- `shell`: Shell script execution using `/bin/sh`
+* `js`: JavaScript execution using V8 engine (recommended)
+* `shell`: Shell script execution using `/bin/sh`
 
 **Example:**
 
@@ -62,7 +62,6 @@ reactions:
       }
   - format: shell
     code: |
-      #!/bin/bash
       echo "Shell reaction"
 ```
 
@@ -72,15 +71,15 @@ Contains the actual reaction code to execute.
 
 **For JavaScript reactions:**
 
-- Must contain a `process(data)` function
-- Function receives the complete event data as a parameter
-- Has access to all helper functions and global variables
+* Must contain a `process(data)` function
+* Function receives the complete event data as a parameter
+* Has access to all helper functions and global variables
 
 **For Shell reactions:**
 
-- Can be any valid shell script
-- Event data is provided via `REACTION_DATA` environment variable as JSON
-- Should include shebang line for clarity
+* Can be any valid shell script
+* Event data is provided via `REACTION_DATA` environment variable as JSON
+* Should include shebang line for clarity
 
 **JavaScript Example:**
 
@@ -446,10 +445,10 @@ reactions:
 
 ### **Reaction Execution**
 
-- **Parallel Execution**: Multiple reactions for the same recipe run concurrently
-- **V8 Compilation**: JavaScript reactions are pre-compiled for fast execution
-- **Context Isolation**: Each reaction runs in its own isolated environment
-- **Resource Management**: Automatic cleanup prevents memory leaks
+* **Parallel Execution**: Multiple reactions for the same recipe run concurrently
+* **V8 Compilation**: JavaScript reactions are pre-compiled for fast execution
+* **Context Isolation**: Each reaction runs in its own isolated environment
+* **Resource Management**: Automatic cleanup prevents memory leaks
 
 ### **Best Practices for Performance**
 

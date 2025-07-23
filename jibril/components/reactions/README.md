@@ -4,29 +4,28 @@ icon: bolt
 
 # Reactions
 
-<figure><img src="../../../.gitbook/assets/image (30).png" alt=""><figcaption><p><mark style="color:green;">MISSION: Automated Response to Security Events</mark></p></figcaption></figure>
-
 The **Reactions** feature is Jibril's powerful automation system that enables immediate, programmable responses to security detection events. When a security event is detected by Jibril's monitoring mechanisms, reactions can automatically execute custom code to respond, remediate, or gather additional intelligence.
 
 ## <mark style="color:yellow;">Overview</mark>
 
 Reactions transform Jibril from a passive monitoring tool into an active security defense system. Instead of merely alerting on suspicious activities, reactions can take immediate action:
 
-- **Block malicious network traffic** in real-time
-- **Terminate suspicious processes** before they cause harm
-- **Collect forensic evidence** automatically
-- **Isolate compromised systems** from the network
-- **Trigger emergency procedures** during critical incidents
+* **Block malicious network traffic** in real-time
+* **Terminate suspicious processes** before they cause harm
+* **Collect forensic evidence** automatically
+* **Isolate compromised systems** from the network
+* **Trigger emergency procedures** during critical incidents
 
 ## <mark style="color:yellow;">How Reactions Work</mark>
 
 When Jibril detects a security event through its monitoring mechanisms (file access, process execution, network activity, etc.), the following workflow occurs:
 
-1. **Event Detection**: A security event is detected and matches a configured detection recipe
-2. **Reaction Trigger**: All reactions associated with that recipe are triggered in parallel
-3. **Context Injection**: The complete event context (process ancestry, network flows, file details, etc.) is made available to the reaction
-4. **Code Execution**: The reaction code executes in an isolated environment with access to powerful helper functions
-5. **Response Actions**: The reaction can take various actions like blocking IPs, killing processes, or logging additional information
+1. **A Security Threat is Detected**: An event from the OS matches a configured detection recipe
+2. **Event Detection**: Security event is reported in all configured and enabled printers
+3. **Reaction Trigger**: All reactions associated with that recipe are triggered in parallel
+4. **Context Injection**: The complete event context (process ancestry, network flows, file details, etc.) is made available to the reaction
+5. **Code Execution**: The reaction code executes in an isolated environment with access to powerful helper functions
+6. **Response Actions**: The reaction can take various actions like blocking IPs, killing processes, or logging additional information
 
 ## <mark style="color:yellow;">Supported Formats</mark>
 
@@ -34,18 +33,18 @@ Reactions support two execution formats:
 
 ### JavaScript (Recommended)
 
-- **Runtime**: Google V8 JavaScript engine with isolated contexts
-- **Performance**: Fast compilation and execution
-- **Features**: Rich set of built-in helper functions
-- **Isolation**: Each reaction runs in its own secure context
-- **Data Access**: Full access to event data through JSON objects
+* **Runtime**: Google V8 JavaScript engine with isolated contexts
+* **Performance**: Fast compilation and execution
+* **Features**: Rich set of built-in helper functions
+* **Isolation**: Each reaction runs in its own secure context
+* **Data Access**: Full access to event data through JSON objects
 
 ### Shell Scripts
 
-- **Runtime**: Standard `/bin/sh` shell execution
-- **Flexibility**: Full system access with shell commands
-- **Environment**: Event data provided via `REACTION_DATA` environment variable
-- **Security**: Executed in temporary directories with restricted permissions
+* **Runtime**: Standard `/bin/sh` shell execution
+* **Flexibility**: Full system access with shell commands
+* **Environment**: Event data provided as `JSON` via `REACTION_DATA` environment variable
+* **Security**: Executed in temporary directories with restricted permissions
 
 ## <mark style="color:yellow;">Key Capabilities</mark>
 
@@ -124,10 +123,10 @@ Every reaction receives comprehensive context about the security event that trig
 
 ### **Global Variables**
 
-- `kind`: The type of detection event (e.g., "file_access", "execution")
-- `name`: The name of the detection recipe that triggered
-- `uuid`: Unique identifier for this specific event
-- `data`: Complete JSON object containing all event details
+* `kind`: The type of detection event (e.g., "file\_access", "execution")
+* `name`: The name of the detection recipe that triggered
+* `uuid`: Unique identifier for this specific event
+* `data`: Complete JSON object containing all event details
 
 ### **Event Data Structure**
 
@@ -139,8 +138,9 @@ Every reaction receives comprehensive context about the security event that trig
     "kind": "file_access",
     "name": "suspicious_file_access",
     "importance": "high",
-    "tactic": "persistence",
-    "technique": "T1053"
+    "tactic": "name_of_tactic",
+    "technique": "name_of_technique"
+    "subtechnique": "name_of_sub_technique"
   },
   "base": {
     "background": {
@@ -162,32 +162,32 @@ Reactions are designed with security as a primary concern:
 
 ### **JavaScript Isolation**
 
-- Each reaction runs in a separate V8 context
-- Memory isolation prevents code interference
-- Helper functions provide controlled system access
-- No direct system call access
+* Each reaction runs in a separate V8 context
+* Memory isolation prevents code interference
+* Helper functions provide controlled system access
+* No direct system call access
 
 ### **Network Policy Integration**
 
-- Network blocking functions require netpolicy plugin
-- Automatic validation of network helper usage
-- Graceful degradation when netpolicy unavailable
+* Network blocking functions require netpolicy plugin
+* Automatic validation of network helper usage
+* Graceful degradation when netpolicy unavailable
 
 ### **File System Security**
 
-- Temporary directories created with 0700 permissions
-- Restricted to safe temporary locations
-- Automatic cleanup after execution
+* Temporary directories created with 0700 permissions
+* Restricted to safe temporary locations
+* Automatic cleanup after execution
 
 ### **Error Handling**
 
-- Comprehensive error codes for all operations
-- Detailed error messages for debugging
-- Graceful failure modes
+* Comprehensive error codes for all operations
+* Detailed error messages for debugging
+* Graceful failure modes
 
 ## <mark style="color:yellow;">Integration with Detection Recipes</mark>
 
-Reactions are defined within detection recipes (Alchemies) using YAML configuration:
+Reactions are defined within detection recipes using YAML configuration (Alchemies):
 
 ```yaml
 - kind: malicious_file_access
@@ -212,14 +212,14 @@ Reactions are defined within detection recipes (Alchemies) using YAML configurat
 
 ## <mark style="color:yellow;">Performance Considerations</mark>
 
-- **Parallel Execution**: Multiple reactions run concurrently for optimal performance
-- **V8 Compilation**: JavaScript reactions are pre-compiled for fast execution
-- **Memory Management**: Automatic cleanup of reaction contexts
-- **Resource Limits**: Built-in safeguards prevent resource exhaustion
+* **Parallel Execution**: Multiple reactions run concurrently for optimal performance
+* **V8 Compilation**: JavaScript reactions are pre-compiled for fast execution
+* **Memory Management**: Automatic cleanup of reaction contexts
+* **Resource Limits**: Built-in safeguards prevent resource exhaustion
 
 ## <mark style="color:yellow;">Next Steps</mark>
 
-- [JavaScript API Reference](javascript-api.md) - Complete guide to all helper functions
-- [Configuration Guide](configuration.md) - How to set up reactions in YAML
-- [Examples](examples.md) - Real-world reaction scenarios
-- [Best Practices](best-practices.md) - Security and performance recommendations
+* [JavaScript API Reference](javascript-api.md) - Complete guide to all helper functions
+* [Configuration Guide](configuration.md) - How to set up reactions in YAML
+* [Examples](examples.md) - Real-world reaction scenarios
+* [Best Practices](best-practices.md) - Security and performance recommendations
