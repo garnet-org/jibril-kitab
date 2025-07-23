@@ -21,7 +21,7 @@ $ vi /etc/jibril/config.yaml
 ## <mark style="color:yellow;">Obtain the Image</mark> <a href="#run-jibril-using-command-line-arguments" id="run-jibril-using-command-line-arguments"></a>
 
 ```sh
-$ docker pull garnetlabs/jibril:v2.2
+$ docker pull garnetlabs/jibril:v2.4
 ```
 
 ## <mark style="color:yellow;">Run Jibril using Docker</mark> <a href="#run-jibril-using-command-line-arguments" id="run-jibril-using-command-line-arguments"></a>
