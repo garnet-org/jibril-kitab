@@ -98,12 +98,12 @@ network_policy:
     - cidr: "9.9.9.9/32"
       policy: "allow"
     # Whitelisted Domains.
-    - domain: "org"
-      policy: "allow"
-    - domain: "google.com"
-      policy: "allow"
+    # - domain: "org"
+    #   policy: "allow"
+    # - domain: "google.com"
+    #   policy: "allow"
     # Blacklisted Domains.
-    - domain: "example.com"
+    - domain: "aol.com"
       policy: "deny"
     - domain: "uol.com.br"
       policy: "deny"
