@@ -115,7 +115,6 @@
     * [Tracking Domain Access](jibril/detections/network-peers/tracking_domain_access.md)
     * [VPN Domain Access](jibril/detections/network-peers/vpnlike_domain_access.md)
 * [Bugs and Requests](jibril/bugs-and-requests.md)
-* [Banner](jibril/banner.md)
 * [License](jibril/license.md)
 
 ## Research
@@ -923,4 +922,4 @@
 
 ## POSTS
 
-* [We are not the same](posts/we-are-not-the-same.md)
+* [Jibril Runtime Security](posts/banner.md)
