@@ -53,7 +53,7 @@ helm install jibril garnet/garnet \
   --namespace security \
   --create-namespace \
   --set standalone.enabled=true \
-  --set standalone.jibrilVersion=v2.2.1
+  --set standalone.jibrilVersion=v2.4
 ```
 
 ### Garnet Mode (Full Integration)
@@ -79,7 +79,7 @@ helm install garnet garnet/garnet \
 | `garnet.token` | Your Garnet API token (required in standard mode) | `""` |
 | `cluster.name` | Name of the cluster | `garnet-cluster` |
 | `jibril.image.repository` | Repository for Jibril image | `garnetlabs/jibril` |
-| `jibril.image.tag` | Tag for Jibril image | `v2.2` |
+| `jibril.image.tag` | Tag for Jibril image | `v2.4` |
 
 ### Custom Jibril Configuration
 
@@ -231,7 +231,7 @@ helm install jibril garnet/garnet \
   --namespace security \
   --create-namespace \
   --set standalone.enabled=true \
-  --set standalone.jibrilVersion=v2.2.2 \
+  --set standalone.jibrilVersion=v2.4 \
   --set jibrilConfig.customConfig=true \
   --set-file jibrilConfig.configYaml=./jibril-config.yaml \
   --set networkPolicyConfig.enabled=true \
