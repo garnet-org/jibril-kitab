@@ -10,23 +10,26 @@ icon: user-secret
 
 Always validate data before using it in operations:
 
-```javascript
+```yaml
 reactions:
   - format: js
     code: |
+```
+
+```javascript
       function process(data) {
         // Validate input data
         if (!data || !data.process) {
           Error("Invalid event data received");
           return;
         }
-        
+
         // Sanitize strings before logging
         let cmd = data.process.cmd || "unknown";
         if (cmd.length > 1000) {
           cmd = cmd.substring(0, 1000) + "... (truncated)";
         }
-        
+
         Info("Process: " + cmd);
       }
 ```
@@ -35,20 +38,23 @@ reactions:
 
 Be careful with file operations:
 
-```javascript
+```yaml
 reactions:
   - format: js
     code: |
+```
+
+```javascript
       function process(data) {
         // Validate file paths
         let filePath = data.file ? data.file.file : "";
-        
+
         // Ensure we're not writing to sensitive locations
         if (filePath.startsWith("/etc/") || filePath.startsWith("/sys/")) {
           Error("Attempted to write to sensitive location: " + filePath);
           return;
         }
-        
+
         // Use safe temporary directories
         let tmpDir = CreateTempDir("evidence-*");
         if (tmpDir !== "") {
@@ -72,7 +78,7 @@ reactions:
           // Extract remote IPs
           let remoteIps = [];
           // ... extraction logic ...
-          
+
           for (let ip of remoteIps) {
             // Don't block internal network ranges
             if (!ip.startsWith("10.") && 

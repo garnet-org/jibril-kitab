@@ -16,7 +16,7 @@ Reactions are configured as part of detection recipes. Here's the basic structur
   enabled: true
   version: 1.0
   description: Description of what this recipe detects
-  
+
   # Detection configuration
   breed: detection_type
   mechanism: detection_mechanism
@@ -24,21 +24,18 @@ Reactions are configured as part of detection recipes. Here's the basic structur
   technique: mitre_technique
   subtechnique: mitre_subtechnique
   importance: severity_level
-  
+
   # Detection criteria (varies by type)
   # ... detection-specific configuration ...
-  
+
   # Reactions configuration
   reactions:
     - format: js  # or "shell"
       code: |
-        function process(data) {
-          // JavaScript reaction code
-        }
+        # JavaScript function here
     - format: shell
       code: |
-        #!/bin/bash
-        # Shell script reaction code
+        # Shell script here
 ```
 
 ## <mark style="color:yellow;">Reaction Configuration Options</mark>
@@ -83,45 +80,51 @@ Contains the actual reaction code to execute.
 
 **JavaScript Example:**
 
-```javascript
+```yaml
 reactions:
   - format: js
     code: |
+```
+
+```javascript
       function process(data) {
         // Access global variables
         Info("Event type: " + kind);
         Info("Recipe name: " + name);
         Info("Event UUID: " + uuid);
-        
+
         // Process the event data
         if (data.process) {
           Warn("Process: " + data.process.cmd);
         }
-        
+
         // Take action
         let result = NetBlockIp();
         if (result === 0) {
           Info("Network blocked successfully");
         }
       }
+```
+
+**Shell Example:**
+
+```yaml
 reactions:
   - format: shell
     code: |
 ```
 
-**Shell Example:**
-
 ```bash
       #!/bin/bash
-      
+
       # Parse event data
       PROCESS_CMD=$(echo "$REACTION_DATA" | jq -r '.process.cmd')
       FILE_PATH=$(echo "$REACTION_DATA" | jq -r '.file.file // "N/A"')
-      
+
       echo "Shell reaction triggered"
       echo "Process: $PROCESS_CMD"
       echo "File: $FILE_PATH"
-      
+
       # Log to system log
       logger "Jibril reaction: $PROCESS_CMD accessed $FILE_PATH"
 ```
@@ -172,7 +175,7 @@ File access reactions receive detailed information about file operations.
           Info("Actions: " + data.file.actions.join(", "));
           Info("Process: " + data.process.cmd);
           Info("User ID: " + data.process.uid);
-          
+
           // Terminate suspicious access
           if (data.process.uid !== 0) {
             Warn("Non-root access to passwd file - terminating");
@@ -232,7 +235,7 @@ Execution reactions monitor process creation and can access ancestry information
           Info("Command: " + data.process.cmd);
           Info("PID: " + data.process.pid);
           Info("Parent PID: " + data.process.ppid);
-          
+
           // Log the full process ancestry
           if (data.base.background.ancestry) {
             Info("Process ancestry:");
@@ -241,11 +244,11 @@ Execution reactions monitor process creation and can access ancestry information
               Info("  " + ancestor.pid + ": " + ancestor.cmd);
             }
           }
-          
+
           // Immediate containment
           let killResult = KillCurrent();
           let blockResult = NetBlockIp();
-          
+
           if (killResult === 0 && blockResult === 0) {
             Info("Reverse shell contained successfully");
           }
@@ -292,16 +295,16 @@ Network reactions can access flow information and remote connection details.
 ```javascript
         function process(data) {
           Warn("Tor connection detected");
-          
+
           // Extract network flow information
           if (data.background && data.background.flows) {
             Info("Network flows detected:");
             let flows = data.background.flows;
-            
+
             if (flows.protocols) {
               for (let protocol of flows.protocols) {
                 Info("Protocol: " + protocol.name);
-                
+
                 if (protocol.pairs) {
                   for (let pair of protocol.pairs) {
                     if (pair.nodes && pair.nodes.remote) {
@@ -315,12 +318,12 @@ Network reactions can access flow information and remote connection details.
               }
             }
           }
-          
+
           // Block the connection
           let result = NetBlockDomain();
           if (result === 0) {
             Info("Tor domains blocked successfully");
-            
+
             // Log to security incident database
             DataSet("tor_blocks_" + new Date().toDateString(), 
                    String(parseInt(DataGet("tor_blocks_" + new Date().toDateString()) || "0") + 1));
@@ -346,68 +349,26 @@ You can define multiple reactions for a single detection recipe. They will execu
     - dir: /etc/ssh
   file_actions:
     - write
-  reactions: 
-```
-
-```javascript
-
+  reactions:
     # Reaction 1: Immediate logging
     - format: js
       code: |
-        function process(data) {
-          Error("SSH configuration modified!");
-          Info("File: " + data.file.file);
-          Info("Process: " + data.process.cmd);
-        }
-    
+        # JavaScript function here
+
     # Reaction 2: Network containment
     - format: js
       code: |
-        function process(data) {
-          Info("Implementing network containment");
-          let result = NetBlockIp();
-          if (result === 0) {
-            Info("Network access blocked");
-          }
-        }
-    
+        # JavaScript function here
+
     # Reaction 3: Evidence collection
     - format: js
       code: |
-        function process(data) {
-          Info("Collecting forensic evidence");
-          
-          let evidence = {
-            timestamp: new Date().toISOString(),
-            file_modified: data.file.file,
-            process: data.process.cmd,
-            user_id: data.process.uid
-          };
-          
-          let forensicDir = CreateTempDir("ssh-mod-*");
-          if (forensicDir !== "") {
-            WriteFile(forensicDir + "/evidence.json", 
-                     JSON.stringify(evidence, null, 2));
-            Info("Evidence saved to: " + forensicDir);
-          }
-        }
-```
+        # JavaScript function here
 
-```bash
     # Reaction 4: System backup (shell script)
     - format: shell
       code: |
-        #!/bin/bash
-        echo "Creating SSH configuration backup"
-        
-        BACKUP_DIR="/var/backups/jibril/ssh-$(date +%Y%m%d_%H%M%S)"
-        mkdir -p "$BACKUP_DIR"
-        
-        # Backup SSH configuration
-        cp -r /etc/ssh/* "$BACKUP_DIR/" 2>/dev/null || true
-        
-        echo "SSH backup completed: $BACKUP_DIR"
-        logger "Jibril: SSH configuration backed up to $BACKUP_DIR"
+        # Shell script here
 ```
 
 ## <mark style="color:yellow;">Debugging and Troubleshooting</mark>
@@ -416,31 +377,34 @@ You can define multiple reactions for a single detection recipe. They will execu
 
 Use comprehensive logging to debug reaction issues:
 
-```javascript
+```yaml
 reactions:
   - format: js
     code: |
+```
+
+```javascript
       function process(data) {
         Info("=== REACTION DEBUG START ===");
         Info("Kind: " + kind);
         Info("Name: " + name);
         Info("UUID: " + uuid);
-        
+
         // Log data structure
         Info("Data keys: " + Object.keys(data).join(", "));
-        
+
         if (data.process) {
           Info("Process PID: " + data.process.pid);
           Info("Process CMD: " + data.process.cmd);
         }
-        
+
         // Test helper functions
         let testResult = DataSet("debug_test", "success");
         Info("DataSet test result: " + testResult);
-        
+
         let retrieved = DataGet("debug_test");
         Info("DataGet test result: " + retrieved);
-        
+
         Info("=== REACTION DEBUG END ===");
       }
 ```
@@ -449,10 +413,13 @@ reactions:
 
 Implement proper error handling:
 
-```javascript
+```yaml
 reactions:
   - format: js
     code: |
+```
+
+```javascript
       function process(data) {
         try {
           // Main reaction logic
@@ -460,13 +427,13 @@ reactions:
           if (result !== 0) {
             Error("Failed to block IP: " + Errno());
           }
-          
+
           // File operations with error checking
           let writeResult = WriteFile("/tmp/reaction.log", "test");
           if (writeResult !== 0) {
             Error("Failed to write file: " + Errno());
           }
-          
+
         } catch (error) {
           Error("Reaction error: " + error.toString());
         }
@@ -488,28 +455,29 @@ Create test reactions with disabled state:
   breed: file_access
   mechanism: file_access
   importance: low
-  
+
   bases:
     - dir: /tmp/test
       base: trigger.txt
   file_actions:
     - unlink
-  
+
   reactions:
     - format: js
       code: |
+        # JavaScript function here
 ```
 
 ```javascript
         function process(data) {
           Info("=== TEST REACTION ===");
           Info("All systems operational");
-          
+
           // Test all helper functions safely
           DataSet("test", "success");
           let value = DataGet("test");
           Info("Data store test: " + (value === "success" ? "PASS" : "FAIL"));
-          
+
           DataDelete("test");
           Info("=== TEST COMPLETE ===");
         }

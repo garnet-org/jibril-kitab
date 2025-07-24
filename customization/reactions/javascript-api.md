@@ -82,9 +82,9 @@ Blocks network traffic to/from specified IP addresses.
 
 **Returns:**
 
-- `0`: Success
+- `0`: Success (IP blocked)
 - `1`: All IPs were already blocked
-- `-1`: Error occurred
+- `-1`: Error occurred (use `Errno()` for details)
 
 **Example:**
 
@@ -93,51 +93,32 @@ Blocks network traffic to/from specified IP addresses.
 let result = NetBlockIp("192.168.1.100");
 if (result === 0) {
     Info("IP blocked successfully");
+} else if (result === 1) {
+    Info("IP was already blocked");
+} else {
+    Error("Failed to block IP: " + Errno());
 }
 
 // Block all remote IPs from the event
 let result = NetBlockIp();
 if (result === 0) {
-    Info("All remote IPs blocked");
+    Info("All remote IPs blocked successfully");
 }
-```
-
-### `NetBlockDomain([domain])`
-
-Blocks network traffic to/from specified domains.
-
-**Parameters:**
-
-- `domain` (string, optional): Specific domain to block. If omitted, blocks all remote domains from the current event context.
-
-**Returns:**
-
-- `0`: Success
-- `1`: All domains were already blocked
-- `-1`: Error occurred
-
-**Example:**
-
-```javascript
-// Block a specific domain
-let result = NetBlockDomain("malicious-site.com");
-
-// Block all domains from the event
-let result = NetBlockDomain();
 ```
 
 ### `NetUnblockIp(ipAddress)`
 
-Removes an IP address from the block list.
+Unblocks network traffic to/from a specific IP address.
 
 **Parameters:**
 
-- `ipAddress` (string): IP address to unblock
+- `ipAddress` (string, required): The IP address to unblock
 
 **Returns:**
 
-- `0`: Success
-- `-1`: Error occurred
+- `0`: Success (IP unblocked)
+- `1`: IP was already unblocked
+- `-1`: Error occurred (use `Errno()` for details)
 
 **Example:**
 
@@ -145,6 +126,67 @@ Removes an IP address from the block list.
 let result = NetUnblockIp("192.168.1.100");
 if (result === 0) {
     Info("IP unblocked successfully");
+} else if (result === 1) {
+    Info("IP was already unblocked");
+} else {
+    Error("Failed to unblock IP: " + Errno());
+}
+```
+
+### `NetBlockIpTimer(ipAddress, durationSeconds)`
+
+Blocks an IP address for a specific duration in seconds.
+
+**Parameters:**
+
+- `ipAddress` (string, required): The IP address to block
+- `durationSeconds` (number, required): Duration in seconds to block the IP
+
+**Returns:**
+
+- `0`: Success (IP blocked with timer)
+- `1`: IP was already blocked
+- `-1`: Error occurred (use `Errno()` for details)
+
+**Example:**
+
+```javascript
+// Block IP for 30 seconds
+let result = NetBlockIpTimer("192.168.1.100", 30);
+if (result === 0) {
+    Info("IP blocked for 30 seconds");
+} else {
+    Error("Failed to block IP with timer: " + Errno());
+}
+```
+
+### `NetBlockDomain([domain])`
+
+Blocks network traffic to specified domains.
+
+**Parameters:**
+
+- `domain` (string, optional): Specific domain to block. If omitted, blocks all remote domains from the current event context.
+
+**Returns:**
+
+- `0`: Success (domain blocked)
+- `1`: All domains were already blocked
+- `-1`: Error occurred (use `Errno()` for details)
+
+**Example:**
+
+```javascript
+// Block a specific domain
+let result = NetBlockDomain("malicious-site.com");
+if (result === 0) {
+    Info("Domain blocked successfully");
+}
+
+// Block all domains from the event
+let result = NetBlockDomain();
+if (result === 0) {
+    Info("All remote domains blocked successfully");
 }
 ```
 
@@ -152,12 +194,15 @@ if (result === 0) {
 
 ### `KillCurrent()`
 
-Terminates the current process associated with the security event.
+Terminates the current process (the one that triggered the detection).
+
+**Parameters:** None
 
 **Returns:**
 
-- `0`: Success
-- `-1`: Error occurred
+- `0`: Success (process terminated)
+- `1`: Process already exited
+- `-1`: Error occurred (use `Errno()` for details)
 
 **Example:**
 
@@ -165,8 +210,10 @@ Terminates the current process associated with the security event.
 let result = KillCurrent();
 if (result === 0) {
     Info("Malicious process terminated");
+} else if (result === 1) {
+    Info("Process already exited");
 } else {
-    Error("Failed to kill process: " + Errno());
+    Error("Failed to terminate process: " + Errno());
 }
 ```
 
@@ -174,10 +221,13 @@ if (result === 0) {
 
 Terminates the parent process of the current process.
 
+**Parameters:** None
+
 **Returns:**
 
-- `0`: Success
-- `-1`: Error occurred
+- `0`: Success (parent process terminated)
+- `1`: Parent process already exited
+- `-1`: Error occurred (use `Errno()` for details)
 
 **Example:**
 
@@ -185,28 +235,44 @@ Terminates the parent process of the current process.
 let result = KillParent();
 if (result === 0) {
     Info("Parent process terminated");
+} else if (result === 1) {
+    Info("Parent process already exited");
+} else {
+    Error("Failed to terminate parent: " + Errno());
 }
 ```
 
-### `KillProcess()`
+### `KillProcess(pid)`
 
-Kills processes based on the event context and ancestry information.
+Terminates a specific process by PID.
+
+**Parameters:**
+
+- `pid` (number, required): The process ID to terminate
 
 **Returns:**
 
-- `0`: Success
-- `-1`: Error occurred
+- `0`: Success (process terminated)
+- `1`: Process already exited
+- `-1`: Error occurred (use `Errno()` for details)
+
+**Safety:** This function has built-in protections against killing system processes (PID < 500), Jibril itself, or Jibril's parent process.
 
 **Example:**
 
 ```javascript
-let result = KillProcess();
+let targetPid = 1234;
+let result = KillProcess(targetPid);
 if (result === 0) {
-    Info("Process killed successfully");
+    Info("Process " + targetPid + " terminated");
+} else if (result === 1) {
+    Info("Process " + targetPid + " already exited");
+} else {
+    Error("Failed to terminate process " + targetPid + ": " + Errno());
 }
 ```
 
-## <mark style="color:yellow;">File System Operations</mark>
+## <mark style="color:yellow;">File System Functions</mark>
 
 ### `ReadFile(path)`
 
@@ -214,108 +280,107 @@ Reads the contents of a file.
 
 **Parameters:**
 
-- `path` (string): Absolute path to the file to read
+- `path` (string, required): Path to the file to read
 
 **Returns:**
 
-- File contents as a string on success
-- Empty string on error (check `Errno()` for details)
+- `string`: File contents on success
+- `""` (empty string): On error (use `Errno()` for details)
 
 **Example:**
 
 ```javascript
-let config = ReadFile("/etc/app/config.json");
-if (config !== "") {
-    Info("Config loaded: " + config.length + " bytes");
+let content = ReadFile("/etc/passwd");
+if (content !== "") {
+    Info("File read successfully: " + content.length + " bytes");
 } else {
-    Error("Failed to read config: " + Errno());
+    Error("Failed to read file: " + Errno());
 }
 ```
 
 ### `WriteFile(path, data)`
 
-Writes data to a file with secure permissions (0600).
+Writes data to a file (creates or overwrites).
 
 **Parameters:**
 
-- `path` (string): Absolute path where to write the file
-- `data` (string): Data to write to the file
+- `path` (string, required): Path to the file to write
+- `data` (string, required): Data to write to the file
 
 **Returns:**
 
 - `0`: Success
-- `-1`: Error occurred
+- `-1`: Error occurred (use `Errno()` for details)
+
+**Security:** Files are created with 0600 permissions (readable/writable by owner only).
 
 **Example:**
 
 ```javascript
-let evidence = JSON.stringify({
-    event: data.uuid,
-    timestamp: new Date().toISOString(),
-    process: data.process.cmd
-});
-
-let result = WriteFile("/var/log/security/incident.json", evidence);
+let result = WriteFile("/tmp/incident_log.txt", "Security incident detected");
 if (result === 0) {
-    Info("Evidence logged successfully");
+    Info("Incident log written successfully");
+} else {
+    Error("Failed to write log: " + Errno());
 }
 ```
 
 ### `Stat(path)`
 
-Gets file metadata and statistics.
+Gets file information and statistics.
 
 **Parameters:**
 
-- `path` (string): Absolute path to the file
+- `path` (string, required): Path to the file or directory
 
 **Returns:**
 
-- Object with file information on success
-- `null` on error
-
-**Object Properties:**
-
-- `size` (number): File size in bytes
-- `mode` (string): File permissions and type
-- `modTime` (string): Last modification time (RFC3339 format)
-- `isDir` (boolean): Whether the path is a directory
+- `object`: File information object with properties: `size`, `mode`, `modTime`, `isDir`
+- `null`: On error (use `Errno()` for details)
 
 **Example:**
 
 ```javascript
-let fileInfo = Stat("/suspicious/file");
+let fileInfo = Stat("/etc/passwd");
 if (fileInfo) {
     Info("File size: " + fileInfo.size + " bytes");
-    Info("Last modified: " + fileInfo.modTime);
+    Info("Modified: " + fileInfo.modTime);
     Info("Is directory: " + fileInfo.isDir);
+    Info("Permissions: " + fileInfo.mode);
+} else {
+    Error("Failed to stat file: " + Errno());
 }
 ```
 
-## <mark style="color:yellow;">Temporary Directory Management</mark>
+## <mark style="color:yellow;">Temporary Directory Functions</mark>
 
-### `CreateTempDir([pattern])`
+### `CreateTempDir(pattern)`
 
-Creates a secure temporary directory in `/tmp` with 0700 permissions.
+Creates a temporary directory.
 
 **Parameters:**
 
-- `pattern` (string, optional): Pattern for the directory name (default: "tmpdir-*")
+- `pattern` (string, required): Directory name pattern (must end with `*` for random suffix)
 
 **Returns:**
 
-- Path to the created directory on success
-- Empty string on error
+- `string`: Path to created directory on success
+- `""` (empty string): On error (use `Errno()` for details)
+
+**Security:** Only allows creation within `/tmp` directory for security.
 
 **Example:**
 
 ```javascript
-let tmpDir = CreateTempDir("security-*");
+let tmpDir = CreateTempDir("incident-*");
 if (tmpDir !== "") {
-    Info("Created temp directory: " + tmpDir);
-    
-    // Use the directory for forensic data
-    WriteFile(tmpDir + "/evidence.json", JSON.stringify(data));
+    Info("Created temporary directory: " + tmpDir);
+
+    // Use the directory for forensic evidence
+    let evidenceFile = tmpDir + "/evidence.json";
+    WriteFile(evidenceFile, JSON.stringify(data, null, 2));
+} else {
+    Error("Failed to create temp directory: " + Errno());
 }
 ```
 
@@ -325,19 +390,23 @@ Removes a directory and its contents.
 
 **Parameters:**
 
-- `path` (string): Path to the directory to remove
+- `path` (string, required): Path to the directory to remove
 
 **Returns:**
 
 - `0`: Success
-- `-1`: Error occurred
+- Error code: On failure (use `Errno()` for details)
+
+**Security:** Only allows removal of safe subdirectories within `/tmp` for security.
 
 **Example:**
 
 ```javascript
-let result = RemoveDir("/tmp/cleanup-target");
+let result = RemoveDir("/tmp/old-incident-data");
 if (result === 0) {
     Info("Directory removed successfully");
+} else {
+    Error("Failed to remove directory: " + Errno());
 }
 ```
 
@@ -351,33 +420,34 @@ Stores a key-value pair in the persistent data store.
 
 **Parameters:**
 
-- `key` (string): The key to store
-- `value` (string): The value to associate with the key
+- `key` (string, required): The key to store
+- `value` (string, required): The value to store
 
 **Returns:**
 
 - `0`: Success
-- `-1`: Error occurred
+- Error code: On failure
 
 **Example:**
 
 ```javascript
-DataSet("incident_count", "5");
-DataSet("last_attack_ip", "192.168.1.100");
+let result = DataSet("incident_count", "5");
+if (result === 0) {
+    Info("Data stored successfully");
+}
 ```
 
 ### `DataGet(key)`
 
-Retrieves a value from the data store.
+Retrieves a value from the persistent data store.
 
 **Parameters:**
 
-- `key` (string): The key to retrieve
+- `key` (string, required): The key to retrieve
 
 **Returns:**
 
-- The stored value as a string on success
-- Empty string if key not found (check `Errno()` to distinguish)
+- `string`: The stored value, or `""` if key not found
 
 **Example:**
 
@@ -385,46 +455,9 @@ Retrieves a value from the data store.
 let count = DataGet("incident_count");
 if (count !== "") {
     Info("Current incident count: " + count);
-} else if (Errno() === "key not found in data store") {
-    Info("No previous incidents recorded");
+} else {
+    Info("No incident count found");
 }
-```
-
-### `DataPush(value)`
-
-Pushes a value onto a stack-like structure (LIFO).
-
-**Parameters:**
-
-- `value` (string): Value to push onto the stack
-
-**Returns:**
-
-- `0`: Success
-- `-1`: Error occurred
-
-**Example:**
-
-```javascript
-DataPush("192.168.1.100");
-DataPush("192.168.1.101");
-// Stack now contains: ["192.168.1.101", "192.168.1.100"]
-```
-
-### `DataPop()`
-
-Pops the most recently pushed value from the stack.
-
-**Returns:**
-
-- The most recent value as a string
-- Empty string if stack is empty
-
-**Example:**
-
-```javascript
-let ip = DataPop(); // Returns "192.168.1.101"
-let nextIp = DataPop(); // Returns "192.168.1.100"
 ```
 
 ### `DataDelete(key)`
@@ -433,53 +466,7 @@ Removes a key-value pair from the data store.
 
 **Parameters:**
 
-- `key` (string): The key to delete
-
-**Returns:**
-
-- `0`: Success (even if key didn't exist)
-
-**Example:**
-
-```javascript
-DataDelete("old_incident_data");
-```
-
-### `DataKeys()`
-
-Returns all keys in the data store for the current reaction.
-
-**Returns:** JSON array string containing all keys
-
-**Example:**
-
-```javascript
-let keysJson = DataKeys();
-let keys = JSON.parse(keysJson);
-for (let i = 0; i < keys.length; i++) {
-    Info("Key: " + keys[i]);
-}
-```
-
-### `DataValues()`
-
-Returns all values in the data store for the current reaction.
-
-**Returns:** JSON array string containing all values
-
-**Example:**
-
-```javascript
-let valuesJson = DataValues();
-let values = JSON.parse(valuesJson);
-for (let i = 0; i < values.length; i++) {
-    Info("Value: " + values[i]);
-}
-```
-
-### `DataClear()`
-
-Removes all data for the current reaction from the data store.
+- `key` (string, required): The key to delete
 
 **Returns:**
 
@@ -488,14 +475,119 @@ Removes all data for the current reaction from the data store.
 **Example:**
 
 ```javascript
-DataClear(); // Clean slate
+DataDelete("temporary_data");
+Info("Temporary data cleared");
+```
+
+### `DataPush(key, value)`
+
+Adds a value to a list stored under the given key.
+
+**Parameters:**
+
+- `key` (string, required): The key for the list
+- `value` (string, required): The value to add to the list
+
+**Returns:**
+
+- `0`: Success
+- Error code: On failure
+
+**Example:**
+
+```javascript
+DataPush("blocked_ips", "192.168.1.100");
+DataPush("blocked_ips", "10.0.0.50");
+Info("Added IPs to blocked list");
+```
+
+### `DataPop(key)`
+
+Removes and returns the last value from a list.
+
+**Parameters:**
+
+- `key` (string, required): The key for the list
+
+**Returns:**
+
+- `string`: The popped value, or `""` if list is empty
+
+**Example:**
+
+```javascript
+let lastIp = DataPop("blocked_ips");
+if (lastIp !== "") {
+    Info("Removed IP from list: " + lastIp);
+}
+```
+
+### `DataKeys()`
+
+Returns all keys in the data store for this reaction.
+
+**Parameters:** None
+
+**Returns:**
+
+- `string`: JSON array of all keys as a string
+
+**Example:**
+
+```javascript
+let keysJson = DataKeys();
+if (keysJson !== "") {
+    let keys = JSON.parse(keysJson);
+    Info("Available keys: " + keys.join(", "));
+}
+```
+
+### `DataValues()`
+
+Returns all values in the data store for this reaction.
+
+**Parameters:** None
+
+**Returns:**
+
+- `string`: JSON array of all values as a string
+
+**Example:**
+
+```javascript
+let valuesJson = DataValues();
+if (valuesJson !== "") {
+    let values = JSON.parse(valuesJson);
+    Info("Stored values: " + values.join(", "));
+}
+```
+
+### `DataClear()`
+
+Removes all key-value pairs for this reaction from the data store.
+
+**Parameters:** None
+
+**Returns:**
+
+- `0`: Success
+
+**Example:**
+
+```javascript
+DataClear();
+Info("All reaction data cleared");
 ```
 
 ### `DataSize()`
 
-Returns the number of key-value pairs stored for the current reaction.
+Returns the number of key-value pairs in the data store for this reaction.
 
-**Returns:** Number of items as integer
+**Parameters:** None
+
+**Returns:**
+
+- `number`: The number of stored key-value pairs
 
 **Example:**
 
@@ -506,18 +598,22 @@ Info("Data store contains " + size + " items");
 
 ### `DataIsEmpty()`
 
-Checks if the data store is empty for the current reaction.
+Checks if the data store is empty for this reaction.
+
+**Parameters:** None
 
 **Returns:**
 
-- `true`: Data store is empty
-- `false`: Data store contains data
+- `true`: If the data store is empty
+- `false`: If the data store contains data
 
 **Example:**
 
 ```javascript
 if (DataIsEmpty()) {
-    Info("No previous data found");
+    Info("Data store is empty");
+} else {
+    Info("Data store contains data");
 }
 ```
 
@@ -527,19 +623,20 @@ Checks if a specific key exists in the data store.
 
 **Parameters:**
 
-- `key` (string): The key to check
+- `key` (string, required): The key to check
 
 **Returns:**
 
-- `true`: Key exists
-- `false`: Key does not exist
+- `true`: If the key exists
+- `false`: If the key does not exist
 
 **Example:**
 
 ```javascript
 if (DataHasKey("incident_count")) {
-    let count = DataGet("incident_count");
-    Info("Previous incidents: " + count);
+    Info("Incident count is tracked");
+} else {
+    DataSet("incident_count", "0");
 }
 ```
 
@@ -549,61 +646,65 @@ Checks if a specific value exists in the data store.
 
 **Parameters:**
 
-- `value` (string): The value to search for
+- `value` (string, required): The value to check
 
 **Returns:**
 
-- `true`: Value exists
-- `false`: Value does not exist
+- `true`: If the value exists
+- `false`: If the value does not exist
 
 **Example:**
 
 ```javascript
-if (DataHasValue("192.168.1.100")) {
-    Info("This IP has been seen before");
+if (DataHasValue("high_priority")) {
+    Info("High priority incident detected");
 }
 ```
 
 ## <mark style="color:yellow;">Emergency System Functions</mark>
 
 {% hint style="danger" %}
-**These functions perform system-wide operations and should be used with extreme caution. They are intended for critical security situations where immediate system shutdown is necessary.**
+**These functions perform system-level operations and should be used with extreme caution. They are intended for emergency security situations only.**
 {% endhint %}
 
 ### `PowerOff()`
 
 Initiates an immediate system shutdown.
 
+**Parameters:** None
+
 **Returns:**
 
-- `0`: Success
-- `-1`: Error occurred
+- `0`: Success (shutdown initiated)
+- Error code: On failure
 
 **Example:**
 
 ```javascript
-// Only use in critical situations
-if (data.metadata.importance === "critical") {
-    Info("Critical threat detected - initiating shutdown");
+// Only use in extreme situations
+if (data.process.cmd.includes("rm -rf /")) {
+    Warn("DESTRUCTIVE COMMAND DETECTED - EMERGENCY SHUTDOWN");
     PowerOff();
 }
 ```
 
 ### `Panic()`
 
-Triggers a kernel panic for immediate system halt.
+Triggers a kernel panic to immediately halt the system.
+
+**Parameters:** None
 
 **Returns:**
 
-- `0`: Success
-- `-1`: Error occurred
+- `0`: Success (panic triggered)
+- Error code: On failure
 
 **Example:**
 
 ```javascript
-// Emergency response to severe compromise
-if (systemCompromised) {
-    Error("System compromise detected - triggering panic");
+// Extreme emergency measure only
+if (rootkitDetected) {
+    Error("ROOTKIT DETECTED - TRIGGERING KERNEL PANIC");
     Panic();
 }
 ```
@@ -612,72 +713,117 @@ if (systemCompromised) {
 
 ### `Errno()`
 
-Returns the error message from the last operation that failed.
+Returns detailed error information for the last failed operation.
 
-**Returns:** Error message as a string, or empty string if no error
+**Parameters:** None
+
+**Returns:**
+
+- `string`: Error message describing the last error, or `""` if no error
 
 **Example:**
 
 ```javascript
 let result = NetBlockIp("invalid-ip");
-if (result !== 0) {
-    Error("Failed to block IP: " + Errno());
+if (result === -1) {
+    let errorMsg = Errno();
+    Error("Network blocking failed: " + errorMsg);
 }
 ```
 
-## <mark style="color:yellow;">Common Error Codes</mark>
+## <mark style="color:yellow;">Common Usage Patterns</mark>
 
-- `0`: Success
-- `1`: Operation succeeded but had no effect (e.g., IP already blocked)
-- `-1`: Generic error occurred
-- `-2`: Item not found
-
-## <mark style="color:yellow;">Best Practices</mark>
-
-1. **Always check return values** from functions that can fail
-2. **Use `Errno()`** to get detailed error information
-3. **Log operations** for audit trails
-4. **Validate input data** before using it in operations
-5. **Use data store** for maintaining state across reactions
-6. **Test reactions thoroughly** before deploying to production
-
-## <mark style="color:yellow;">Example: Complete Reaction</mark>
+### Error Checking Pattern
 
 ```javascript
 function process(data) {
-    Info("Processing " + kind + " event: " + name);
-    
-    // Check if this is a repeat offender
-    let lastSeen = DataGet("last_seen_" + data.process.pid);
-    if (lastSeen !== "") {
-        Warn("Repeat offender detected: " + data.process.cmd);
-        
-        // Escalate response
-        let result = KillCurrent();
-        if (result === 0) {
-            Info("Terminated repeat offender");
-            DataSet("terminated_count", String(parseInt(DataGet("terminated_count") || "0") + 1));
-        }
+    let result = SomeFunction();
+    if (result === 0) {
+        Info("Operation successful");
+    } else if (result === 1) {
+        Info("Operation had no effect (already done)");
     } else {
-        // First offense - log and monitor
-        Info("First offense logged for PID: " + data.process.pid);
-        DataSet("last_seen_" + data.process.pid, new Date().toISOString());
-        
-        // Block associated network traffic
-        let blockResult = NetBlockIp();
-        if (blockResult === 0) {
-            Info("Blocked network traffic from process");
-        }
+        Error("Operation failed: " + Errno());
+        return; // Exit reaction on error
     }
-    
-    // Log to forensic file
-    let evidence = {
-        timestamp: new Date().toISOString(),
-        event_id: uuid,
-        process: data.process.cmd,
-        action_taken: lastSeen !== "" ? "terminated" : "monitored"
-    };
-    
-    WriteFile("/var/log/security/reactions.log", JSON.stringify(evidence) + "\n");
 }
 ```
+
+### Data Store Tracking Pattern
+
+```javascript
+function process(data) {
+    // Increment counter
+    let count = parseInt(DataGet("incident_count") || "0") + 1;
+    DataSet("incident_count", String(count));
+    DataSet("last_incident", new Date().toISOString());
+
+    Info("Incident #" + count + " processed");
+}
+```
+
+### Network Flow Processing Pattern
+
+```javascript
+function process(data) {
+    // Extract IPs from network flows
+    let ips = [];
+    if (data?.background?.flows?.protocols) {
+        for (let protocol of data.background.flows.protocols) {
+            if (protocol?.pairs) {
+                for (let pair of protocol.pairs) {
+                    if (pair?.nodes?.remote?.address) {
+                        ips.push(pair.nodes.remote.address);
+                    }
+                }
+            }
+        }
+    }
+
+    // Process each IP
+    for (let ip of ips) {
+        Info("Processing IP: " + ip);
+        NetBlockIp(ip);
+    }
+}
+```
+
+### Forensic Evidence Collection Pattern
+
+```javascript
+function process(data) {
+    let forensicDir = CreateTempDir("evidence-*");
+    if (forensicDir !== "") {
+        let evidence = {
+            timestamp: new Date().toISOString(),
+            event_uuid: uuid,
+            process: data.process,
+            file: data.file,
+            ancestry: data.base?.background?.ancestry
+        };
+
+        let evidenceFile = forensicDir + "/evidence.json";
+        if (WriteFile(evidenceFile, JSON.stringify(evidence, null, 2)) === 0) {
+            Info("Evidence collected: " + evidenceFile);
+        }
+    }
+}
+```
+
+## <mark style="color:yellow;">Performance Considerations</mark>
+
+1. **Keep reactions lightweight** - They run in the hot path of event processing
+2. **Minimize file I/O** - File operations can impact system performance
+3. **Use data store efficiently** - Don't store large amounts of data per key
+4. **Clean up temporary files** - Use `RemoveDir()` when done with temporary directories
+5. **Handle errors gracefully** - Always check return values and use `Errno()` for debugging
+
+## <mark style="color:yellow;">Security Considerations</mark>
+
+1. **Input validation** - Always validate data from the event context
+2. **Least privilege** - Only perform necessary operations
+3. **Safe file operations** - Be careful with file paths and permissions
+4. **Network dependencies** - Network functions require the netpolicy plugin
+5. **Error information** - Don't expose sensitive information in error messages
+
+This API provides powerful capabilities for automated security responses while maintaining system safety and security.

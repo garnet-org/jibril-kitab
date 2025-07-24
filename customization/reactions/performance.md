@@ -21,28 +21,31 @@ icon: chart-waterfall
 
 ## <mark style="color:yellow;">**Example: Optimized Reaction**</mark>
 
-```javascript
+```yaml
 reactions:
   - format: js
     code: |
+```
+
+```javascript
       function process(data) {
         // Fast path for common cases
         if (!data.process || !data.process.cmd) {
           return; // Exit early if no process data
         }
-        
+
         // Efficient data access
         let cmd = data.process.cmd;
         let isHighRisk = cmd.includes("wget") || cmd.includes("curl");
-        
+
         if (isHighRisk) {
           // Only log essential information
           Info("High-risk process: " + cmd);
-          
+
           // Use efficient data store operations
           let count = parseInt(DataGet("risk_count") || "0") + 1;
           DataSet("risk_count", String(count));
-          
+
           // Take action only when necessary
           if (count > 5) {
             NetBlockIp();
@@ -52,7 +55,7 @@ reactions:
 ```
 
 > In a detection system, distinguishing between what belongs in the reaction phase and what should be part of the detection logic is crucial. Think of reactions as an extension of Jibril: they encompass scripts that collect, analyze, interpret, and act on data—similar to the Jibril detection mechanism.
->
+
 > #### Key Points
 >
 > * **Jibril Detection Mechanism**\

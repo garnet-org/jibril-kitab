@@ -86,7 +86,7 @@ KillCurrent();
 KillParent();
 
 // Kill specific process by PID
-KillProcess();
+KillProcess(1234);
 ```
 
 ### **File System Operations**
@@ -205,13 +205,13 @@ Reactions are defined within detection recipes using YAML configuration (Alchemi
       code: |
         function process(data) {
           Info("Password file accessed by: " + data.process.cmd);
-          
+
           // Block the process
           let result = KillCurrent();
           if (result === 0) {
             Info("Malicious process terminated");
           }
-          
+
           // Log to incident database
           DataSet("last_passwd_access", new Date().toISOString());
         }

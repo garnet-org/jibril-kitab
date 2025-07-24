@@ -4,126 +4,43 @@ icon: lightbulb
 
 # Examples
 
-This document provides practical, real-world examples of how to use reactions to create powerful automated security responses. Each example includes the complete YAML configuration and JavaScript code.
+This document provides practical, real-world examples of how to use reactions to create powerful automated security responses. Each example includes the complete YAML configuration and JavaScript code with production-ready patterns.
 
 ## <mark style="color:yellow;">Basic Examples</mark>
 
-### Example 1: Simple Logging Reaction
+### Example 1: Crypto Miner Detection with Process Termination
 
-This basic example logs information about file access events.
+This example shows how to detect and terminate cryptocurrency miners using common miner binaries.
 
 ```yaml
-- kind: log_files_access
-  name: log_files_access_sensitive
+- kind: crypto_miner_reaction
+  name: crypto_miner_terminate_and_block
   enabled: true
   version: 1.0
-  description: Log access to sensitive files
+  description: Detect and respond to cryptocurrency miner execution
+  documentation: |
+    Detects crypto miner execution and terminates the process while blocking network access
   breed: file_access
-  mechanism: file_access
-  tactic: mitre_tactic
-  technique: mitre_technique
-  subtechnique: mitre_sub_technique
-  importance: medium
-  bases:
-    - dir: /etc
-      regex: "passwd|shadow|sudoers"
-  file_actions:
-    - read
-    - write
-  file_actions_how: any
-  reactions:
-    - format: js
-      code: |
-```
-
-```javascript
-        function process(data) {
-          Info("=== SENSITIVE FILE ACCESS ===");
-          Info("File: " + data.file.file);
-          Info("Process: " + data.process.cmd);
-          Info("User: " + data.process.uid);
-          Info("Actions: " + data.file.actions.join(", "));
-          Info("Timestamp: " + data.timestamp);
-        }
-```
-
-### Example 2: Network Blocking Reaction
-
-Automatically block suspicious network connections.
-
-```yaml
-- kind: malicious_network_block
-  name: block_c2_domains
-  enabled: true
-  version: 1.0
-  description: Block connections to known C2 domains
-  breed: remote_domains
-  mechanism: network_peers
-  tactic: command_and_control
-  technique: T1071
-  importance: high
-  remote_domains:
-    - malware-c2.com
-    - evil-server.net
-    - suspicious-domain.org
-  remote_domains_type: exact
-  flow_actions:
-    - egress
-  reactions:
-    - format: js
-      code: |
-```
-
-```javascript
-       function process(data) {
-          Info("Blocking malicious domain connection");
-          
-          // Block all domains from this event
-          let result = NetBlockDomain();
-          if (result === 0) {
-            Info("Successfully blocked C2 domains");
-            
-            // Log the incident
-            DataSet("last_c2_block", new Date().toISOString());
-            
-            // Count blocked attempts
-            let count = parseInt(DataGet("c2_block_count") || "0") + 1;
-            DataSet("c2_block_count", String(count));
-            
-            Warn("Total C2 blocks: " + count);
-          } else {
-            Error("Failed to block domains: " + Errno());
-          }
-        }
-```
-
-## <mark style="color:yellow;">Intermediate Examples</mark>
-
-### Example 3: Process Termination with Forensics
-
-Terminate malicious processes while collecting evidence.
-
-```yaml
-- kind: malware_execution
-  name: terminate_cryptominer
-  enabled: true
-  version: 1.0
-  description: Detect and terminate cryptocurrency miners
-  breed: execution
   mechanism: execution
   tactic: impact
-  technique: T1496
-  importance: high
-  arbitrary:
-    - how: OR
-      which: pertinent
-      items:
-        - what: cmd
-          which: contains
-          pattern: "xmrig|cpuminer|ethminer"
-        - what: exe
-          which: contains
-          pattern: "miner"
+  technique: resource_hijacking
+  subtechnique: compute_hijacking
+  importance: critical
+  times:
+    - kind: times_per_proc
+      max: 2
+    - kind: times_per_exe
+      max: 4
+  arbitrary: []
+  file_actions:
+    - execve
+  file_actions_how: any
+  bases:
+    - base: xmrig      # Popular Monero miner
+    - base: ethminer   # Ethereum GPU miner
+    - base: cgminer    # Multi-threaded ASIC/GPU miner
+    - base: cpuminer   # CPU miner (minerd)
+    - base: t-rex      # Nvidia GPU miner
   reactions:
     - format: js
       code: |
@@ -132,176 +49,263 @@ Terminate malicious processes while collecting evidence.
 ```javascript
         function process(data) {
           Info("=== CRYPTOCURRENCY MINER DETECTED ===");
-          Info("Command: " + data.process.cmd);
+          Info("Miner: " + data.file.basename);
+          Info("Process: " + data.process.cmd);
           Info("PID: " + data.process.pid);
-          Info("Parent: " + data.process.ppid);
-          
-          // Create forensic directory
-          let forensicDir = CreateTempDir("cryptominer-*");
-          if (forensicDir !== "") {
-            // Collect evidence
-            let evidence = {
-              timestamp: new Date().toISOString(),
-              event_id: uuid,
-              process: {
-                pid: data.process.pid,
-                ppid: data.process.ppid,
-                cmd: data.process.cmd,
-                exe: data.process.exe,
-                uid: data.process.uid
-              },
-              ancestry: data.base.background.ancestry,
-              network_flows: data.base.background.flows
-            };
-            
-            // Write evidence to file
-            let evidenceFile = forensicDir + "/miner_evidence.json";
-            let writeResult = WriteFile(evidenceFile, JSON.stringify(evidence, null, 2));
-            if (writeResult === 0) {
-              Info("Evidence collected: " + evidenceFile);
-            }
-          }
-          
-          // Terminate the miner
+
+          // Terminate the miner immediately
           let killResult = KillCurrent();
           if (killResult === 0) {
-            Info("Cryptocurrency miner terminated");
-            
-            // Update statistics
-            let minerCount = parseInt(DataGet("miners_terminated") || "0") + 1;
-            DataSet("miners_terminated", String(minerCount));
-            DataSet("last_miner_kill", new Date().toISOString());
-            
-            Warn("Total miners terminated: " + minerCount);
+            Info("Cryptocurrency miner terminated successfully");
+
+            // Count terminated miners
+            let count = parseInt(DataGet("miners_terminated") || "0") + 1;
+            DataSet("miners_terminated", String(count));
+            DataSet("last_miner_terminated", new Date().toISOString());
+
+            Warn("Total miners terminated: " + count);
+          } else if (killResult === 1) {
+            Info("Process already exited");
           } else {
             Error("Failed to terminate miner: " + Errno());
           }
-          
-          // Block any network connections from this process
+
+          // Block network connections to prevent mining pool communication
           let blockResult = NetBlockIp();
           if (blockResult === 0) {
-            Info("Blocked miner network connections");
+            Info("Blocked network connections from miner");
+          } else {
+            Warn("Network blocking result: " + blockResult);
           }
         }
 ```
 
-### Example 4: Escalating Response System
+### Example 2: Sudoers File Modification Detection
 
-Implement a graduated response based on threat severity and frequency.
+This example shows how to detect and respond to privilege escalation attempts through sudoers file modifications.
 
 ```yaml
-- kind: escalating_response
-  name: progressive_threat_response
+- kind: sudoers_reaction
+  name: sudoers_modification_response
   enabled: true
   version: 1.0
-  description: Escalating response to repeated suspicious activities
+  description: Respond to sudoers file modifications
+  documentation: |
+    Detects modifications to sudoers files and creates forensic evidence
   breed: file_access
   mechanism: file_access
-  tactic: persistence
-  technique: T1547
-  importance: medium
-  bases:
-    - dir: /etc/systemd/system
-      regex: ".*\\.service$"
+  tactic: privilege_escalation
+  technique: abuse_elevation_control_mechanism
+  subtechnique: sudo_and_sudo_caching
+  importance: critical
+  times:
+    - kind: times_per_proc
+      max: 2
+    - kind: times_per_exe
+      max: 4
+  arbitrary:
+    - how: AND
+      which: pertinent
+      items:
+        - what: cmd
+          which: irrelevant
+          pattern: .*sudo.*
+    - how: AND
+      which: pertinent
+      items:
+        - what: exe
+          which: irrelevant
+          # Exclude package managers that legitimately modify sudoers
+          pattern: (apk|apt|apt-add-repository|dnf|dpkg|emerge|pacman|rpm|yum|zypper)
   file_actions:
-    - write
-    - create
+    - modify_related
+  file_actions_how: any
+  bases:
+    - dir: /etc
+      base: sudoers
+    - regex: /etc/sudoers(\.d/.*)?
+    - regex: /(tmp|var/tmp|dev/shm|home/[^/]+)/\.?sudoers.*
   reactions:
     - format: js
-      code: 
+      code: |
 ```
 
 ```javascript
         function process(data) {
-          let serviceName = data.file.basename;
-          let processCmd = data.process.cmd;
-          
-          Info("Service file modification detected: " + serviceName);
-          Info("Modified by: " + processCmd);
-          
-          // Track incidents per process
-          let incidentKey = "incidents_" + data.process.exe;
-          let incidentCount = parseInt(DataGet(incidentKey) || "0") + 1;
-          DataSet(incidentKey, String(incidentCount));
-          
-          // Escalation logic
-          if (incidentCount === 1) {
-            // Level 1: Log and monitor
-            Info("LEVEL 1 RESPONSE: First incident - monitoring");
-            DataSet("first_incident_" + data.process.exe, new Date().toISOString());
-            
-          } else if (incidentCount === 2) {
-            // Level 2: Block network access
-            Info("LEVEL 2 RESPONSE: Second incident - blocking network");
-            let blockResult = NetBlockIp();
-            if (blockResult === 0) {
-              Info("Network access blocked for repeat offender");
-            }
-            
-          } else if (incidentCount >= 3) {
-            // Level 3: Terminate process
-            Info("LEVEL 3 RESPONSE: Multiple incidents - terminating process");
-            let killResult = KillCurrent();
-            if (killResult === 0) {
-              Info("Persistent threat terminated");
-              
-              // Log the escalation
-              let escalationData = {
-                process: processCmd,
-                incident_count: incidentCount,
-                escalation_level: 3,
-                timestamp: new Date().toISOString()
-              };
-              
-              WriteFile("/var/log/security/escalations.log", 
-                       JSON.stringify(escalationData) + "\n");
+          Error("=== SUDOERS MODIFICATION DETECTED ===");
+          Info("File: " + data.file.file);
+          Info("Process: " + data.process.cmd);
+          Info("User ID: " + data.process.uid);
+          Info("Actions: " + (data.file.actions ? data.file.actions.join(", ") : "unknown"));
+
+          // Create forensic evidence
+          let forensicDir = CreateTempDir("sudoers-incident-*");
+          if (forensicDir !== "") {
+            let evidence = {
+              timestamp: new Date().toISOString(),
+              incident_type: "sudoers_modification",
+              file_modified: data.file.file,
+              process: {
+                cmd: data.process.cmd,
+                exe: data.process.exe,
+                pid: data.process.pid,
+                uid: data.process.uid
+              },
+              ancestry: data.base.background.ancestry
+            };
+
+            let evidenceFile = forensicDir + "/sudoers_modification_evidence.json";
+            let writeResult = WriteFile(evidenceFile, JSON.stringify(evidence, null, 2));
+            if (writeResult === 0) {
+              Info("Forensic evidence saved: " + evidenceFile);
             }
           }
-          
-          // Always log the current incident
-          let logEntry = {
-            timestamp: new Date().toISOString(),
-            service_file: serviceName,
-            process: processCmd,
-            incident_number: incidentCount,
-            response_level: Math.min(incidentCount, 3)
-          };
-          
-          WriteFile("/var/log/security/service_modifications.log",
-                   JSON.stringify(logEntry) + "\n");
+
+          // Log incident to permanent store
+          let incidentId = "sudoers_" + new Date().getTime();
+          DataSet(incidentId, JSON.stringify({
+            file: data.file.file,
+            process: data.process.cmd,
+            timestamp: new Date().toISOString()
+          }));
+
+          // Update incident counter
+          let incidents = parseInt(DataGet("sudoers_incidents") || "0") + 1;
+          DataSet("sudoers_incidents", String(incidents));
+          DataSet("last_sudoers_incident", new Date().toISOString());
+
+          Error("CRITICAL: Sudoers modification #" + incidents + " detected");
+        }
+```
+
+## <mark style="color:yellow;">Network-Based Examples</mark>
+
+### Example 3: Suspicious Network Tool Detection
+
+This example detects network tools executed with IP addresses in their arguments.
+
+```yaml
+- kind: net_tool_reaction
+  name: suspicious_network_tool_response
+  enabled: true
+  version: 1.0
+  description: Detect network tools executed with IP arguments
+  documentation: |
+    Detects execution of network tools with IP addresses in arguments
+  breed: file_access
+  mechanism: execution
+  tactic: discovery
+  technique: network_service_discovery
+  subtechnique: none
+  importance: high
+  times:
+    - kind: times_per_parent_proc
+      max: 2
+    - kind: times_per_parent_exe
+      max: 4
+  arbitrary:
+    - how: OR
+      which: irrelevant
+      items:
+        - what: args
+          which: pertinent
+          # Comprehensive regex pattern to match IPv4 and IPv6 addresses
+          pattern: ([^\w|\.](\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}([^\w|\.]|$)|[^\w|\.](([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))([^\w|\.]|$))
+  file_actions:
+    - execve
+  file_actions_how: any
+  bases:
+    - base: nc         # Netcat
+    - base: curl       # HTTP client
+    - base: wget       # HTTP client
+    - base: ssh        # SSH client
+    - base: telnet     # Telnet client
+    - base: socat      # Multipurpose relay
+    - base: chisel     # TCP/UDP tunnel
+  reactions:
+    - format: js
+      code: |
+```
+
+```javascript
+        function process(data) {
+          Warn("=== SUSPICIOUS NETWORK TOOL WITH IP ===");
+          Info("Tool: " + data.file.basename);
+          Info("Command: " + data.process.cmd);
+          Info("Arguments: " + (data.process.args ? data.process.args.join(" ") : "N/A"));
+
+          // Extract IP addresses from arguments
+          let ipRegex = /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}/g;
+          let command = data.process.cmd || "";
+          let ips = command.match(ipRegex) || [];
+
+          if (ips.length > 0) {
+            Info("IP addresses found in command: " + ips.join(", "));
+
+            // Block the discovered IPs
+            for (let ip of ips) {
+              Info("Blocking IP: " + ip);
+              let blockResult = NetBlockIp(ip);
+              if (blockResult === 0) {
+                Info("Successfully blocked IP: " + ip);
+              } else {
+                Warn("Failed to block IP " + ip + ": " + Errno());
+              }
+            }
+
+            // Store the blocked IPs for tracking
+            DataPush("blocked_ips", ips.join(","));
+
+            // Update statistics
+            let toolCount = parseInt(DataGet("suspicious_tool_count") || "0") + 1;
+            DataSet("suspicious_tool_count", String(toolCount));
+            DataSet("last_suspicious_tool", data.file.basename);
+            DataSet("last_tool_time", new Date().toISOString());
+
+            Info("Total suspicious network tool executions: " + toolCount);
+          }
+
+          // Block network connections from this process
+          let netResult = NetBlockIp();
+          if (netResult === 0) {
+            Info("Blocked all network connections from process");
+          }
         }
 ```
 
 ## <mark style="color:yellow;">Advanced Examples</mark>
 
-### Example 5: Comprehensive Incident Response
+### Example 4: Multi-Stage Incident Response
 
-A complete incident response system with evidence collection, containment, and notification.
+This comprehensive example shows how to create a complete incident response workflow.
 
 ```yaml
-- kind: advanced_incident_response
-  name: comprehensive_malware_response
+- kind: incident_response
+  name: comprehensive_security_response
   enabled: true
   version: 1.0
-  description: Full incident response for malware detection
-  breed: execution
+  description: Multi-stage incident response for critical security events
+  breed: file_access
   mechanism: execution
   tactic: execution
   technique: T1204
   importance: critical
   arbitrary:
     - how: OR
-      which: pertinent
+      which: irrelevant
       items:
-        - what: cmd
-          which: contains
-          pattern: "powershell.*-enc.*"
-        - what: cmd
-          which: contains
-          pattern: "curl.*|.*wget.*"
-        - what: exe
-          which: contains
-          pattern: "/tmp/.*"
+        # Common crypto miner command line patterns
+         - what: task_or_parent_args
+           which: pertinent
+           pattern: (--cpu-priority|--cryptonight|--donate-level|--max-cpu-usage|--randomx|--rig-id|supportxmr|coin=|pool1=|wallet=|--algo|kawpow|stratum|zpool|nicehash|monero)
+  file_actions:
+    - execve
+  file_actions_how: any
+  bases:
+    - regex: .*
+  times:
+    - kind: times_per_proc
+      max: 1
   reactions:
     - format: js
       code: |
@@ -310,149 +314,167 @@ A complete incident response system with evidence collection, containment, and n
 ```javascript
         function process(data) {
           let incidentId = "INC-" + new Date().getTime();
-          
-          Info("=== CRITICAL INCIDENT DETECTED ===");
+
+          Error("=== CRITICAL INCIDENT DETECTED ===");
           Info("Incident ID: " + incidentId);
-          Info("Command: " + data.process.cmd);
-          
+          Info("Process: " + data.process.cmd);
+          Info("Executable: " + data.file.basename);
+
           // Phase 1: Immediate Containment
-          Info("Phase 1: Immediate Containment");
-          
-          // Block all network traffic from this process
-          let networkBlocked = NetBlockIp();
+          Info("=== PHASE 1: CONTAINMENT ===");
           let containmentActions = [];
-          
-          if (networkBlocked === 0) {
-            containmentActions.push("network_blocked");
-            Info("✓ Network traffic blocked");
-          }
-          
+
           // Terminate the malicious process
-          let processKilled = KillCurrent();
-          if (processKilled === 0) {
+          let killResult = KillCurrent();
+          if (killResult === 0) {
             containmentActions.push("process_terminated");
             Info("✓ Malicious process terminated");
+          } else if (killResult === 1) {
+            containmentActions.push("process_already_exited");
+            Info("✓ Process already exited");
+          } else {
+            Error("✗ Failed to terminate process: " + Errno());
           }
-          
+
+          // Block network connections
+          let networkResult = NetBlockIp();
+          if (networkResult === 0) {
+            containmentActions.push("network_blocked");
+            Info("✓ Network access blocked");
+          } else {
+            Warn("Network blocking result: " + networkResult);
+          }
+
           // Phase 2: Evidence Collection
-          Info("Phase 2: Evidence Collection");
-          
+          Info("=== PHASE 2: EVIDENCE COLLECTION ===");
           let forensicDir = CreateTempDir("incident-" + incidentId + "-*");
-          let evidenceCollected = [];
-          
+          let evidenceFiles = [];
+
           if (forensicDir !== "") {
-            // Collect process information
+            // Collect process evidence
             let processEvidence = {
-              pid: data.process.pid,
-              ppid: data.process.ppid,
-              cmd: data.process.cmd,
-              exe: data.process.exe,
-              args: data.process.args,
-              uid: data.process.uid,
-              start_time: data.process.start,
-              ancestry: data.base.background.ancestry
-            };
-            
-            WriteFile(forensicDir + "/process_info.json", 
-                     JSON.stringify(processEvidence, null, 2));
-            evidenceCollected.push("process_info");
-            
-            // Collect network information
-            if (data.base.background.flows) {
-              WriteFile(forensicDir + "/network_flows.json", 
-                       JSON.stringify(data.base.background.flows, null, 2));
-              evidenceCollected.push("network_flows");
-            }
-            
-            // Collect system state
-            let systemState = {
-              timestamp: new Date().toISOString(),
-              hostname: "system-hostname", // Would be dynamic in real scenario
               incident_id: incidentId,
-              detection_recipe: name,
-              event_uuid: uuid
+              timestamp: new Date().toISOString(),
+              process: {
+                cmd: data.process.cmd,
+                exe: data.process.exe,
+                pid: data.process.pid,
+                ppid: data.process.ppid,
+                uid: data.process.uid,
+                args: data.process.args
+              },
+              file: {
+                path: data.file.file,
+                basename: data.file.basename,
+                actions: data.file.actions
+              },
+              ancestry: data.base.background.ancestry,
+              flows: data.base.background.flows
             };
-            
-            WriteFile(forensicDir + "/system_state.json", 
-                     JSON.stringify(systemState, null, 2));
-            evidenceCollected.push("system_state");
-            
-            Info("✓ Evidence collected in: " + forensicDir);
-            Info("✓ Evidence types: " + evidenceCollected.join(", "));
+
+            let processFile = forensicDir + "/process_evidence.json";
+            if (WriteFile(processFile, JSON.stringify(processEvidence, null, 2)) === 0) {
+              evidenceFiles.push("process_evidence.json");
+              Info("✓ Process evidence collected");
+            }
+
+            // Collect system state
+            let systemEvidence = {
+              incident_id: incidentId,
+              timestamp: new Date().toISOString(),
+              detection_recipe: name,
+              event_uuid: uuid,
+              containment_actions: containmentActions
+            };
+
+            let systemFile = forensicDir + "/system_state.json";
+            if (WriteFile(systemFile, JSON.stringify(systemEvidence, null, 2)) === 0) {
+              evidenceFiles.push("system_state.json");
+              Info("✓ System state evidence collected");
+            }
+
+            Info("Evidence directory: " + forensicDir);
+            Info("Evidence files: " + evidenceFiles.join(", "));
           }
-          
+
           // Phase 3: Incident Tracking
-          Info("Phase 3: Incident Tracking");
-          
-          // Update incident database
+          Info("=== PHASE 3: INCIDENT TRACKING ===");
+
+          // Create incident record
           let incidentRecord = {
             id: incidentId,
             timestamp: new Date().toISOString(),
             severity: "critical",
             status: "contained",
-            process: data.process.cmd,
+            detection_recipe: name,
+            process_cmd: data.process.cmd,
+            executable: data.file.basename,
             containment_actions: containmentActions,
             evidence_location: forensicDir,
-            evidence_types: evidenceCollected
+            evidence_files: evidenceFiles
           };
-          
-          // Store incident in data store
+
+          // Store in persistent data store
           DataSet("incident_" + incidentId, JSON.stringify(incidentRecord));
-          
-          // Update incident counters
+
+          // Update incident statistics
           let totalIncidents = parseInt(DataGet("total_incidents") || "0") + 1;
           DataSet("total_incidents", String(totalIncidents));
-          DataSet("last_incident", incidentId);
+          DataSet("last_incident_id", incidentId);
           DataSet("last_incident_time", new Date().toISOString());
-          
-          // Write to central incident log
-          WriteFile("/var/log/security/incidents.log", 
-                   JSON.stringify(incidentRecord) + "\n");
-          
-          // Phase 4: Alerting and Reporting
-          Info("Phase 4: Alerting");
-          
+
+          // Phase 4: Alerting
+          Info("=== PHASE 4: ALERTING ===");
           let alertSummary = {
             incident_id: incidentId,
             severity: "CRITICAL",
             process: data.process.cmd,
             actions_taken: containmentActions.length,
-            evidence_collected: evidenceCollected.length,
+            evidence_collected: evidenceFiles.length,
             total_incidents_today: totalIncidents
           };
-          
-          // Log alert (in real scenario, this might trigger external notifications)
-          Error("CRITICAL INCIDENT ALERT: " + JSON.stringify(alertSummary));
-          
-          // Emergency shutdown for critical threats
-          if (data.process.cmd.includes("rm -rf") || 
-              data.process.cmd.includes("format")) {
-            Warn("DESTRUCTIVE COMMAND DETECTED - INITIATING EMERGENCY SHUTDOWN");
-            PowerOff();
-          }
-          
+
+          Error("CRITICAL INCIDENT: " + JSON.stringify(alertSummary));
+
           Info("=== INCIDENT RESPONSE COMPLETE ===");
-          Info("Incident ID: " + incidentId + " - Status: CONTAINED");
+          Info("Incident " + incidentId + " has been contained and documented");
         }
 ```
 
-### Example 6: Threat Intelligence Integration
+## <mark style="color:yellow;">Test Examples</mark>
 
-Integrate with threat intelligence data for enhanced decision making.
+These examples demonstrate testing patterns for reactions:
+
+### Example 5: Basic Logging Test
 
 ```yaml
-- kind: threat_intel_reaction
-  name: intel_driven_blocking
-  enabled: true
+- kind: reactions_basics
+  name: reactions_basics_logging
+  enabled: false  # Test recipe
   version: 1.0
-  description: Use threat intelligence for smart blocking decisions
-  breed: remote_domains
-  mechanism: network_peers
-  tactic: command_and_control
-  technique: T1071
+  description: Test javascript helper functions (logging)
+  breed: file_access
+  mechanism: file_access
+  tactic: example
+  technique: example
+  subtechnique: example
   importance: high
-  flow_actions:
-    - egress
+  arbitrary:
+    - how: AND
+      which: pertinent
+      items:
+        - what: cmd
+          which: irrelevant
+          pattern: "^cat$"
+        - what: exe
+          which: irrelevant
+          pattern: "^bat$"
+  file_actions:
+    - unlink
+  file_actions_how: any
+  bases:
+    - dir: /tmp/reactions_tests
+      base: logging.txt
   reactions:
     - format: js
       code: |
@@ -460,144 +482,96 @@ Integrate with threat intelligence data for enhanced decision making.
 
 ```javascript
         function process(data) {
-          Info("Analyzing network connection with threat intelligence");
-          
-          // Extract connection details
-          let remoteIps = [];
-          let remoteDomains = [];
-          
-          if (data.background && data.background.flows && 
-              data.background.flows.protocols) {
+          let kind = data.metadata ? data.metadata.kind : "unknown";
+          let name = data.metadata ? data.metadata.name : "unknown";
+          let uuid = data.uuid || "no-uuid";
+
+          Info(kind);
+          Info(name);
+          Info(uuid.slice(-6));
+
+          Info("info");
+          Warn("warn");
+          Error("error");
+        }
+```
+
+### Example 6: Network IP Blocking Test
+
+```yaml
+- kind: reactions_block_ip
+  name: reactions_block_ip_block
+  enabled: false  # Test recipe
+  version: 1.0
+  description: Test javascript helper functions (NetBlockIp)
+  breed: remote_domains
+  mechanism: network_peers
+  tactic: example
+  technique: example
+  subtechnique: example
+  importance: high
+  remote_domains:
+    - example.com
+  remote_domains_type: exact
+  flow_actions:
+    - egress
+    - ingress
+  flow_actions_how: any
+  reactions:
+    - format: js
+      code: |
+```
+
+```javascript
+        function process(data) {
+          Info("globalKind: " + kind);
+          Info("globalName: " + name);
+          Info("globalUUID: " + uuid);
+
+          // Extract all IPs from flows
+          let ips = [];
+          if (data?.background?.flows?.protocols) {
             for (let protocol of data.background.flows.protocols) {
-              if (protocol.pairs) {
+              if (protocol?.pairs) {
                 for (let pair of protocol.pairs) {
-                  if (pair.nodes && pair.nodes.remote) {
-                    if (pair.nodes.remote.address) {
-                      remoteIps.push(pair.nodes.remote.address);
-                    }
-                    if (pair.nodes.remote.names) {
-                      remoteDomains = remoteDomains.concat(pair.nodes.remote.names);
-                    }
+                  if (pair?.nodes?.remote?.address && pair.nodes.remote.address !== "") {
+                    ips.push(pair.nodes.remote.address);
                   }
                 }
               }
             }
           }
-          
-          // Threat intelligence lookup simulation
-          // In real scenario, this would query actual threat intel APIs
-          let threatScore = 0;
-          let threatIndicators = [];
-          
-          // Check domains against known malicious patterns
-          for (let domain of remoteDomains) {
-            if (domain.includes("bit.ly") || domain.includes("tinyurl.com")) {
-              threatScore += 3;
-              threatIndicators.push("url_shortener");
-            }
-            if (domain.match(/[0-9]{8,}\.com$/)) {
-              threatScore += 5;
-              threatIndicators.push("dga_domain");
-            }
-            if (domain.includes("onion")) {
-              threatScore += 7;
-              threatIndicators.push("tor_domain");
-            }
+
+          // Block all remote IPs
+          Info("blocking found remote IPs: " + ips.join(", "));
+          let result = NetBlockIp();
+          if (result === 0) {
+            Info("blocked remote IPs successfully");
+          } else if (result === 1) {
+            Warn("all remote IPs were already blocked");
+          } else if (result === -1) {
+            let err = Errno();
+            Error("errno " + err);
+            return;
+          } else {
+            Warn("unexpected error " + result);
+            return;
           }
-          
-          // Check IPs against suspicious ranges
-          for (let ip of remoteIps) {
-            if (ip.startsWith("10.") || ip.startsWith("192.168.")) {
-              // Private IP - could be lateral movement
-              threatScore += 2;
-              threatIndicators.push("private_ip");
-            }
-          }
-          
-          // Process-based indicators
-          let processCmd = data.process ? data.process.cmd : "";
-          if (processCmd.includes("curl") || processCmd.includes("wget")) {
-            threatScore += 2;
-            threatIndicators.push("download_tool");
-          }
-          
-          // Risk-based response
-          Info("Threat Score: " + threatScore);
-          Info("Indicators: " + threatIndicators.join(", "));
-          
-          let responseAction = "none";
-          
-          if (threatScore >= 10) {
-            // High threat - immediate blocking and termination
-            responseAction = "block_and_kill";
-            Error("HIGH THREAT DETECTED - Score: " + threatScore);
-            
-            let blockResult = NetBlockIp();
-            let killResult = KillCurrent();
-            
-            if (blockResult === 0 && killResult === 0) {
-              Info("High threat contained - network blocked and process killed");
-            }
-            
-          } else if (threatScore >= 5) {
-            // Medium threat - network blocking only
-            responseAction = "block_network";
-            Warn("MEDIUM THREAT DETECTED - Score: " + threatScore);
-            
-            let blockResult = NetBlockIp();
-            if (blockResult === 0) {
-              Info("Medium threat contained - network blocked");
-            }
-            
-          } else if (threatScore >= 1) {
-            // Low threat - monitoring only
-            responseAction = "monitor";
-            Info("LOW THREAT DETECTED - Score: " + threatScore + " - Monitoring");
-          }
-          
-          // Update threat intelligence database
-          let intelRecord = {
-            timestamp: new Date().toISOString(),
-            event_id: uuid,
-            remote_ips: remoteIps,
-            remote_domains: remoteDomains,
-            threat_score: threatScore,
-            indicators: threatIndicators,
-            response_action: responseAction,
-            process: processCmd
-          };
-          
-          DataSet("intel_" + uuid, JSON.stringify(intelRecord));
-          
-          // Update statistics
-          let totalAnalyzed = parseInt(DataGet("total_analyzed") || "0") + 1;
-          DataSet("total_analyzed", String(totalAnalyzed));
-          
-          if (threatScore > 0) {
-            let threatsDetected = parseInt(DataGet("threats_detected") || "0") + 1;
-            DataSet("threats_detected", String(threatsDetected));
-            
-            Warn("Threat detection rate: " + threatsDetected + "/" + totalAnalyzed);
-          }
-          
-          // Log to threat intelligence file
-          WriteFile("/var/log/security/threat_intel.log", 
-                   JSON.stringify(intelRecord) + "\n");
+
+          Info("all good, remote IPs blocked");
         }
 ```
 
-## <mark style="color:yellow;">Shell Script Examples</mark>
+## <mark style="color:yellow;">Shell Script Example</mark>
 
-### Example 7: Shell Script Reaction
-
-Sometimes shell scripts provide more flexibility for system operations.
+### Example 7: System Backup on Critical File Access
 
 ```yaml
-- kind: shell_based_response
-  name: system_backup_on_threat
+- kind: shell_backup_reaction
+  name: system_backup_on_critical_access
   enabled: true
   version: 1.0
-  description: Create system backup when critical files are modified
+  description: Create system backup when critical files are accessed
   breed: file_access
   mechanism: file_access
   tactic: impact
@@ -608,33 +582,41 @@ Sometimes shell scripts provide more flexibility for system operations.
       regex: "(passwd|shadow|group|sudoers)$"
   file_actions:
     - write
+    - modify_related
+  file_actions_how: any
   reactions:
     - format: shell
       code: |
-```
+        #!/bin/bash
 
-```bash
-        # Parse the reaction data
-        FILE_PATH=$(echo "$REACTION_DATA" | jq -r '.file.file')
-        PROCESS_CMD=$(echo "$REACTION_DATA" | jq -r '.process.cmd')
-        TIMESTAMP=$(echo "$REACTION_DATA" | jq -r '.timestamp')
-        
+        # Parse the reaction data (using jq if available)
+        if command -v jq >/dev/null 2>&1; then
+            FILE_PATH=$(echo "$REACTION_DATA" | jq -r '.file.file // "unknown"')
+            PROCESS_CMD=$(echo "$REACTION_DATA" | jq -r '.process.cmd // "unknown"')
+            TIMESTAMP=$(echo "$REACTION_DATA" | jq -r '.timestamp // "unknown"')
+        else
+            FILE_PATH="unknown"
+            PROCESS_CMD="unknown"
+            TIMESTAMP=$(date -Iseconds)
+        fi
+
         echo "CRITICAL FILE MODIFICATION DETECTED"
         echo "File: $FILE_PATH"
         echo "Process: $PROCESS_CMD"
         echo "Time: $TIMESTAMP"
-        
+
         # Create backup directory
         BACKUP_DIR="/var/backups/jibril/$(date +%Y%m%d_%H%M%S)"
         mkdir -p "$BACKUP_DIR"
-        
+
         # Backup critical system files
         echo "Creating emergency backup..."
-        cp /etc/passwd "$BACKUP_DIR/"
-        cp /etc/shadow "$BACKUP_DIR/"
-        cp /etc/group "$BACKUP_DIR/"
-        cp /etc/sudoers "$BACKUP_DIR/"
-        
+        for file in /etc/passwd /etc/shadow /etc/group /etc/sudoers; do
+            if [ -f "$file" ]; then
+                cp "$file" "$BACKUP_DIR/" 2>/dev/null || true
+            fi
+        done
+
         # Create incident report
         cat > "$BACKUP_DIR/incident_report.txt" << EOF
         INCIDENT REPORT
@@ -643,31 +625,28 @@ Sometimes shell scripts provide more flexibility for system operations.
         Modified File: $FILE_PATH
         Process Command: $PROCESS_CMD
         Backup Location: $BACKUP_DIR
-        
+
         System files backed up as emergency measure.
         EOF
-        
+
         echo "Emergency backup completed: $BACKUP_DIR"
-        
-        # Optional: Send alert email (if mail is configured)
-        if command -v mail >/dev/null 2>&1; then
-            echo "Critical file modification detected on $(hostname)" | \
-            mail -s "JIBRIL SECURITY ALERT" admin@company.com
-        fi
+
+        # Log to system log
+        logger "Jibril: Critical file modification backup created at $BACKUP_DIR"
 ```
 
 ## <mark style="color:yellow;">Testing Your Reactions</mark>
 
-### Safe Testing Environment
+### Safe Testing Template
 
-Always test reactions in a safe environment first. Here's an example test reaction:
+Always test reactions safely first:
 
 ```yaml
 - kind: test_reaction
-  name: reaction_test
-  enabled: false  # Start with disabled
+  name: my_reaction_test
+  enabled: false  # Start disabled for testing
   version: 1.0
-  description: Test reaction functionality
+  description: Test reaction functionality safely
   breed: file_access
   mechanism: file_access
   tactic: test
@@ -678,6 +657,7 @@ Always test reactions in a safe environment first. Here's an example test reacti
       base: test_trigger.txt
   file_actions:
     - unlink
+  file_actions_how: any
   reactions:
     - format: js
       code: |
@@ -687,64 +667,43 @@ Always test reactions in a safe environment first. Here's an example test reacti
         function process(data) {
           Info("=== REACTION TEST ===");
           Info("Testing all major functions...");
-          
+
           // Test logging
           Info("Info logging works");
           Warn("Warning logging works");
           Error("Error logging works");
-          
+
           // Test data store
           DataSet("test_key", "test_value");
           let value = DataGet("test_key");
           Info("Data store test: " + (value === "test_value" ? "PASS" : "FAIL"));
-          
+
           // Test file operations (safe)
           let testContent = "Reaction test at " + new Date().toISOString();
-          let writeResult = WriteFile("/tmp/reaction_test.log", testContent);
-          Info("File write test: " + (writeResult === 0 ? "PASS" : "FAIL"));
-          
-          let readContent = ReadFile("/tmp/reaction_test.log");
-          Info("File read test: " + (readContent.includes("Reaction test") ? "PASS" : "FAIL"));
-          
+          let tmpDir = CreateTempDir("test-*");
+          if (tmpDir !== "") {
+            let testFile = tmpDir + "/test.txt";
+            let writeResult = WriteFile(testFile, testContent);
+            Info("File write test: " + (writeResult === 0 ? "PASS" : "FAIL"));
+
+            let readContent = ReadFile(testFile);
+            Info("File read test: " + (readContent === testContent ? "PASS" : "FAIL"));
+          }
+
           // Clean up
           DataDelete("test_key");
-          
+
           Info("=== TEST COMPLETE ===");
         }
 ```
 
-### Test Script
+## <mark style="color:yellow;">Key Takeaways</mark>
 
-Create this test script to trigger your test reaction:
+1. **Use Production Patterns**: These examples use proven patterns for effective security automation
+2. **Proper Syntax**: Pay attention to the `arbitrary` section with `which: irrelevant` vs `which: pertinent`
+3. **Error Handling**: Always check return values and use `Errno()` for debugging
+4. **Testing First**: Start with `enabled: false` and test in safe environments
+5. **Data Persistence**: Use the data store for tracking incidents across reactions
+6. **Network Dependencies**: Network functions require the netpolicy plugin to be enabled
 
-```bash
-#!/bin/bash
-# test_reaction.sh
-
-# Create test directory
-mkdir -p /tmp/test_reactions
-
-# Create the trigger file
-touch /tmp/test_reactions/test_trigger.txt
-
-# Wait a moment
-sleep 1
-
-# Remove the file to trigger the reaction
-rm /tmp/test_reactions/test_trigger.txt
-
-echo "Test trigger sent - check Jibril logs for reaction output"
-```
-
-## <mark style="color:yellow;">Best Practices Summary</mark>
-
-1. **Start Simple**: Begin with basic logging reactions before implementing complex logic
-2. **Test Thoroughly**: Always test in a safe environment first
-3. **Error Handling**: Check return values and use `Errno()` for debugging
-4. **Logging**: Log all significant actions for audit trails
-5. **Data Persistence**: Use the data store for maintaining state across reactions
-6. **Performance**: Keep reactions lightweight to avoid impacting system performance
-7. **Security**: Validate all inputs and avoid exposing sensitive information in logs
-8. **Documentation**: Document your reactions clearly for maintenance
-
-These examples provide a foundation for building powerful automated security responses with Jibril's reaction system. Adapt and extend them based on your specific security requirements and environment.
+These examples provide a solid foundation for creating effective security automation with Jibril's reaction system using proven, production-ready patterns.
