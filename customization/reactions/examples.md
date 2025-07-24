@@ -6,6 +6,8 @@ icon: lightbulb
 
 This document provides practical, real-world examples of how to use reactions to create powerful automated security responses. Each example includes the complete YAML configuration and JavaScript code with production-ready patterns.
 
+###
+
 ## <mark style="color:yellow;">Basic Examples</mark>
 
 ### Example 1: Crypto Miner Detection with Process Termination

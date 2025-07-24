@@ -120,11 +120,11 @@
 * [Reactions](customization/reactions/README.md)
   * [Overview](customization/reactions/overview.md)
   * [Configuration](customization/reactions/configuration.md)
+  * [Troubleshooting](customization/reactions/common-errors.md)
   * [Performance](customization/reactions/performance.md)
   * [Security](customization/reactions/security.md)
-  * [Examples](customization/reactions/examples.md)
-  * [Common Errors](customization/reactions/common-errors.md)
   * [JavaScript API](customization/reactions/javascript-api.md)
+  * [Examples](customization/reactions/examples.md)
   * [Best Practices](customization/reactions/best-practices.md)
 
 ## Support

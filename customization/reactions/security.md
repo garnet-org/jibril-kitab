@@ -1,8 +1,36 @@
 ---
+description: Reactions are designed with security as a primary concern.
 icon: user-secret
 ---
 
 # Security
+
+## <mark style="color:yellow;">Security & Isolation</mark>
+
+### **JavaScript Isolation**
+
+* Each reaction runs in a separate V8 context
+* Memory isolation prevents code interference
+* Helper functions provide controlled system access
+* No direct system call access
+
+### **Network Policy Integration**
+
+* Network blocking functions require netpolicy plugin
+* Automatic validation of network helper usage
+* Graceful degradation when netpolicy unavailable
+
+### **File System Security**
+
+* Temporary directories created with 0700 permissions
+* Restricted to safe temporary locations
+* Automatic cleanup after execution
+
+### **Error Handling**
+
+* Comprehensive error codes for all operations
+* Detailed error messages for debugging
+* Graceful failure modes
 
 ## <mark style="color:yellow;">Security Considerations</mark>
 
@@ -10,13 +38,10 @@ icon: user-secret
 
 Always validate data before using it in operations:
 
-```yaml
+```javascript
 reactions:
   - format: js
     code: |
-```
-
-```javascript
       function process(data) {
         // Validate input data
         if (!data || !data.process) {
@@ -38,13 +63,10 @@ reactions:
 
 Be careful with file operations:
 
-```yaml
+```javascript
 reactions:
   - format: js
     code: |
-```
-
-```javascript
       function process(data) {
         // Validate file paths
         let filePath = data.file ? data.file.file : "";

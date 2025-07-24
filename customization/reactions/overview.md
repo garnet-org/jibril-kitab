@@ -163,35 +163,6 @@ Every reaction receives comprehensive context about the security event that trig
 }
 ```
 
-## <mark style="color:yellow;">Security & Isolation</mark>
-
-Reactions are designed with security as a primary concern:
-
-### **JavaScript Isolation**
-
-* Each reaction runs in a separate V8 context
-* Memory isolation prevents code interference
-* Helper functions provide controlled system access
-* No direct system call access
-
-### **Network Policy Integration**
-
-* Network blocking functions require netpolicy plugin
-* Automatic validation of network helper usage
-* Graceful degradation when netpolicy unavailable
-
-### **File System Security**
-
-* Temporary directories created with 0700 permissions
-* Restricted to safe temporary locations
-* Automatic cleanup after execution
-
-### **Error Handling**
-
-* Comprehensive error codes for all operations
-* Detailed error messages for debugging
-* Graceful failure modes
-
 ## <mark style="color:yellow;">Integration with Detection Recipes</mark>
 
 Reactions are defined within detection recipes using YAML configuration (Alchemies):
@@ -216,13 +187,6 @@ Reactions are defined within detection recipes using YAML configuration (Alchemi
           DataSet("last_passwd_access", new Date().toISOString());
         }
 ```
-
-## <mark style="color:yellow;">Performance Considerations</mark>
-
-* **Parallel Execution**: Multiple reactions run concurrently for optimal performance
-* **V8 Compilation**: JavaScript reactions are pre-compiled for fast execution
-* **Memory Management**: Automatic cleanup of reaction contexts
-* **Resource Limits**: Built-in safeguards prevent resource exhaustion
 
 ## <mark style="color:yellow;">Next Steps</mark>
 

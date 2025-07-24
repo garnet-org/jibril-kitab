@@ -1,8 +1,9 @@
 ---
+description: The bridge between Jibril and a detection reaction
 icon: code
 ---
 
-# JavaScript API Reference
+# JavaScript API
 
 This document provides a complete reference for all JavaScript helper functions available within reaction code. These functions provide controlled access to system resources and security operations.
 
@@ -10,10 +11,10 @@ This document provides a complete reference for all JavaScript helper functions 
 
 Every reaction has access to these global variables:
 
-- **`kind`** (string): The type of detection event (e.g., "file_access", "execution", "network_peer")
-- **`name`** (string): The name of the detection recipe that triggered this reaction
-- **`uuid`** (string): Unique identifier for the specific event instance
-- **`data`** (object): Complete JSON object containing all event details and context
+* **`kind`** (string): The type of detection event (e.g., "file\_access", "execution", "network\_peer")
+* **`name`** (string): The name of the detection recipe that triggered this reaction
+* **`uuid`** (string): Unique identifier for the specific event instance
+* **`data`** (object): Complete JSON object containing all event details and context
 
 ## <mark style="color:yellow;">Logging Functions</mark>
 
@@ -23,7 +24,7 @@ Logs an informational message to the Jibril log system.
 
 **Parameters:**
 
-- `message` (string): The message to log
+* `message` (string): The message to log
 
 **Returns:** `undefined`
 
@@ -40,7 +41,7 @@ Logs a warning message to the Jibril log system.
 
 **Parameters:**
 
-- `message` (string): The warning message to log
+* `message` (string): The warning message to log
 
 **Returns:** `undefined`
 
@@ -56,7 +57,7 @@ Logs an error message to the Jibril log system.
 
 **Parameters:**
 
-- `message` (string): The error message to log
+* `message` (string): The error message to log
 
 **Returns:** `undefined`
 
@@ -78,13 +79,13 @@ Blocks network traffic to/from specified IP addresses.
 
 **Parameters:**
 
-- `ipAddress` (string, optional): Specific IP address to block. If omitted, blocks all remote IPs from the current event context.
+* `ipAddress` (string, optional): Specific IP address to block. If omitted, blocks all remote IPs from the current event context.
 
 **Returns:**
 
-- `0`: Success (IP blocked)
-- `1`: All IPs were already blocked
-- `-1`: Error occurred (use `Errno()` for details)
+* `0`: Success (IP blocked)
+* `1`: All IPs were already blocked
+* `-1`: Error occurred (use `Errno()` for details)
 
 **Example:**
 
@@ -112,13 +113,13 @@ Unblocks network traffic to/from a specific IP address.
 
 **Parameters:**
 
-- `ipAddress` (string, required): The IP address to unblock
+* `ipAddress` (string, required): The IP address to unblock
 
 **Returns:**
 
-- `0`: Success (IP unblocked)
-- `1`: IP was already unblocked
-- `-1`: Error occurred (use `Errno()` for details)
+* `0`: Success (IP unblocked)
+* `1`: IP was already unblocked
+* `-1`: Error occurred (use `Errno()` for details)
 
 **Example:**
 
@@ -139,14 +140,14 @@ Blocks an IP address for a specific duration in seconds.
 
 **Parameters:**
 
-- `ipAddress` (string, required): The IP address to block
-- `durationSeconds` (number, required): Duration in seconds to block the IP
+* `ipAddress` (string, required): The IP address to block
+* `durationSeconds` (number, required): Duration in seconds to block the IP
 
 **Returns:**
 
-- `0`: Success (IP blocked with timer)
-- `1`: IP was already blocked
-- `-1`: Error occurred (use `Errno()` for details)
+* `0`: Success (IP blocked with timer)
+* `1`: IP was already blocked
+* `-1`: Error occurred (use `Errno()` for details)
 
 **Example:**
 
@@ -166,13 +167,13 @@ Blocks network traffic to specified domains.
 
 **Parameters:**
 
-- `domain` (string, optional): Specific domain to block. If omitted, blocks all remote domains from the current event context.
+* `domain` (string, optional): Specific domain to block. If omitted, blocks all remote domains from the current event context.
 
 **Returns:**
 
-- `0`: Success (domain blocked)
-- `1`: All domains were already blocked
-- `-1`: Error occurred (use `Errno()` for details)
+* `0`: Success (domain blocked)
+* `1`: All domains were already blocked
+* `-1`: Error occurred (use `Errno()` for details)
 
 **Example:**
 
@@ -200,9 +201,9 @@ Terminates the current process (the one that triggered the detection).
 
 **Returns:**
 
-- `0`: Success (process terminated)
-- `1`: Process already exited
-- `-1`: Error occurred (use `Errno()` for details)
+* `0`: Success (process terminated)
+* `1`: Process already exited
+* `-1`: Error occurred (use `Errno()` for details)
 
 **Example:**
 
@@ -225,9 +226,9 @@ Terminates the parent process of the current process.
 
 **Returns:**
 
-- `0`: Success (parent process terminated)
-- `1`: Parent process already exited
-- `-1`: Error occurred (use `Errno()` for details)
+* `0`: Success (parent process terminated)
+* `1`: Parent process already exited
+* `-1`: Error occurred (use `Errno()` for details)
 
 **Example:**
 
@@ -248,13 +249,13 @@ Terminates a specific process by PID.
 
 **Parameters:**
 
-- `pid` (number, required): The process ID to terminate
+* `pid` (number, required): The process ID to terminate
 
 **Returns:**
 
-- `0`: Success (process terminated)
-- `1`: Process already exited
-- `-1`: Error occurred (use `Errno()` for details)
+* `0`: Success (process terminated)
+* `1`: Process already exited
+* `-1`: Error occurred (use `Errno()` for details)
 
 **Safety:** This function has built-in protections against killing system processes (PID < 500), Jibril itself, or Jibril's parent process.
 
@@ -280,12 +281,12 @@ Reads the contents of a file.
 
 **Parameters:**
 
-- `path` (string, required): Path to the file to read
+* `path` (string, required): Path to the file to read
 
 **Returns:**
 
-- `string`: File contents on success
-- `""` (empty string): On error (use `Errno()` for details)
+* `string`: File contents on success
+* `""` (empty string): On error (use `Errno()` for details)
 
 **Example:**
 
@@ -304,13 +305,13 @@ Writes data to a file (creates or overwrites).
 
 **Parameters:**
 
-- `path` (string, required): Path to the file to write
-- `data` (string, required): Data to write to the file
+* `path` (string, required): Path to the file to write
+* `data` (string, required): Data to write to the file
 
 **Returns:**
 
-- `0`: Success
-- `-1`: Error occurred (use `Errno()` for details)
+* `0`: Success
+* `-1`: Error occurred (use `Errno()` for details)
 
 **Security:** Files are created with 0600 permissions (readable/writable by owner only).
 
@@ -331,12 +332,12 @@ Gets file information and statistics.
 
 **Parameters:**
 
-- `path` (string, required): Path to the file or directory
+* `path` (string, required): Path to the file or directory
 
 **Returns:**
 
-- `object`: File information object with properties: `size`, `mode`, `modTime`, `isDir`
-- `null`: On error (use `Errno()` for details)
+* `object`: File information object with properties: `size`, `mode`, `modTime`, `isDir`
+* `null`: On error (use `Errno()` for details)
 
 **Example:**
 
@@ -360,12 +361,12 @@ Creates a temporary directory.
 
 **Parameters:**
 
-- `pattern` (string, required): Directory name pattern (must end with `*` for random suffix)
+* `pattern` (string, required): Directory name pattern (must end with `*` for random suffix)
 
 **Returns:**
 
-- `string`: Path to created directory on success
-- `""` (empty string): On error (use `Errno()` for details)
+* `string`: Path to created directory on success
+* `""` (empty string): On error (use `Errno()` for details)
 
 **Security:** Only allows creation within `/tmp` directory for security.
 
@@ -390,12 +391,12 @@ Removes a directory and its contents.
 
 **Parameters:**
 
-- `path` (string, required): Path to the directory to remove
+* `path` (string, required): Path to the directory to remove
 
 **Returns:**
 
-- `0`: Success
-- Error code: On failure (use `Errno()` for details)
+* `0`: Success
+* Error code: On failure (use `Errno()` for details)
 
 **Security:** Only allows removal of safe subdirectories within `/tmp` for security.
 
@@ -420,13 +421,13 @@ Stores a key-value pair in the persistent data store.
 
 **Parameters:**
 
-- `key` (string, required): The key to store
-- `value` (string, required): The value to store
+* `key` (string, required): The key to store
+* `value` (string, required): The value to store
 
 **Returns:**
 
-- `0`: Success
-- Error code: On failure
+* `0`: Success
+* Error code: On failure
 
 **Example:**
 
@@ -443,11 +444,11 @@ Retrieves a value from the persistent data store.
 
 **Parameters:**
 
-- `key` (string, required): The key to retrieve
+* `key` (string, required): The key to retrieve
 
 **Returns:**
 
-- `string`: The stored value, or `""` if key not found
+* `string`: The stored value, or `""` if key not found
 
 **Example:**
 
@@ -466,11 +467,11 @@ Removes a key-value pair from the data store.
 
 **Parameters:**
 
-- `key` (string, required): The key to delete
+* `key` (string, required): The key to delete
 
 **Returns:**
 
-- `0`: Success
+* `0`: Success
 
 **Example:**
 
@@ -485,13 +486,13 @@ Adds a value to a list stored under the given key.
 
 **Parameters:**
 
-- `key` (string, required): The key for the list
-- `value` (string, required): The value to add to the list
+* `key` (string, required): The key for the list
+* `value` (string, required): The value to add to the list
 
 **Returns:**
 
-- `0`: Success
-- Error code: On failure
+* `0`: Success
+* Error code: On failure
 
 **Example:**
 
@@ -507,11 +508,11 @@ Removes and returns the last value from a list.
 
 **Parameters:**
 
-- `key` (string, required): The key for the list
+* `key` (string, required): The key for the list
 
 **Returns:**
 
-- `string`: The popped value, or `""` if list is empty
+* `string`: The popped value, or `""` if list is empty
 
 **Example:**
 
@@ -530,7 +531,7 @@ Returns all keys in the data store for this reaction.
 
 **Returns:**
 
-- `string`: JSON array of all keys as a string
+* `string`: JSON array of all keys as a string
 
 **Example:**
 
@@ -550,7 +551,7 @@ Returns all values in the data store for this reaction.
 
 **Returns:**
 
-- `string`: JSON array of all values as a string
+* `string`: JSON array of all values as a string
 
 **Example:**
 
@@ -570,7 +571,7 @@ Removes all key-value pairs for this reaction from the data store.
 
 **Returns:**
 
-- `0`: Success
+* `0`: Success
 
 **Example:**
 
@@ -587,7 +588,7 @@ Returns the number of key-value pairs in the data store for this reaction.
 
 **Returns:**
 
-- `number`: The number of stored key-value pairs
+* `number`: The number of stored key-value pairs
 
 **Example:**
 
@@ -604,8 +605,8 @@ Checks if the data store is empty for this reaction.
 
 **Returns:**
 
-- `true`: If the data store is empty
-- `false`: If the data store contains data
+* `true`: If the data store is empty
+* `false`: If the data store contains data
 
 **Example:**
 
@@ -623,12 +624,12 @@ Checks if a specific key exists in the data store.
 
 **Parameters:**
 
-- `key` (string, required): The key to check
+* `key` (string, required): The key to check
 
 **Returns:**
 
-- `true`: If the key exists
-- `false`: If the key does not exist
+* `true`: If the key exists
+* `false`: If the key does not exist
 
 **Example:**
 
@@ -646,12 +647,12 @@ Checks if a specific value exists in the data store.
 
 **Parameters:**
 
-- `value` (string, required): The value to check
+* `value` (string, required): The value to check
 
 **Returns:**
 
-- `true`: If the value exists
-- `false`: If the value does not exist
+* `true`: If the value exists
+* `false`: If the value does not exist
 
 **Example:**
 
@@ -675,8 +676,8 @@ Initiates an immediate system shutdown.
 
 **Returns:**
 
-- `0`: Success (shutdown initiated)
-- Error code: On failure
+* `0`: Success (shutdown initiated)
+* Error code: On failure
 
 **Example:**
 
@@ -696,8 +697,8 @@ Triggers a kernel panic to immediately halt the system.
 
 **Returns:**
 
-- `0`: Success (panic triggered)
-- Error code: On failure
+* `0`: Success (panic triggered)
+* Error code: On failure
 
 **Example:**
 
@@ -719,7 +720,7 @@ Returns detailed error information for the last failed operation.
 
 **Returns:**
 
-- `string`: Error message describing the last error, or `""` if no error
+* `string`: Error message describing the last error, or `""` if no error
 
 **Example:**
 
@@ -809,21 +810,3 @@ function process(data) {
     }
 }
 ```
-
-## <mark style="color:yellow;">Performance Considerations</mark>
-
-1. **Keep reactions lightweight** - They run in the hot path of event processing
-2. **Minimize file I/O** - File operations can impact system performance
-3. **Use data store efficiently** - Don't store large amounts of data per key
-4. **Clean up temporary files** - Use `RemoveDir()` when done with temporary directories
-5. **Handle errors gracefully** - Always check return values and use `Errno()` for debugging
-
-## <mark style="color:yellow;">Security Considerations</mark>
-
-1. **Input validation** - Always validate data from the event context
-2. **Least privilege** - Only perform necessary operations
-3. **Safe file operations** - Be careful with file paths and permissions
-4. **Network dependencies** - Network functions require the netpolicy plugin
-5. **Error information** - Don't expose sensitive information in error messages
-
-This API provides powerful capabilities for automated security responses while maintaining system safety and security.
