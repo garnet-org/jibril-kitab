@@ -4,16 +4,14 @@ icon: chart-waterfall
 
 # Performance
 
-## <mark style="color:yellow;">Performance Considerations</mark>
-
-### **Reaction Execution**
+## <mark style="color:yellow;">**Reaction Execution**</mark>
 
 * **Parallel Execution**: Multiple reactions for the same recipe run concurrently
 * **V8 Compilation**: JavaScript reactions are pre-compiled for fast execution
 * **Context Isolation**: Each reaction runs in its own isolated environment
 * **Resource Management**: Automatic cleanup prevents memory leaks
 
-### **Best Practices for Performance**
+## <mark style="color:yellow;">**Best Practices for Performance**</mark>
 
 1. **Keep reactions lightweight** - Avoid complex computations
 2. **Use the data store efficiently** - Don't store large objects
@@ -21,7 +19,7 @@ icon: chart-waterfall
 4. **Handle errors gracefully** - Don't let failed reactions impact others
 5. **Test thoroughly** - Validate reactions before production deployment
 
-### **Example: Optimized Reaction**
+## <mark style="color:yellow;">**Example: Optimized Reaction**</mark>
 
 ```javascript
 reactions:
@@ -53,6 +51,13 @@ reactions:
       }
 ```
 
-> There is a thin line in between what should go in the reaction and what should be done in the detection recipe (or logic) itself. One can see the reaction as being an extension of Jibril since scripts can collect, analyze and interpret data the same way as Jibril does.
+> In a detection system, distinguishing between what belongs in the reaction phase and what should be part of the detection logic is crucial. Think of reactions as an extension of Jibril: they encompass scripts that collect, analyze, interpret, and act on data—similar to the Jibril detection mechanism.
+>
+> #### Key Points
+>
+> * **Jibril Detection Mechanism**\
+>   Optimized for enhanced results, efficient caching, and additional functionalities.
+> * **Reaction Logic**\
+>   Should focus on responding to events, without being responsible for filtering or decision-making, which is handled by `arbitraries` or specific detection features.
 
 > Remember: Jibril detection mechanisms are faster and optimized. This makes the use of reactions logic, such as showed above, targeted to fine-grained business logic (and not to replace it).

@@ -2,7 +2,7 @@
 icon: lightbulb
 ---
 
-# Reaction Examples
+# Examples
 
 This document provides practical, real-world examples of how to use reactions to create powerful automated security responses. Each example includes the complete YAML configuration and JavaScript code.
 
@@ -13,15 +13,16 @@ This document provides practical, real-world examples of how to use reactions to
 This basic example logs information about file access events.
 
 ```yaml
-- kind: file_access_monitor
-  name: log_sensitive_files
+- kind: log_files_access
+  name: log_files_access_sensitive
   enabled: true
   version: 1.0
   description: Log access to sensitive files
   breed: file_access
   mechanism: file_access
-  tactic: collection
-  technique: T1005
+  tactic: mitre_tactic
+  technique: mitre_technique
+  subtechnique: mitre_sub_technique
   importance: medium
   bases:
     - dir: /etc
@@ -33,6 +34,9 @@ This basic example logs information about file access events.
   reactions:
     - format: js
       code: |
+```
+
+```javascript
         function process(data) {
           Info("=== SENSITIVE FILE ACCESS ===");
           Info("File: " + data.file.file);
@@ -68,7 +72,10 @@ Automatically block suspicious network connections.
   reactions:
     - format: js
       code: |
-        function process(data) {
+```
+
+```javascript
+       function process(data) {
           Info("Blocking malicious domain connection");
           
           // Block all domains from this event
@@ -120,6 +127,9 @@ Terminate malicious processes while collecting evidence.
   reactions:
     - format: js
       code: |
+```
+
+```javascript
         function process(data) {
           Info("=== CRYPTOCURRENCY MINER DETECTED ===");
           Info("Command: " + data.process.cmd);
@@ -198,7 +208,10 @@ Implement a graduated response based on threat severity and frequency.
     - create
   reactions:
     - format: js
-      code: |
+      code: 
+```
+
+```javascript
         function process(data) {
           let serviceName = data.file.basename;
           let processCmd = data.process.cmd;
@@ -292,6 +305,9 @@ A complete incident response system with evidence collection, containment, and n
   reactions:
     - format: js
       code: |
+```
+
+```javascript
         function process(data) {
           let incidentId = "INC-" + new Date().getTime();
           
@@ -440,6 +456,9 @@ Integrate with threat intelligence data for enhanced decision making.
   reactions:
     - format: js
       code: |
+```
+
+```javascript
         function process(data) {
           Info("Analyzing network connection with threat intelligence");
           
@@ -592,8 +611,9 @@ Sometimes shell scripts provide more flexibility for system operations.
   reactions:
     - format: shell
       code: |
-        #!/bin/bash
-        
+```
+
+```bash
         # Parse the reaction data
         FILE_PATH=$(echo "$REACTION_DATA" | jq -r '.file.file')
         PROCESS_CMD=$(echo "$REACTION_DATA" | jq -r '.process.cmd')
@@ -661,6 +681,9 @@ Always test reactions in a safe environment first. Here's an example test reacti
   reactions:
     - format: js
       code: |
+```
+
+```javascript
         function process(data) {
           Info("=== REACTION TEST ===");
           Info("Testing all major functions...");
