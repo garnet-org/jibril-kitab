@@ -33,13 +33,13 @@ $ sudo -E /usr/bin/jibril --systemd install
 This command will create:
 
 1. [`/etc/systemd/system/jibril.service`](systemd-config.md)
-2. [`/etc/jibril/config.yaml`](../configuration-file/)
-3. [`/etc/jibril/netpolicy.yaml`](../../components/network-policy.md)
+2. [`/etc/jibril/config.yaml`](../../configuration-file/)
+3. [`/etc/jibril/netpolicy.yaml`](../../../execution/network-policy.md)
 4. `/etc/jibril/recipes/*.yaml`
 
 The systemd service will be installed, but not enabled yet.
 
-> All the recipes automatically installed in `etc` directory are already [builtin in Jibril ](../../components/alchemies/builtin-recipes.md)- with a few other [private recipes](../../components/alchemies/builtin-recipes.md#private-recipes). If you chose to execute [Jibril with the alchemies plugin](../../components/alchemies/) (allowing you to define your own detection recipes), make sure to have the [alchemies directory](../../components/alchemies/create-recipes.md) configured to `/etc/jibril/recipes/`directory AND to have those **recipes disabled** in the [configuration file](../configuration-file/).
+> All the recipes automatically installed in `etc` directory are already [builtin in Jibril ](../../../customization/alchemies/builtin-recipes.md)- with a few other [private recipes](../../../customization/alchemies/builtin-recipes.md#private-recipes). If you chose to execute [Jibril with the alchemies plugin](../../../customization/alchemies/) (allowing you to define your own detection recipes), make sure to have the [alchemies directory](../../../customization/alchemies/create-recipes.md) configured to `/etc/jibril/recipes/`directory AND to have those **recipes disabled** in the [configuration file](../../configuration-file/).
 
 ### <mark style="color:yellow;">Edit the Configuration File</mark> <a href="#edit-the-configuration-file" id="edit-the-configuration-file"></a>
 

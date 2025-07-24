@@ -10,7 +10,7 @@ Public Detection Recipes (YAML)\
 [https://github.com/garnet-org/jibril-wahy](https://github.com/garnet-org/jibril-wahy)
 
 {% hint style="success" %}
-Detection recipes to be used with Jibril [alchemies](../components/alchemies/ "mention") feature.
+Detection recipes to be used with Jibril [alchemies](../customization/alchemies/ "mention") feature.
 {% endhint %}
 
 ### <mark style="color:yellow;">Jibril Ashkaal - أشكال</mark>

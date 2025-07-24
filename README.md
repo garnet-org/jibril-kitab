@@ -1,16 +1,32 @@
 ---
-icon: shield
+icon: heart
+layout:
+  width: default
+  title:
+    visible: false
+  description:
+    visible: false
+  tableOfContents:
+    visible: true
+  outline:
+    visible: false
+  pagination:
+    visible: false
+  metadata:
+    visible: true
 ---
 
-# Jibril
+# Welcome
 
-<figure><img src=".gitbook/assets/jibril-logo-batuta-trans.png" alt="" width="308"><figcaption><p>Jibril Runtime Security</p></figcaption></figure>
+<figure><img src=".gitbook/assets/jibril-logo-batuta-trans.png" alt="" width="308"><figcaption></figcaption></figure>
+
+<h2 align="center"></h2>
 
 <h2 align="center"><strong>Secure Linux workloads ...</strong></h2>
 
-<div align="center"><figure><img src=".gitbook/assets/image (1).png" alt="" width="128"><figcaption><p>CI/CD Pipeline<br>GitHub<br>GitLab<br>Jenkins</p></figcaption></figure> <figure><img src=".gitbook/assets/image (1) (1).png" alt="" width="128"><figcaption><p>Classic IT<br>Standalone OS</p></figcaption></figure> <figure><img src=".gitbook/assets/image (3).png" alt="" width="128"><figcaption><p>Cloud Native<br>Kubernetes<br>Virtual Private<br>Servers</p></figcaption></figure> <figure><img src=".gitbook/assets/image (4).png" alt="" width="128"><figcaption><p>IoT Devices<br>Embedded</p></figcaption></figure></div>
+<div align="center" data-full-width="false"><figure><img src=".gitbook/assets/image (1).png" alt="" width="128"><figcaption><p>CI/CD Pipeline<br>GitHub<br>GitLab<br>Jenkins</p></figcaption></figure> <figure><img src=".gitbook/assets/image (1) (1).png" alt="" width="128"><figcaption><p>Classic IT<br>Standalone OS</p></figcaption></figure> <figure><img src=".gitbook/assets/image (3).png" alt="" width="128"><figcaption><p>Cloud Native<br>Kubernetes<br>Virtual Private<br>Servers</p></figcaption></figure> <figure><img src=".gitbook/assets/image (4).png" alt="" width="128"><figcaption><p>IoT Devices<br>Embedded</p></figcaption></figure></div>
 
-<h2 align="center"><strong>... no matter where they are.</strong></h2>
+<h2 align="center"><strong>... no matter where they are!</strong></h2>
 
 
 
@@ -28,3 +44,9 @@ Jibril is a cutting-edge runtime monitoring and threat detection engine, designe
 * Seamless Integration: Integrate detection events with your current SIEM.
 * Less Burden: Noise might be reduced by private and public AI LLM models.
 {% endhint %}
+
+
+
+
+
+<figure><img src=".gitbook/assets/garnet.png" alt="" width="188"><figcaption></figcaption></figure>

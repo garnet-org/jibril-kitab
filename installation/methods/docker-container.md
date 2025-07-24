@@ -14,7 +14,7 @@ $ mkdir /etc/jibril
 $ vi /etc/jibril/config.yaml
 ```
 
-> Use the [default configuration file ](configuration-file/)as reference.
+> Use the [default configuration file ](../configuration-file/)as reference.
 
 ## <mark style="color:yellow;">Obtain the Image</mark> <a href="#run-jibril-using-command-line-arguments" id="run-jibril-using-command-line-arguments"></a>
 
@@ -37,14 +37,14 @@ $ docker run --rm --name=jibril --privileged \
 > This command is an example of how one can run Jibril using its docker image.
 
 {% hint style="info" %}
-For Kubernetes, use the [Kubernetes instructions](kubernetes/).
+For Kubernetes, use the [Kubernetes instructions](../kubernetes/).
 {% endhint %}
 
 ## <mark style="color:yellow;">AI Filtering</mark> <a href="#run-jibril-using-command-line-arguments" id="run-jibril-using-command-line-arguments"></a>
 
 #### <mark style="color:yellow;">The Attenuator</mark>
 
-#### Want to try the [attenuator.md](../components/attenuator.md "mention") feature ?
+#### Want to try the [attenuator.md](../../customization/attenuator.md "mention") feature ?
 
 ```shell
 $ docker run --rm --name=jibril --privileged \
@@ -60,7 +60,7 @@ $ docker run --rm --name=jibril --privileged \
     --config /etc/jibril/config.yaml
 ```
 
-#### Make sure your [configuration-file](configuration-file/ "mention") `/etc/jibril/config,yaml` is set as:
+#### Make sure your [configuration-file](../configuration-file/ "mention") `/etc/jibril/config,yaml` is set as:
 
 ```yaml
 log-level: info

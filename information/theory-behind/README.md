@@ -1,8 +1,9 @@
 ---
-icon: person-chalkboard
+description: Find out reasons why Jibril is your next and final runtime security system.
+icon: message-question
 ---
 
-# Theory Behind
+# Why Jibril ?
 
 ## <mark style="color:yellow;">Mission</mark> <a href="#introduction" id="introduction"></a>
 
@@ -37,59 +38,6 @@ Jibril transforms runtime monitoring by unifying comprehensive tracking, advance
 * **Real-Time Intelligence**: Access insights when they matter most
 * **Proactive Protection**: Detect threats before damage occurs
 * **Sustainable Performance**: Maintain monitoring at scale
-
-## <mark style="color:yellow;">Resource Tracking</mark> <a href="#comprehensive-resource-tracking" id="comprehensive-resource-tracking"></a>
-
-***
-
-<figure><img src="../../.gitbook/assets/image (29).png" alt=""><figcaption></figcaption></figure>
-
-Jibril delivers complete observability through exhaustive monitoring of critical system elements:
-
-* **Identity**: Users and Groups
-* **Infrastructure**: Machines, Hostnames, and Namespaces
-* **Storage**: Disks, Filesystems, Volumes, and Files
-* **Execution**: Containers, Processes, and Threads
-* **Communication**: Protocols, Domains, Ports, and Sockets
-* **Data Movement**: Network Flows
-
-This extensive coverage ensures no security-relevant activity escapes detection, providing the comprehensive foundation needed for actionable security insights and decisive response capabilities.
-
-## <mark style="color:yellow;">Action Visibility</mark>
-
-***
-
-<figure><img src="../../.gitbook/assets/image (30).png" alt=""><figcaption></figcaption></figure>
-
-Jibril records every interaction with system resources, creating a comprehensive audit trail for both security analysis and operational monitoring:
-
-**Lifecycle Events**
-
-* Create
-* Destroy
-
-**Modification Actions**
-
-* Truncate
-* Link
-* Rename
-* Open
-* Close
-
-**Data Operations**
-
-* Read
-* Write
-* Seek
-* Execute
-
-**Advanced Interactions**
-
-* Memory Map
-* Sync
-* Lock
-
-This detailed activity logging provides security teams with the precise chronology and context needed to confidently analyze system behavior, identify suspicious patterns, and respond to potential threats with complete information.
 
 ## <mark style="color:yellow;">Advantages</mark> <a href="#key-features-and-innovations" id="key-features-and-innovations"></a>
 
@@ -162,3 +110,56 @@ Methods below ensure comprehensive security coverage while optimizing system res
 * Implement interval-based queries to in-kernel data
 * Proactively identify threats through pattern recognition
 * Maintain persistent security monitoring without performance impact
+
+## <mark style="color:yellow;">Resource Tracking</mark> <a href="#comprehensive-resource-tracking" id="comprehensive-resource-tracking"></a>
+
+***
+
+<figure><img src="../../.gitbook/assets/image (29).png" alt=""><figcaption></figcaption></figure>
+
+Jibril delivers complete observability through exhaustive monitoring of critical system elements:
+
+* **Identity**: Users and Groups
+* **Infrastructure**: Machines, Hostnames, and Namespaces
+* **Storage**: Disks, Filesystems, Volumes, and Files
+* **Execution**: Containers, Processes, and Threads
+* **Communication**: Protocols, Domains, Ports, and Sockets
+* **Data Movement**: Network Flows
+
+This extensive coverage ensures no security-relevant activity escapes detection, providing the comprehensive foundation needed for actionable security insights and decisive response capabilities.
+
+## <mark style="color:yellow;">Action Visibility</mark>
+
+***
+
+<figure><img src="../../.gitbook/assets/image (30).png" alt=""><figcaption></figcaption></figure>
+
+Jibril records every interaction with system resources, creating a comprehensive audit trail for both security analysis and operational monitoring:
+
+**Lifecycle Events**
+
+* Create
+* Destroy
+
+**Modification Actions**
+
+* Truncate
+* Link
+* Rename
+* Open
+* Close
+
+**Data Operations**
+
+* Read
+* Write
+* Seek
+* Execute
+
+**Advanced Interactions**
+
+* Memory Map
+* Sync
+* Lock
+
+This detailed activity logging provides security teams with the precise chronology and context needed to confidently analyze system behavior, identify suspicious patterns, and respond to potential threats with complete information.

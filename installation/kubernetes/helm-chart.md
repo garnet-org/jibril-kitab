@@ -315,7 +315,7 @@ helm uninstall jibril -n security
 
 ## Additional Resources
 
-* [Jibril Architecture](../readme/architecture.md)
-* [Network Policy Configuration](../components/network-policy.md)
-* [Components Overview](../components/)
-* [Installation Methods](./)
+* [Jibril Architecture](../../information/theory-behind/architecture.md)
+* [Network Policy Configuration](../../execution/network-policy.md)
+* [Components Overview](../../execution/components.md)
+* [Installation Methods](broken-reference)

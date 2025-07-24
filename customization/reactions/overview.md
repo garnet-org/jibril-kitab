@@ -1,8 +1,9 @@
 ---
-icon: bolt
+description: Immediate, programmable responses to security detection events.
+icon: eye
 ---
 
-# Reactions
+# Overview
 
 The **Reactions** feature is Jibril's powerful automation system that enables immediate, programmable responses to security detection events. When a security event is detected by Jibril's monitoring mechanisms, reactions can automatically execute custom code to respond, remediate, or gather additional intelligence.
 

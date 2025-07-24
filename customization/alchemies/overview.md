@@ -1,6 +1,6 @@
 ---
 description: A Powerful Dynamic Recipe Generation System for Jibril
-icon: truck-fast
+icon: eye
 ---
 
 # Overview

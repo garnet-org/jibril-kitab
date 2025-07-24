@@ -18,7 +18,7 @@ $ /usr/bin/jibril --version
 
 ## <mark style="color:yellow;">Run Jibril using command line</mark> <a href="#run-jibril-using-command-line-arguments" id="run-jibril-using-command-line-arguments"></a>
 
-All [configuration flags ](configuration-file/)can be given to Jibril through command line. Example:
+All [configuration flags ](../configuration-file/)can be given to Jibril through command line. Example:
 
 ```sh
 $ sudo -E jibril \
@@ -36,7 +36,7 @@ $ sudo -E jibril \
 > This command does not show practical results, it is meant to show how Jibril can be executed. It runs the loader (binary named jibril), enables the _example_, _config_, _data_ and _jibril_ extensions, the _helloworld_ plugin from the _example_ extension, the _hold_ plugin from the _jibril_ extension, and the _datakeeper_ and _varlog_ printers from the _jibril_ extension.
 
 {% hint style="info" %}
-Find more information about [components](../components/).
+Find more information about [components](../../execution/components.md).
 {% endhint %}
 
 ## <mark style="color:yellow;">Select specific components</mark> <a href="#pick-a-plugin-and-an-event" id="pick-a-plugin-and-an-event"></a>
