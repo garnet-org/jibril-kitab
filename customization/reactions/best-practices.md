@@ -2,7 +2,7 @@
 icon: shield-check
 ---
 
-# Best Practices and Security
+# Best Practices
 
 This document outlines best practices for developing, deploying, and maintaining secure and effective reactions in Jibril's runtime security system.
 
@@ -418,6 +418,9 @@ Create a comprehensive staging environment for reaction testing.
   reactions:
     - format: js
       code: |
+```
+
+```javascript
         function process(data) {
           Info("=== STAGING TEST EXECUTION ===");
 
@@ -599,6 +602,9 @@ Maintain reaction configurations with proper version control and rollback capabi
   reactions:
     - format: js
       code: |
+```
+
+```javascript
         // Production Reaction - Version 2.1.0
         function process(data) {
           // Configuration constants
@@ -644,7 +650,7 @@ Maintain reaction configurations with proper version control and rollback capabi
         }
 ```
 
-### **Documentation and Maintenance**
+### **Documentation**
 
 Maintain comprehensive documentation for all reactions.
 
@@ -703,128 +709,6 @@ Maintain comprehensive documentation for all reactions.
 function process(data) {
   // Implementation follows documented specifications
   implementIncidentResponse(data);
-}
-```
-
-## <mark style="color:yellow;">Deployment and Rollback Strategies</mark>
-
-### **Canary Deployment**
-
-Deploy reactions incrementally to minimize risk.
-
-```yaml
-# Phase 1: Limited Deployment
-- kind: canary_deployment_phase1
-  name: new_reaction_limited
-  enabled: true
-  version: 1.0
-  description: Canary deployment - Phase 1 (10% of events)
-
-  # Limit scope for initial deployment
-  arbitrary:
-    - how: AND
-      which: pertinent
-      items:
-        - what: pid
-          which: modulo
-          number: 10  # Only process every 10th event
-        - what: cmd
-          which: contains
-          pattern: "test_pattern"
-
-  reactions:
-    - format: js
-      code: |
-        function process(data) {
-          Info("CANARY PHASE 1: Processing limited event set");
-
-          // Track canary deployment metrics
-          DataSet("canary_phase1_count",
-                 String(parseInt(DataGet("canary_phase1_count") || "0") + 1));
-
-          // Implement new logic with extensive monitoring
-          executeNewLogicWithMonitoring(data);
-        }
-
-# Phase 2: Expanded Deployment (after Phase 1 validation)
-- kind: canary_deployment_phase2
-  name: new_reaction_expanded
-  enabled: false  # Enable after Phase 1 success
-  version: 1.0
-  description: Canary deployment - Phase 2 (50% of events)
-
-  arbitrary:
-    - how: AND
-      which: pertinent
-      items:
-        - what: pid
-          which: modulo
-          number: 2  # Process every 2nd event
-        - what: cmd
-          which: contains
-          pattern: "test_pattern"
-
-  reactions:
-    - format: js
-      code: |
-        function process(data) {
-          Info("CANARY PHASE 2: Processing expanded event set");
-          executeNewLogicWithMonitoring(data);
-        }
-```
-
-### **Rollback Procedures**
-
-Implement quick rollback capabilities for problematic reactions.
-
-```javascript
-function process(data) {
-  // Check for emergency rollback flag
-  if (DataGet("emergency_rollback") === "true") {
-    Info("EMERGENCY ROLLBACK ACTIVATED - Reaction disabled");
-
-    // Log rollback event
-    let rollbackLog = {
-      timestamp: new Date().toISOString(),
-      reaction_name: name,
-      event_uuid: uuid,
-      rollback_reason: DataGet("rollback_reason") || "Emergency rollback"
-    };
-
-    WriteFile("/var/log/jibril/rollbacks.log",
-             JSON.stringify(rollbackLog) + "\n");
-
-    return; // Exit without processing
-  }
-
-  // Check for gradual rollback (reduce functionality)
-  let rollbackLevel = parseInt(DataGet("rollback_level") || "0");
-
-  switch (rollbackLevel) {
-    case 0:
-      // Full functionality
-      executeFullReaction(data);
-      break;
-
-    case 1:
-      // Reduced functionality - no network blocking
-      executeReactionWithoutNetworkOps(data);
-      break;
-
-    case 2:
-      // Minimal functionality - logging only
-      executeLoggingOnlyReaction(data);
-      break;
-
-    case 3:
-      // Complete disable
-      Info("Reaction disabled via rollback level 3");
-      return;
-
-    default:
-      Warn("Unknown rollback level: " + rollbackLevel);
-      executeLoggingOnlyReaction(data);
-  }
 }
 ```
 
@@ -925,17 +809,3 @@ function shouldBlockNetwork(data) {
          data.metadata && data.metadata.importance === "high";
 }
 ```
-
-## <mark style="color:yellow;">Summary</mark>
-
-Following these best practices ensures that your Jibril reactions are:
-
-1. **Secure**: Protected against injection attacks and unauthorized access
-2. **Reliable**: Robust error handling and graceful degradation
-3. **Performant**: Optimized for speed and resource efficiency  
-4. **Maintainable**: Well-documented and version-controlled
-5. **Observable**: Comprehensive logging and monitoring
-6. **Compliant**: Full audit trails and regulatory compliance
-7. **Deployable**: Safe deployment and rollback strategies
-
-By implementing these practices, you'll create a robust, secure, and effective automated response system that enhances your organization's security posture while maintaining operational stability.
