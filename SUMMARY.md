@@ -110,6 +110,7 @@
 
 ## Customization
 
+* [The Attenuator](customization/attenuator.md)
 * [Alchemies](customization/alchemies/README.md)
   * [Overview](customization/alchemies/overview.md)
   * [Enable Alchemies](customization/alchemies/enable-alchemies.md)
@@ -125,7 +126,6 @@
   * [Common Errors](customization/reactions/common-errors.md)
   * [JavaScript API](customization/reactions/javascript-api.md)
   * [Best Practices](customization/reactions/best-practices.md)
-* [The Attenuator](customization/attenuator.md)
 
 ## Support
 

@@ -1,20 +1,17 @@
 ---
+description: >-
+  Enhance Jibril's detection capabilities through AI-powered analysis of
+  security events.
 icon: filters
 ---
 
 # The Attenuator
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1).png" alt="" width="375"><figcaption><p><mark style="color:green;">MISSION: To Exterminate False Positives</mark></p></figcaption></figure>
+The Attenuator is an advanced and powerful feature of Jibril designed to significantly enhance its security detection capabilities. It leverages cutting-edge AI-powered analysis to meticulously examine and interpret security events, providing an additional layer of safeguard against potential threats.
 
-The Attenuator is a powerful feature of Jibril that enhances its security detection capabilities through AI-powered analysis of security events.
+<figure><img src="../.gitbook/assets/image (31).png" alt="" width="563"><figcaption><p>Detection Event Reasoning</p></figcaption></figure>
 
 > Quickly check how to use this feature at [docker-container.md](../installation/methods/docker-container.md "mention") session.
-
-{% tabs %}
-{% tab title="Detection Event Reasoning" %}
-<figure><img src="../.gitbook/assets/image (31).png" alt=""><figcaption></figcaption></figure>
-{% endtab %}
-{% endtabs %}
 
 ## <mark style="color:yellow;">Overview</mark>
 
@@ -49,11 +46,11 @@ During initial deployment, the amend mode is recommended to evaluate the AI's pe
 
 You can configure the Attenuator through Jibril's configuration file or environment variables:
 
-### <mark style="color:yellow;">Configuration Options</mark>
+### <mark style="color:$primary;">Configuration Options</mark>
 
 <table><thead><tr><th>Description</th><th>Config Option</th><th width="178.89703369140625">Env Variable</th><th>Default Value</th></tr></thead><tbody><tr><td>Feature<br>Flag</td><td><code>enabled</code></td><td>-</td><td><code>false</code></td></tr><tr><td>API token</td><td><code>token</code></td><td><code>AI_TOKEN</code></td><td>-</td></tr><tr><td>AI Model<br>Name</td><td><code>model</code></td><td><code>AI_MODEL</code></td><td><code>gpt-4o</code></td></tr><tr><td>Model Temperature</td><td><code>temperature</code></td><td><code>AI_TEMPERATURE</code></td><td><code>0.3</code></td></tr><tr><td>Operational<br>Mode</td><td><code>mode</code></td><td><code>AI_MODE</code></td><td><code>amend</code></td></tr><tr><td>AI Service<br>URL</td><td><code>url</code></td><td><code>AI_URL</code></td><td>OpenAI API URL</td></tr></tbody></table>
 
-### <mark style="color:yellow;">Example Configuration</mark>
+### <mark style="color:$primary;">Example Configuration</mark>
 
 To enable and configure the Attenuator in your Jibril setup, add the following to your configuration:
 
@@ -78,15 +75,15 @@ export AI_TEMPERATURE=0.3
 export AI_MODE=reason
 ```
 
-## <mark style="color:yellow;">Local and Private Models</mark>
+### <mark style="color:$primary;">Local and Private Models</mark>
 
 <figure><img src="../.gitbook/assets/image (22).png" alt="" width="375"><figcaption></figcaption></figure>
 
 The Attenuator can be used with local inference engines like [Ollama](https://ollama.com/) to run private models on your own infrastructure. This approach offers several advantages:
 
-* **Data Privacy**: Keeps security event data within your environment
-* **Cost Efficiency**: Eliminates API usage costs
-* **Customization**: Allows fine-tuning of models for security-specific tasks
+* Data Privacy: Keeps security event data within your environment
+* Cost Efficiency: Eliminates API usage costs
+* Customization: Allows fine-tuning of models for security-specific tasks
 
 To use Ollama with the Attenuator, set the URL to your Ollama instance:
 
@@ -121,13 +118,13 @@ The Attenuator provides rich context for each security event it analyzes:
 
 The Attenuator is particularly useful for:
 
-1. **Reducing Alert Fatigue**\
+1. Reducing Alert Fatigue\
    By filtering out false positives (in block mode)
-2. **Prioritizing Alerts**\
+2. Prioritizing Alerts\
    Through accurate severity classification
-3. **Contextualizing Detections**\
+3. Contextualizing Detections\
    Adding expert analysis to help security teams understand the significance of events
-4. **CI/CD Environments**\
+4. CI/CD Environments\
    Automatically filtering security events in automated workflows
 
 ## <mark style="color:yellow;">Integration with GitHub Actions</mark>
