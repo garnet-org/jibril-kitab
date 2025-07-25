@@ -938,3 +938,4 @@
 ## POSTS
 
 * [Jibril Runtime Security](posts/banner.md)
+* [Jibril v2.4: Detect & React](posts/jibril-v2.4-detect-and-react.md)
