@@ -166,6 +166,313 @@ helm install jibril garnet/garnet \
   -f custom-env-values.yaml
 ```
 
+## Fluent Bit Integration
+
+The Garnet Helm chart includes optional Fluent Bit integration for collecting and forwarding Jibril logs to various destinations.
+
+### Enabling Fluent Bit
+
+Fluent Bit runs as a DaemonSet to collect logs from all Jibril pods:
+
+```bash
+helm install jibril garnet/garnet \
+  --namespace security \
+  --create-namespace \
+  --set standalone.enabled=true \
+  --set fluent-bit.enabled=true
+```
+
+### Basic Fluent Bit Configuration
+
+By default, Fluent Bit will:
+- Collect logs from `/var/log/containers/jibril-*.log`
+- Parse JSON-formatted logs from Jibril
+- Output to stdout for debugging
+
+### Configuring OpenSearch Output
+
+To send Jibril logs to OpenSearch/Elasticsearch, you need to provide a custom outputs configuration. The Fluent Bit subchart requires static configuration for outputs.
+
+#### Basic OpenSearch Configuration
+
+Create a custom values file `fluent-bit-opensearch-values.yaml`:
+
+```yaml
+fluent-bit:
+  enabled: true
+  config:
+    outputs: |
+      [OUTPUT]
+          Name stdout
+          Match *
+          Format json
+          json_date_key timestamp
+          json_date_format iso8601
+      
+      [OUTPUT]
+          Name opensearch
+          Match *
+          Host opensearch.example.com
+          Port 9200
+          Index jibril
+          Logstash_Format On
+          Logstash_Prefix jibril
+          Retry_Limit False
+```
+
+Then deploy:
+
+```bash
+helm install jibril garnet/garnet \
+  --namespace security \
+  --create-namespace \
+  --set standalone.enabled=true \
+  -f fluent-bit-opensearch-values.yaml
+```
+
+#### OpenSearch with Authentication
+
+Create a custom values file with authentication:
+
+```yaml
+fluent-bit:
+  enabled: true
+  config:
+    outputs: |
+      [OUTPUT]
+          Name stdout
+          Match *
+          Format json
+          json_date_key timestamp
+          json_date_format iso8601
+      
+      [OUTPUT]
+          Name opensearch
+          Match *
+          Host opensearch.example.com
+          Port 9200
+          Index jibril
+          Logstash_Format On
+          Logstash_Prefix jibril
+          HTTP_User admin
+          HTTP_Passwd mypassword
+          tls On
+          tls.verify On
+          Retry_Limit False
+```
+
+#### AWS OpenSearch Service
+
+For AWS OpenSearch Service (formerly Elasticsearch Service), create a custom values file:
+
+```yaml
+fluent-bit:
+  enabled: true
+  config:
+    outputs: |
+      [OUTPUT]
+          Name stdout
+          Match *
+          Format json
+          json_date_key timestamp
+          json_date_format iso8601
+      
+      [OUTPUT]
+          Name opensearch
+          Match *
+          Host my-domain.us-east-1.es.amazonaws.com
+          Port 443
+          Index jibril
+          Logstash_Format On
+          Logstash_Prefix jibril-logs
+          Logstash_DateFormat %Y.%m.%d
+          AWS_Auth On
+          AWS_Region us-east-1
+          AWS_Service_Name es
+          tls On
+          tls.verify On
+          Compress gzip
+          Retry_Limit False
+```
+
+With IAM role for service account (IRSA) on EKS, add the role ARN:
+
+```yaml
+fluent-bit:
+  enabled: true
+  serviceAccount:
+    annotations:
+      eks.amazonaws.com/role-arn: arn:aws:iam::123456789012:role/fluent-bit-opensearch-role
+  config:
+    outputs: |
+      [OUTPUT]
+          Name stdout
+          Match *
+          Format json
+          json_date_key timestamp
+          json_date_format iso8601
+      
+      [OUTPUT]
+          Name opensearch
+          Match *
+          Host my-domain.us-west-2.es.amazonaws.com
+          Port 443
+          Index jibril
+          Logstash_Format On
+          Logstash_Prefix jibril-logs
+          AWS_Auth On
+          AWS_Region us-west-2
+          AWS_Service_Name es
+          AWS_Role_ARN arn:aws:iam::123456789012:role/fluent-bit-opensearch-role
+          tls On
+          tls.verify On
+          Compress gzip
+          Retry_Limit False
+```
+
+### Fluent Bit Configuration Options
+
+Since Fluent Bit outputs require static configuration, you'll need to configure OpenSearch parameters directly in the outputs section of your values file. Here are the key OpenSearch output parameters:
+
+| Parameter | Description | Example |
+|-----------|-------------|---------|
+| `Host` | OpenSearch host | `opensearch.example.com` |
+| `Port` | OpenSearch port | `9200` or `443` for HTTPS |
+| `Index` | Index name (if not using logstash format) | `jibril` |
+| `Logstash_Format` | Use daily indices | `On` |
+| `Logstash_Prefix` | Prefix for daily indices | `jibril` |
+| `Logstash_DateFormat` | Date format for indices | `%Y.%m.%d` |
+| `HTTP_User` | Basic auth username | `admin` |
+| `HTTP_Passwd` | Basic auth password | `password` |
+| `tls` | Enable TLS | `On` or `Off` |
+| `tls.verify` | Verify TLS certificates | `On` or `Off` |
+| `AWS_Auth` | Enable AWS authentication | `On` or `Off` |
+| `AWS_Region` | AWS region | `us-east-1` |
+| `AWS_Service_Name` | AWS service name | `es` |
+| `Compress` | Enable compression | `gzip` |
+
+### Advanced Fluent Bit Examples
+
+#### Custom Index Pattern with Authentication
+
+Create a values file with custom index pattern:
+
+```yaml
+fluent-bit:
+  enabled: true
+  config:
+    outputs: |
+      [OUTPUT]
+          Name stdout
+          Match *
+          Format json
+          json_date_key timestamp
+          json_date_format iso8601
+      
+      [OUTPUT]
+          Name opensearch
+          Match *
+          Host opensearch.example.com
+          Port 9200
+          Logstash_Format On
+          Logstash_Prefix security-jibril
+          Logstash_DateFormat %Y.%m
+          Time_Key @timestamp
+          Include_Tag_Key On
+          Tag_Key k8s_tag
+          HTTP_User fluentbit
+          HTTP_Passwd secretpassword
+          Replace_Dots On
+          Suppress_Type_Name On
+          Retry_Limit False
+```
+
+#### Complete Production Setup
+
+Create a values file for production:
+
+```yaml
+# production-values.yaml
+standalone:
+  enabled: true
+
+fluent-bit:
+  enabled: true
+  image:
+    tag: 4.0.4
+  resources:
+    limits:
+      memory: 256Mi
+      cpu: 500m
+    requests:
+      memory: 128Mi
+      cpu: 200m
+  
+  opensearch:
+    enabled: true
+    host: opensearch-cluster.elastic.svc.cluster.local
+    port: 9200
+    logstashFormat: true
+    logstashPrefix: prod-jibril
+    logstashDateFormat: "%Y.%m.%d"
+    httpUser: fluent
+    httpPasswd: ${OPENSEARCH_PASSWORD}
+    tls: On
+    tlsVerify: On
+    compress: gzip
+    bufferSize: "8MB"
+    includeTagKey: true
+    tagKey: "@log_tag"
+    replaceDots: On
+    suppressTypeName: On
+```
+
+Deploy with:
+
+```bash
+helm install jibril garnet/garnet \
+  --namespace security \
+  --create-namespace \
+  -f production-values.yaml
+```
+
+Note: Since the outputs configuration is static, sensitive values like passwords should be handled securely:
+- Use Kubernetes secrets and mount them as environment variables
+- Use a secure values file that's not committed to version control
+- Consider using tools like Helm Secrets or Sealed Secrets for production deployments
+
+### Verifying Fluent Bit
+
+Check Fluent Bit status:
+
+```bash
+# Check Fluent Bit pods
+kubectl get pods -n security -l app.kubernetes.io/name=fluent-bit
+
+# View Fluent Bit logs
+kubectl logs -n security -l app.kubernetes.io/name=fluent-bit -f
+
+# Check if logs are being collected
+kubectl logs -n security -l app.kubernetes.io/name=fluent-bit | grep -i "jibril"
+```
+
+### Troubleshooting Fluent Bit
+
+1. **Fluent Bit pods not starting**:
+   ```bash
+   kubectl describe pod -n security <fluent-bit-pod-name>
+   ```
+
+2. **Logs not appearing in OpenSearch**:
+   - Check Fluent Bit logs for errors
+   - Verify network connectivity to OpenSearch
+   - Check authentication credentials
+   - Ensure proper index permissions in OpenSearch
+
+3. **High memory usage**:
+   - Reduce `mem_buf_limit` in configuration
+   - Adjust `buffer_chunk_size` and `buffer_max_size`
+
 ## Network Policy Support
 
 The chart supports deploying Jibril with custom network policies for enhanced security:
