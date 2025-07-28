@@ -79,7 +79,7 @@ helm install garnet garnet/garnet \
 | `garnet.token` | Your Garnet API token (required in standard mode) | `""` |
 | `cluster.name` | Name of the cluster | `garnet-cluster` |
 | `jibril.image.repository` | Repository for Jibril image | `garnetlabs/jibril` |
-| `jibril.image.tag` | Tag for Jibril image | `v2.2` |
+| `jibril.image.tag` | Tag for Jibril image | `v2.4` |
 
 ### Custom Jibril Configuration
 
@@ -160,6 +160,226 @@ helm install jibril garnet/garnet \
   --set standalone.enabled=true \
   -f custom-env-values.yaml
 ```
+
+## Fluent Bit Integration
+
+The Garnet Helm chart includes optional Fluent Bit integration for collecting and forwarding Jibril logs to various destinations.
+
+### Enabling Fluent Bit
+
+Fluent Bit runs as a DaemonSet to collect logs from all Jibril pods:
+
+```bash
+helm install jibril garnet/garnet \
+  --namespace security \
+  --create-namespace \
+  --set standalone.enabled=true \
+  --set fluent-bit.enabled=true
+```
+
+### Basic Fluent Bit Configuration
+
+By default, Fluent Bit will:
+- Collect logs from `/var/log/containers/jibril-*.log`
+- Parse JSON-formatted logs from Jibril
+- Output to stdout for debugging
+
+### Configuring OpenSearch Output
+
+To send Jibril logs to OpenSearch/Elasticsearch:
+
+#### Basic OpenSearch Configuration
+
+```bash
+helm install jibril garnet/garnet \
+  --namespace security \
+  --create-namespace \
+  --set standalone.enabled=true \
+  --set fluent-bit.enabled=true \
+  --set fluent-bit.opensearch.enabled=true \
+  --set fluent-bit.opensearch.host=opensearch.example.com \
+  --set fluent-bit.opensearch.port=9200
+```
+
+#### OpenSearch with Authentication
+
+```bash
+helm install jibril garnet/garnet \
+  --namespace security \
+  --create-namespace \
+  --set standalone.enabled=true \
+  --set fluent-bit.enabled=true \
+  --set fluent-bit.opensearch.enabled=true \
+  --set fluent-bit.opensearch.host=opensearch.example.com \
+  --set fluent-bit.opensearch.port=9200 \
+  --set fluent-bit.opensearch.httpUser=admin \
+  --set fluent-bit.opensearch.httpPasswd=mypassword \
+  --set fluent-bit.opensearch.tls=On \
+  --set fluent-bit.opensearch.tlsVerify=On
+```
+
+#### AWS OpenSearch Service
+
+For AWS OpenSearch Service (formerly Elasticsearch Service):
+
+```bash
+helm install jibril garnet/garnet \
+  --namespace security \
+  --create-namespace \
+  --set standalone.enabled=true \
+  --set fluent-bit.enabled=true \
+  --set fluent-bit.opensearch.enabled=true \
+  --set fluent-bit.opensearch.host=my-domain.us-east-1.es.amazonaws.com \
+  --set fluent-bit.opensearch.port=443 \
+  --set fluent-bit.opensearch.tls=On \
+  --set fluent-bit.opensearch.awsAuth=On \
+  --set fluent-bit.opensearch.awsRegion=us-east-1 \
+  --set fluent-bit.opensearch.awsServiceName=es \
+  --set fluent-bit.opensearch.logstashPrefix=jibril-logs \
+  --set fluent-bit.opensearch.compress=gzip
+```
+
+With IAM role for service account (IRSA) on EKS:
+
+```bash
+helm install jibril garnet/garnet \
+  --namespace security \
+  --create-namespace \
+  --set standalone.enabled=true \
+  --set fluent-bit.enabled=true \
+  --set fluent-bit.opensearch.enabled=true \
+  --set fluent-bit.opensearch.host=my-domain.us-west-2.es.amazonaws.com \
+  --set fluent-bit.opensearch.port=443 \
+  --set fluent-bit.opensearch.tls=On \
+  --set fluent-bit.opensearch.awsAuth=On \
+  --set fluent-bit.opensearch.awsRegion=us-west-2 \
+  --set fluent-bit.opensearch.awsServiceName=es \
+  --set fluent-bit.opensearch.awsRoleArn=arn:aws:iam::123456789012:role/fluent-bit-opensearch-role \
+  --set fluent-bit.opensearch.logstashPrefix=jibril-logs
+```
+
+### Fluent Bit Configuration Options
+
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| `fluent-bit.enabled` | Enable Fluent Bit DaemonSet | `false` |
+| `fluent-bit.opensearch.enabled` | Enable OpenSearch output | `false` |
+| `fluent-bit.opensearch.host` | OpenSearch host | `localhost` |
+| `fluent-bit.opensearch.port` | OpenSearch port | `9200` |
+| `fluent-bit.opensearch.index` | Index name (if not using logstash format) | `jibril` |
+| `fluent-bit.opensearch.logstashFormat` | Use daily indices | `true` |
+| `fluent-bit.opensearch.logstashPrefix` | Prefix for daily indices | `jibril` |
+| `fluent-bit.opensearch.httpUser` | Basic auth username | `""` |
+| `fluent-bit.opensearch.httpPasswd` | Basic auth password | `""` |
+| `fluent-bit.opensearch.tls` | Enable TLS | `Off` |
+| `fluent-bit.opensearch.tlsVerify` | Verify TLS certificates | `On` |
+| `fluent-bit.opensearch.awsAuth` | Enable AWS authentication | `Off` |
+| `fluent-bit.opensearch.awsRegion` | AWS region | `""` |
+| `fluent-bit.opensearch.compress` | Enable compression | `gzip` |
+
+### Advanced Fluent Bit Examples
+
+#### Custom Index Pattern with Authentication
+
+```bash
+helm install jibril garnet/garnet \
+  --namespace security \
+  --create-namespace \
+  --set standalone.enabled=true \
+  --set fluent-bit.enabled=true \
+  --set fluent-bit.opensearch.enabled=true \
+  --set fluent-bit.opensearch.host=opensearch.example.com \
+  --set fluent-bit.opensearch.port=9200 \
+  --set fluent-bit.opensearch.logstashFormat=true \
+  --set fluent-bit.opensearch.logstashPrefix=security-jibril \
+  --set fluent-bit.opensearch.logstashDateFormat="%Y.%m" \
+  --set fluent-bit.opensearch.httpUser=fluentbit \
+  --set fluent-bit.opensearch.httpPasswd=secretpassword \
+  --set fluent-bit.opensearch.includeTagKey=true \
+  --set fluent-bit.opensearch.tagKey=k8s_tag
+```
+
+#### Complete Production Setup
+
+Create a values file for production:
+
+```yaml
+# production-values.yaml
+standalone:
+  enabled: true
+
+fluent-bit:
+  enabled: true
+  image:
+    tag: 4.0.4
+  resources:
+    limits:
+      memory: 256Mi
+      cpu: 500m
+    requests:
+      memory: 128Mi
+      cpu: 200m
+  
+  opensearch:
+    enabled: true
+    host: opensearch-cluster.elastic.svc.cluster.local
+    port: 9200
+    logstashFormat: true
+    logstashPrefix: prod-jibril
+    logstashDateFormat: "%Y.%m.%d"
+    httpUser: fluent
+    httpPasswd: ${OPENSEARCH_PASSWORD}
+    tls: On
+    tlsVerify: On
+    compress: gzip
+    bufferSize: "8MB"
+    includeTagKey: true
+    tagKey: "@log_tag"
+    replaceDots: On
+    suppressTypeName: On
+```
+
+Deploy with:
+
+```bash
+helm install jibril garnet/garnet \
+  --namespace security \
+  --create-namespace \
+  -f production-values.yaml \
+  --set fluent-bit.opensearch.httpPasswd=$OPENSEARCH_PASSWORD
+```
+
+### Verifying Fluent Bit
+
+Check Fluent Bit status:
+
+```bash
+# Check Fluent Bit pods
+kubectl get pods -n security -l app.kubernetes.io/name=fluent-bit
+
+# View Fluent Bit logs
+kubectl logs -n security -l app.kubernetes.io/name=fluent-bit -f
+
+# Check if logs are being collected
+kubectl logs -n security -l app.kubernetes.io/name=fluent-bit | grep -i "jibril"
+```
+
+### Troubleshooting Fluent Bit
+
+1. **Fluent Bit pods not starting**:
+   ```bash
+   kubectl describe pod -n security <fluent-bit-pod-name>
+   ```
+
+2. **Logs not appearing in OpenSearch**:
+   - Check Fluent Bit logs for errors
+   - Verify network connectivity to OpenSearch
+   - Check authentication credentials
+   - Ensure proper index permissions in OpenSearch
+
+3. **High memory usage**:
+   - Reduce `mem_buf_limit` in configuration
+   - Adjust `buffer_chunk_size` and `buffer_max_size`
 
 ## Network Policy Support
 
